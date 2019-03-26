@@ -1,9 +1,8 @@
 # helm-tls
 
 These certificates are used to secure the connection between `helm` and
-`helm-tiller`. One such `helm.key.pem` is needed for each client in order
-to be able to access the `helm-tiller`, and the one in this directory is for
-admin use (by the owner of this repository).
+`helm-tiller`. One such certificate-key pair (i.e. `helm.cert.pem` and
+`helm.key.pem`) is needed for each client to access `helm-tiller`.
 
 For more information, see
 [`helm/docs/tiller_ssl.md`](https://github.com/helm/helm/blob/master/docs/tiller_ssl.md)!
