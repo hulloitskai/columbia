@@ -1,5 +1,19 @@
 ## ----- TARGETS ------
+## Generic:
+.PHONY: default setup help
 __ARGS = $(filter-out $@,$(MAKECMDGOALS))
+
+default: help
+setup: ## Set this project up on a new environment.
+	@echo "Configuring githooks..." && \
+	 git config core.hooksPath .githooks && \
+	 echo done
+
+## Show usage for the targets in this Makefile.
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+	 awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
+
 
 ## git-secret:
 .PHONY: secrets-hide secrets-reveal

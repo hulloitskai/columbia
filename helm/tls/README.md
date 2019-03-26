@@ -31,8 +31,7 @@ From the `helm/tls` directory:
 ```bash
 ## Link certificates to `~/.helm`:
 ln -s $(pwd)/helm.cert.pem $HOME/.helm/cert.pem && \
-ln -s $(pwd)/helm.key.pem $HOME/.helm/key.pem && \
-ln -s $(pwd)/ca.key.pem $HOME/.helm/ca.pem
+ln -s $(pwd)/helm.key.pem $HOME/.helm/key.pem
 ```
 
 Add the following to `~/.bashrc`:

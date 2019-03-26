@@ -1,0 +1,18 @@
+image:
+  tag: 1.11.0
+
+git:
+  url: git@github.com:stevenxie/columbia
+  path: cluster
+
+helmOperator:
+  tag: 0.6.0
+  create: true
+  createCRD: false
+
+  tillerNamespace: helm
+  tls:
+    enable: true
+
+prometheus:
+  enabled: true

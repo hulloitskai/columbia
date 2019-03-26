@@ -1,4 +1,6 @@
 ## [Repository]
+kubeconfig.yaml
+
 ## Secrets:
 .gitsecret/keys/random_seed
 
