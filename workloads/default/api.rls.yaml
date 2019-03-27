@@ -8,6 +8,7 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "true"
+    flux.weave.works/tag.varnish: glob:6.*.*-alpine
 
 spec:
   releaseName: api
@@ -15,9 +16,8 @@ spec:
     repository: https://charts.stevenxie.me
     name: api
     version: 0.3.4
-  valuesFrom:
-    - secretKeyRef:
-        name: api-release
+  valueFileSecrets:
+    - name: api-release
   values:
     config:
       mongo:
@@ -29,24 +29,27 @@ spec:
       jobserver:
         redisAddr: redis-master:6379
         fetchMoodsCron: 0 0-59/5 * * * *
-
     deployment:
+      # image: stevenxie/api:latest
       strategy: &deploymentStrategy
         rollingUpdate:
           maxSurge: 1
           maxUnavailable: 0
     varnish:
       deployment:
+        image: cooptilleuls/varnish:6.0.0-alpine
         strategy: *deploymentStrategy
         nodeSelector:
           node-role.kubernetes.io/storage: storage
     jobserver:
       deployment:
+        # image: stevenxie/api-jobs:latest
         strategy: *deploymentStrategy
       ui:
         enabled: true
         redisAddr: redis://redis-master:6379
         deployment:
+          # image: stevenxie/api-jobs-ui:latest
           strategy: *deploymentStrategy
     ingress:
       host: api.stevenxie.me
