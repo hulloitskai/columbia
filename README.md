@@ -5,16 +5,16 @@ _My personal K8s cluster, configured with code (using
 
 ## Directories
 
-- [`helm`](./helm) – configuration related to the [`helm`](https://helm.sh) and
-  `helm-tiller` cluster setup.
-- [`flux`](./flux) - configuration related to the
-  [`flux`](https://github.com/weaveworks/flux) cluster setup.
-- [`sealed-secrets`](./sealed-secrets) – a workbench from which to create
-  [sealed secrets](https://github.com/bitnami-labs/sealed-secrets).
 - [`cluster`](./cluster) – a GitOps-enabled directory that contains cluster-wide
-  resources like `CustomResourseDefinition`s and `ClusterRoleBinding`s.
+  resources like `CustomResourseDefinitions` and `ClusterRoleBindings`.
 - [`workloads`](./workloads) – a GitOps-enabled directory that contains
   namespaced resources and Helm releases to be run on-cluster.
+- [`sealed-secrets`](./sealed-secrets) – a workbench from which to create
+  [sealed secrets](https://github.com/bitnami-labs/sealed-secrets).
+- [`helm`](./helm) – configuration related to the [`helm`](https://helm.sh) and
+  `helm-tiller` cluster setup.
+- [`flux`](./flux) – configuration related to the
+  [`flux`](https://github.com/weaveworks/flux) cluster setup.
 
 ## Secrets
 

@@ -1,17 +1,18 @@
-# helm-tls
+# helm
 
-These certificates are used to secure the connection between `helm` and
-`helm-tiller`. One such certificate-key pair (i.e. `helm.cert.pem` and
-`helm.key.pem`) is needed for each client to access `helm-tiller`.
+This directory contains certificates that are used to secure the connection
+between `helm` and `helm-tiller`. One such certificate-key pair (i.e.
+`helm.cert.pem` and `helm.key.pem`) is needed for each client to access
+`helm-tiller`.
 
 For more information, see
-[`helm/docs/tiller_ssl.md`](https://github.com/helm/helm/blob/master/docs/tiller_ssl.md)!
+[`helm/docs/tiller_ssl.md`](https://github.com/helm/helm/blob/master/docs/tiller_ssl.md).
 
 ## Installing Helm with TLS
 
 ### Configuring `helm-tiller`
 
-From the `helm/tls` directory:
+From the `helm` directory:
 
 ```bash
 helm init \
@@ -19,14 +20,14 @@ helm init \
   --tiller-tls-cert=./tiller.cert.pem \
   --tiller-tls-key=./tiller.key.pem \
   --tiller-tls-verify \
-  --tls-ca-cert=./helm/tls/ca.cert.pem
+  --tls-ca-cert=./ca.cert.pem
   --tiller-namespace=helm \
   --service-account=helm-tiller
 ```
 
 ### Configuring `helm` CLI:
 
-From the `helm/tls` directory:
+From the `helm` directory:
 
 ```bash
 ## Link certificates to `~/.helm`:
