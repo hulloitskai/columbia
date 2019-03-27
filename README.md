@@ -18,5 +18,10 @@ _My personal K8s cluster, configured with code (using
 
 ## Secrets
 
-Secrets are to be hidden using [`git-secret`](https://git-secret.io), using
-the `make secrets-hide` and `make secrets-reveal` commands.
+Configuration secrets are to be hidden using
+[`git-secret`](https://git-secret.io), using the `make secrets-hide` and
+`make secrets-reveal` commands.
+
+K8s `Secret` resources should be encrypted using
+[`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets), using a
+process described in [`sealed-secrets/README.md`](./sealed-secrets/README.md).
