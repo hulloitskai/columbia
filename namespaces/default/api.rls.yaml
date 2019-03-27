@@ -1,0 +1,67 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: api
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+
+spec:
+  releaseName: api
+  chart:
+    repository: https://charts.stevenxie.me
+    name: api
+    version: 0.3.4
+  valuesFrom:
+    - secretKeyRef:
+        name: api-release
+  values:
+    config:
+      mongo:
+        db: self
+      airtable:
+        baseId: appDm0Ts20KbQ0rG0
+        moodSource:
+          limit: 15
+      jobserver:
+        redisAddr: redis-master:6379
+        fetchMoodsCron: 0 0-59/5 * * * *
+
+    deployment:
+      strategy: &deploymentStrategy
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+    varnish:
+      deployment:
+        strategy: *deploymentStrategy
+        nodeSelector:
+          node-role.kubernetes.io/storage: storage
+    jobserver:
+      deployment:
+        strategy: *deploymentStrategy
+      ui:
+        enabled: true
+        redisAddr: redis://redis-master:6379
+        deployment:
+          strategy: *deploymentStrategy
+    ingress:
+      host: api.stevenxie.me
+      annotations:
+        ingress.kubernetes.io/custom-response-headers: X-Service:api
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: api-release
+  namespace: default
+
+spec:
+  encryptedData:
+    values.yaml: AgC+zR5kXAJQI5JbcNhavGLTMXlKaE4/y5zYdUFw7pVCgeBEZ+4gL+xDpIKCbfLu9fEABZqxxIxBVvDrQmCGWjyuSQ1vXAne2Y9ZF0yQakAPlmps73ZUnI7dj4gQsDcHt+SSe0BMhp6AIjkR9h9AkS4+CBvJcluAEQt+5vS+Sk29At1y+jPDBWIkBU4ODtMuKOWowHqCLNqnbe+S9nnb/9GpkY7vFcyr6GSsPYY54SfgYqOfq3EW7GK1aYVQ0A31A0aw3f7U17GlxXQfQkY4mgxjZiH4o0KCCnTuDXzw7I4ew8CWQxMlCH3EFDgE7zTt1/BqiXncyiENr/t0vZw4CyzcCPyxSwJth2gzgKVDwoSymNaJvF53z1eKxluBbJVeCDObVQB+wgVd9Pn4hUm6m+AA78gnq+VeTOaORM83XuIz0IGC8XlUV+VA8jgnP4sKh7GiuQjM2DfKxBvC1q55x7fSr8P5x5MNgN/C2s/5ST8Ga3hhsU/pIAhvNnjs7MrSaohY8xdngICq6E+MObe0zLNWBTYSYoRrb0jpCJavkgrvU+XS4LFIsvxHehdnvuj0wlJD9Gatltk9AFlbgSdaYpOtqVHc35JhZeEp2Uhc2Q93by0xhoHnfgAtw+w2CbWrZtZFDn9UMpKG8+Kzt1NKqGxIBjBgKvx0Gr4xFawQWYUXQPkM6T4tHhtrq9xMq6GYeHQXjozt9h3EMZ+t1k4K7JLHpE9W8SJJ35t/L/UpCce4UCKvdx2ocSCzqB2HBY/VAn4MkdCbPjyKC6EMxZp3YexUs26NaL48/x7OFsPiUpbzCnlb4ZzUkpIZOYh9MQTamS6JDKv0zcs3F/Gn0Qm7RlXIhfeeM8MXWA==

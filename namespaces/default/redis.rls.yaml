@@ -1,0 +1,36 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: redis
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~4.0
+
+spec:
+  releaseName: redis
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com/
+    name: redis
+    version: 6.4.3
+  values:
+    image:
+      tag: 4.0.14
+      pullPolicy: IfNotPresent
+
+    usePassword: false
+    master:
+      persistence:
+        enabled: false
+    cluster:
+      enabled: false
+
+    metrics:
+      enabled: false
+      service:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "9121"
