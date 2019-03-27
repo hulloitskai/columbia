@@ -3,7 +3,7 @@ image:
 
 git:
   url: git@github.com:stevenxie/columbia
-  path: cluster,namespaces
+  path: cluster,workloads
 
 helmOperator:
   tag: 0.6.0
