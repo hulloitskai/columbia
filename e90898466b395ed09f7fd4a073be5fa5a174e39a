@@ -1,0 +1,1 @@
+{"jobID":"75f81c66-8c67-6109-2983-6f8edf45e839","spec":{"type":"policy","cause":{"Message":"","User":"Steven Xie \u003cdev@stevenxie.me\u003e"},"spec":{"default:helmrelease/api":{"add":{"tag.varnish":"glob:6*alpine"},"remove":{}}}},"result":null}
