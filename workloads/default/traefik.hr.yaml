@@ -1,0 +1,101 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: traefik
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~1.7
+
+spec:
+  releaseName: traefik
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com
+    name: traefik
+    version: 1.65.0
+  valueFileSecrets:
+    - name: traefik-release
+  values:
+    imageTag: 1.7.9
+    cpuLimit: 250m
+    memoryLimit: 100Mi
+    nodeSelector:
+      node-role.kubernetes.io/entrypoint: entrypoint
+
+    kubernetes:
+      namespaces:
+        - default
+        - wanderfall
+    rbac:
+      enabled: true
+
+    deployment:
+      hostPort:
+        httpEnabled: true
+        httpsEnabled: true
+
+    serviceType: ClusterIP
+    externalTrafficPolicy: ""
+    service:
+      nodePorts:
+        http: []
+        https: []
+
+    ssl:
+      enabled: true
+      enforced: true  # redirect HTTP to HTTPS
+    acme:
+      enabled: true
+      staging: false
+      onHostRule: false
+      challengeType: dns-01
+      email: steven.xie@outlook.com
+      dnsProvider:
+        name: cloudflare
+      domains:
+        enabled: true
+        domainsList:
+          - main: "stevenxie.me"
+          - main: "*.stevenxie.me"
+          - main: "stevenxie.com"
+          - main: "*.stevenxie.com"
+          - main: "wanderfallgames.com"
+          - sans:
+              - "www.wanderfallgames.com"
+              - "api.wanderfallgames.com"
+      persistence:
+        enabled: true
+        size: 1Gi
+
+    gzip:
+      enabled: true
+
+    metrics:
+      prometheus:
+        enabled: true
+        restrictAccess: true
+
+    dashboard:
+      enabled: true
+      statistics:
+        recentErrors: 5
+      service:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "8080"
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: traefik-release
+  namespace: default
+
+spec:
+  encryptedData:
+    values.yaml: AgBHmWDgihbkgHSuGxw5E3I12aiIKPJsy4sMQuJDBDfRBlTJ4PWPruth5Gwlw5bVMyE39lWbkkgIKciQ8CJpTKCjSI305/rqRliqC8V3DtZe+k7wZ9OJOuXCU/Y7gWtowq5RAjtIXaqd//XsGbElKrbxleYd1dS1VpSdLMeMLLhICOpsSWR1u/VugAgoOWX+Pdn71rgs3mgNA+sBiX68QoJOXZJxXMhnmPGsIl/zmejM0WNnwnrH3jS4V970yLdiw6npQYC0cQxLI1Wqp9vX+r7qx+MOMIVmgWCwH0Bc7fSkGQnMeJvxHhzxOykXe6wfsr2+gZdnUVUipK7J8qbNpU5X5nM64aCg0xSB7iWfZz/lPR4bxlItLkioYV2Pt3tUcYQyB9tQAo74lKczLF27Mv1GZxbvbC9+sI/TdrlF1xbRbWe2MbcbrP21E92WiW6sdZVMlAqpm1EkrFDG3l1NWq6zIvbzSD0Afbs2X1011DQxXmV1P5N/uOw2mLBZo1HJRPrwOL9PvM2k58oxbjK3MWrBrtQcE8KzfDAILKAE16cKOY76jU8WlFn9Ow/Bt85PwZctiIAcQCsYMBHH6xrWqtS6QiNwAHa2osEBuKiqMEMwOPe4JDpKAGqDRoI+P6PAwOZCsnh/Z+XvrzJV3GoPkYONT12YFLhiFyrG5DJJNKDa0AFA5C/B95KGEaDtVjMbyIJ4FgfY7Bu6MIy8o1qb6i5cFE6s16oXz9zuzHi9YOWYrbVkCTWoXgVxb4WqogwqeAZJzNLMQL9URhUKVuJ1uxySDpNZikJmACNZgq+tggnhznzNy6ffbZdD1CoK44kQyHfdIozY0Up3s0wmaN+pAl3+m0mmA6udqRn83JjEDAYA6TfY2gd9faAuoVpLXA17cPuoY8Ph

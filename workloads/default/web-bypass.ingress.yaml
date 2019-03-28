@@ -1,0 +1,29 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: web-bypass
+  namespace: default
+  annotations:
+    app.kubernetes.io/name: web
+    ingress.kubernetes.io/custom-response-headers: X-Service:web-bypass
+    traefik.ingress.kubernetes.io/redirect-regex: ^https?://web.stevenxie.com/(.*)
+    traefik.ingress.kubernetes.io/redirect-replacement: https://web.stevenxie.me/$1
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+
+spec:
+  rules:
+    - host: web.stevenxie.me
+      http:
+        paths:
+          - backend:
+              serviceName: web
+              servicePort: 80
+    - host: web.stevenxie.com
+      http:
+        paths:
+          - backend:
+              serviceName: traefik
+              servicePort: 80
