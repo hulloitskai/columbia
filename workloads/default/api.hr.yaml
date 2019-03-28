@@ -44,7 +44,7 @@ spec:
 
     varnish:
       image:
-        tag: latest
+        tag: 6.0.0-alpine
       deployment:
         strategy: *strategy
       nodeSelector:

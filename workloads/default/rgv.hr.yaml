@@ -1,0 +1,22 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: rgv
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+
+spec:
+  releaseName: rgv
+  chart:
+    repository: https://charts.stevenxie.me
+    name: rgv
+    version: 0.1.2
+  values:
+    ingress:
+      host: rgv.stevenxie.me
+      annotations:
+        ingress.kubernetes.io/custom-response-headers: X-Service:rgv

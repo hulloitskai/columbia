@@ -1,0 +1,23 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: rgv-redirect
+  namespace: default
+  annotations:
+    app.kubernetes.io/name: rgv
+    ingress.kubernetes.io/custom-response-headers: X-Service:rgv-redirect
+    traefik.ingress.kubernetes.io/redirect-regex: ^https?://rgv.stevenxie.com/(.*)
+    traefik.ingress.kubernetes.io/redirect-replacement: https://rgv.stevenxie.me/$1
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+
+spec:
+  rules:
+    - host: rgv.stevenxie.com
+      http:
+        paths:
+          - backend:
+              serviceName: rgv-frontend
+              servicePort: http

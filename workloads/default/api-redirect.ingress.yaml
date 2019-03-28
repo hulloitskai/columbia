@@ -1,0 +1,23 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: api-redirect
+  namespace: default
+  annotations:
+    app.kubernetes.io/name: api
+    ingress.kubernetes.io/custom-response-headers: X-Service:api-redirect
+    traefik.ingress.kubernetes.io/redirect-regex: ^https?://api.stevenxie.com/(.*)
+    traefik.ingress.kubernetes.io/redirect-replacement: https://api.stevenxie.me/$1
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+
+spec:
+  rules:
+    - host: api.stevenxie.com
+      http:
+        paths:
+          - backend:
+              serviceName: api-varnish
+              servicePort: varnish

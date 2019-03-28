@@ -1,0 +1,21 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: http-debug
+  namespace: default
+  labels:
+    app: http-debug
+  annotations:
+    flux.weave.works/ignore: "true"
+
+spec:
+  type: ClusterIP
+  selector:
+    app: http-debug
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80

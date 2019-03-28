@@ -1,0 +1,28 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: http-debug
+  namespace: default
+  labels:
+    app: http-debug
+  annotations:
+    flux.weave.works/ignore: "true"
+    ingress.kubernetes.io/custom-response-headers: X-Service:http-debug
+
+spec:
+  rules:
+    - host: debug.stevenxie.me
+      http:
+        paths:
+          - backend:
+              serviceName: http-debug
+              servicePort: http
+    - host: cfdebug.stevenxie.me
+      http:
+        paths:
+          - backend:
+              serviceName: http-debug
+              servicePort: http

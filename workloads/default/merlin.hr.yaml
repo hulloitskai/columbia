@@ -1,0 +1,22 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: merlin
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+
+spec:
+  releaseName: merlin
+  chart:
+    repository: https://charts.stevenxie.me
+    name: merlin
+    version: 0.1.1
+  values:
+    ingress:
+      host: merlin.stevenxie.me
+      annotations:
+        ingress.kubernetes.io/custom-response-headers: X-Service:merlin

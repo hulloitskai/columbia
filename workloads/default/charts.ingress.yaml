@@ -1,0 +1,21 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: charts
+  namespace: default
+  labels:
+    app: charts
+  annotations:
+    ingress.kubernetes.io/custom-response-headers: X-Service:charts
+
+spec:
+  rules:
+    - host: charts.stevenxie.me
+      http:
+        paths:
+          - backend:
+              serviceName: charts
+              servicePort: https

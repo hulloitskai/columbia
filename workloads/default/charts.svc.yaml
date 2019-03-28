@@ -1,0 +1,19 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: charts
+  namespace: default
+  labels:
+    app: charts
+
+spec:
+  type: ExternalName
+  externalName: stevenxie.github.io
+  ports:
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 443

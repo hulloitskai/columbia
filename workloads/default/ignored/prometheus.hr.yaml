@@ -1,0 +1,24 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: prometheus
+  namespace: default
+  annotations:
+    flux.weave.works/ignore: "true"
+    flux.weave.works/automated: "true"
+
+spec:
+  releaseName: prometheus
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com
+    name: prometheus
+    version: 8.9.0
+  values:
+    server:
+      persistentVolume:
+        size: 4Gi
+    alertmanager:
+      enabled: false
