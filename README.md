@@ -1,3 +1,11 @@
+<p align="center">
+  <img
+    src="./docs/columbia.png"
+    width="275px"
+    title="'Robot City' by Petr Had (https://dribbble.com/petrhad)"
+  />
+</p>
+
 # columbia
 
 _My personal K8s cluster, configured with code (using
