@@ -19,6 +19,7 @@ spec:
   valueFileSecrets:
     - name: traefik-release
   values:
+    image: traefik
     imageTag: 1.7.9
     cpuLimit: 250m
     memoryLimit: 100Mi

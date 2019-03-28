@@ -19,6 +19,7 @@ spec:
     version: 6.4.3
   values:
     image:
+      repository: bitnami/redis
       tag: "5.0"
       pullPolicy: IfNotPresent
 
