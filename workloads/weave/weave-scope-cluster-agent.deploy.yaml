@@ -20,22 +20,27 @@ metadata:
 
 spec:
   replicas: 1
-  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-scope
+      weave-cloud-component: scope
+      weave-scope-component: cluster-agent
   template:
     metadata:
       labels:
-        name: weave-scope-cluster-agent
-        app: weave-scope
+        app.kubernetes.io/name: weave-scope
         weave-cloud-component: scope
         weave-scope-component: cluster-agent
     spec:
+      serviceAccountName: weave-scope
       containers:
         - name: scope-cluster-agent
           args:
-            - '--mode=probe'
-            - '--probe-only'
-            - '--probe.kubernetes.role=cluster'
-            - 'weave-scope-app.weave.svc.cluster.local:80'
+            - --mode=probe
+            - --probe-only
+            - --probe.kubernetes.role=cluster
+            - --weave=false
+            - weave-scope-app.weave.svc.cluster.local:80
           command:
             - /home/weave/scope
           env: []
@@ -45,4 +50,3 @@ spec:
             requests:
               cpu: 100m
               memory: 100Mi
-      serviceAccountName: weave-scope

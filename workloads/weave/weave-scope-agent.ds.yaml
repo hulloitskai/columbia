@@ -20,27 +20,32 @@ metadata:
 
 spec:
   minReadySeconds: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-scope
+      weave-cloud-component: scope
+      weave-scope-component: agent
   template:
     metadata:
       labels:
-        name: weave-scope-agent
-        app: weave-scope
+        app.kubernetes.io/name: weave-scope
         weave-cloud-component: scope
         weave-scope-component: agent
     spec:
       containers:
         - name: scope-agent
           args:
-            - '--mode=probe'
-            - '--probe-only'
-            - '--probe.kubernetes.role=host'
-            - '--probe.docker.bridge=docker0'
-            - '--probe.docker=true'
-            - 'weave-scope-app.weave.svc.cluster.local:80'
+            - --mode=probe
+            - --probe-only
+            - --probe.kubernetes.role=host
+            - --probe.docker.bridge=docker0
+            - --probe.docker=true
+            - --weave=false
+            - weave-scope-app.weave.svc.cluster.local:80
           command:
             - /home/weave/scope
           env: []
-          image: 'docker.io/weaveworks/scope:1.10.2'
+          image: docker.io/weaveworks/scope:1.10.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
