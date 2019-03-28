@@ -8,7 +8,7 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "false"
-    flux.weave.works/tag.hack: glob:2.*.*-alpine
+    flux.weave.works/tag.hack: glob:v1.7*-alpine
   labels:
     app.kubernetes.io/name: traefik
 
@@ -24,7 +24,7 @@ spec:
     hack:
       image:
         repository: &repository traefik
-        tag: &tag 2.0.0-alpine
+        tag: &tag v1.7.9-alpine
 
     image: *repository
     imageTag: *tag
@@ -44,6 +44,10 @@ spec:
       hostPort:
         httpEnabled: true
         httpsEnabled: true
+    deploymentStrategy:
+      rollingUpdate:
+        maxSurge: 0
+        maxUnavailable: 1
 
     serviceType: ClusterIP
     externalTrafficPolicy: ""
