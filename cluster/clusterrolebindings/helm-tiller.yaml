@@ -6,7 +6,7 @@ kind: ClusterRoleBinding
 metadata:
   name: helm-tiller
   labels:
-    app: helm
+    app.kubernetes.io/name: helm
 
 roleRef:
   apiGroup: rbac.authorization.k8s.io

@@ -6,7 +6,7 @@ kind: ClusterRoleBinding
 metadata:
   name: flux
   labels:
-    app: flux
+    app.kubernetes.io/name: flux
 
 roleRef:
   apiGroup: rbac.authorization.k8s.io

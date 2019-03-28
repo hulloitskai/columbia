@@ -9,6 +9,8 @@ metadata:
   annotations:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.varnish: regexp:^6\.[0-9]\.[0-9]-alpine$
+  labels:
+    app.kubernetes.io/name: api
 
 spec:
   releaseName: api

@@ -7,7 +7,7 @@ metadata:
   name: mongo
   namespace: default
   labels:
-    app: mongo
+    app.kubernetes.io/name: mongo
 
 spec:
   type: ExternalName

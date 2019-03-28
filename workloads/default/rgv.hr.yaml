@@ -8,6 +8,8 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "true"
+  labels:
+    app.kubernetes.io/name: rgv
 
 spec:
   releaseName: rgv

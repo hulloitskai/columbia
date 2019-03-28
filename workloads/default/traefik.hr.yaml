@@ -9,6 +9,8 @@ metadata:
   annotations:
     flux.weave.works/automated: "false"
     flux.weave.works/tag.hack: glob:2.*.*-alpine
+  labels:
+    app.kubernetes.io/name: traefik
 
 spec:
   releaseName: traefik

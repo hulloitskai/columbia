@@ -7,11 +7,12 @@ metadata:
   name: web-bypass
   namespace: default
   annotations:
-    app.kubernetes.io/name: web
     ingress.kubernetes.io/custom-response-headers: X-Service:web-bypass
     traefik.ingress.kubernetes.io/redirect-regex: ^https?://web.stevenxie.com/(.*)
     traefik.ingress.kubernetes.io/redirect-replacement: https://web.stevenxie.me/$1
     traefik.ingress.kubernetes.io/redirect-permanent: "true"
+  labels:
+    app.kubernetes.io/name: web
 
 spec:
   rules:

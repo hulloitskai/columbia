@@ -6,10 +6,10 @@ kind: Ingress
 metadata:
   name: charts
   namespace: default
-  labels:
-    app: charts
   annotations:
     ingress.kubernetes.io/custom-response-headers: X-Service:charts
+  labels:
+    app.kubernetes.io/name: charts
 
 spec:
   rules:

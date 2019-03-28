@@ -7,11 +7,12 @@ metadata:
   name: merlin-redirect
   namespace: default
   annotations:
-    app.kubernetes.io/name: merlin
     ingress.kubernetes.io/custom-response-headers: X-Service:merlin-redirect
     traefik.ingress.kubernetes.io/redirect-regex: ^https?://merlin.stevenxie.com/(.*)
     traefik.ingress.kubernetes.io/redirect-replacement: https://merlin.stevenxie.me/$1
     traefik.ingress.kubernetes.io/redirect-permanent: "true"
+  labels:
+    app.kubernetes.io/name: merlin
 
 spec:
   rules:

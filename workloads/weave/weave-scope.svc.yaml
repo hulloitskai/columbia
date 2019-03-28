@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: weave-scope-app
+  annotations:
+    cloud.weave.works/launcher-info: |-
+      {
+        "original-request": {
+          "url": "/k8s/v1.10/scope.yaml?k8s-version=Q2xpZW50IFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiIxNCIsIEdpdFZlcnNpb246InYxLjE0LjAiLCBHaXRDb21taXQ6IjY0MTg1NmRiMTgzNTIwMzNhMGQ5NmRiYzk5MTUzZmEzYjI3Mjk4ZTUiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE5LTAzLTI2VDAwOjA0OjUyWiIsIEdvVmVyc2lvbjoiZ28xLjEyLjEiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToiZGFyd2luL2FtZDY0In0KU2VydmVyIFZlcnNpb246IHZlcnNpb24uSW5mb3tNYWpvcjoiMSIsIE1pbm9yOiIxMyIsIEdpdFZlcnNpb246InYxLjEzLjEiLCBHaXRDb21taXQ6ImVlYzU1YjliYTk4NjA5YTQ2ZmVlNzEyMzU5YzdiNWIzNjViZGQ5MjAiLCBHaXRUcmVlU3RhdGU6ImNsZWFuIiwgQnVpbGREYXRlOiIyMDE4LTEyLTEzVDEwOjMxOjMzWiIsIEdvVmVyc2lvbjoiZ28xLjExLjIiLCBDb21waWxlcjoiZ2MiLCBQbGF0Zm9ybToibGludXgvYW1kNjQifQo=",
+          "date": "Thu Mar 28 2019 19:49:15 GMT+0000 (UTC)"
+        },
+        "email-address": "support@weave.works"
+      }
+  labels:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+  namespace: weave
+
+spec:
+  selector:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+  ports:
+    - name: app
+      port: 80
+      protocol: TCP
+      targetPort: 4040
