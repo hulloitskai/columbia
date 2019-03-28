@@ -6,13 +6,16 @@ git:
   path: cluster,workloads
 
 helmOperator:
-  tag: 0.6.0
+  tag: 0.7.1
   create: true
   createCRD: false
 
   tillerNamespace: helm
   tls:
     enable: true
+
+memcached:
+  tag: 1.5.12-alpine
 
 prometheus:
   enabled: true
