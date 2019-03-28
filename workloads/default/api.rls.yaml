@@ -16,7 +16,7 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: api
-    version: 0.4.4
+    version: 0.4.5
   valueFileSecrets:
     - name: api-release
   values:
@@ -51,18 +51,19 @@ spec:
         node-role.kubernetes.io/storage: storage
 
     jobserver:
-      image:
-        tag: latest
-      deployment:
-        strategy: *strategy
+      enabled: false
+      # image:
+      #   tag: latest
+      # deployment:
+      #   strategy: *strategy
 
     jobserver-ui:
-      enabled: true
-      redisAddr: redis://redis-master:6379
-      image:
-        tag: latest
-      deployment:
-        strategy: *strategy
+      enabled: false
+      # redisAddr: redis://redis-master:6379
+      # image:
+      #   tag: latest
+      # deployment:
+      #   strategy: *strategy
 
 ---
 
