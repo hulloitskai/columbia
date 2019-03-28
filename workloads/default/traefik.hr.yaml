@@ -8,7 +8,7 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "false"
-    flux.weave.works/tag.chart-image: semver:~1.7
+    flux.weave.works/tag.hack: glob:2.*.*-alpine
 
 spec:
   releaseName: traefik
@@ -19,8 +19,13 @@ spec:
   valueFileSecrets:
     - name: traefik-release
   values:
-    image: traefik:v1.7.9
-    imageTag: 1.7.9
+    hack:
+      image:
+        repository: &repository traefik
+        tag: &tag 2.0.0-alpine
+
+    image: *repository
+    imageTag: *tag
     cpuLimit: 250m
     memoryLimit: 100Mi
     nodeSelector:
