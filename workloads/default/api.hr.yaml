@@ -75,7 +75,7 @@ kind: SealedSecret
 metadata:
   name: api-release
   namespace: default
-  annotations:
+  labels:
     app.kubernetes.io/name: api
 
 spec:

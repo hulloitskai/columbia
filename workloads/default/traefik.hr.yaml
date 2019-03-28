@@ -35,8 +35,9 @@ spec:
 
     kubernetes:
       namespaces:
-      - default
-      - wanderfall
+        - default
+        - wanderfall
+        - weave
     rbac:
       enabled: true
 
@@ -70,14 +71,14 @@ spec:
       domains:
         enabled: true
         domainsList:
-        - main: "stevenxie.me"
-        - main: "*.stevenxie.me"
-        - main: "stevenxie.com"
-        - main: "*.stevenxie.com"
-        - main: "wanderfallgames.com"
-        - sans:
-          - "www.wanderfallgames.com"
-          - "api.wanderfallgames.com"
+          - main: "stevenxie.me"
+          - main: "*.stevenxie.me"
+          - main: "stevenxie.com"
+          - main: "*.stevenxie.com"
+          - main: "wanderfallgames.com"
+          - sans:
+              - "www.wanderfallgames.com"
+              - "api.wanderfallgames.com"
       persistence:
         enabled: true
         size: 1Gi
@@ -107,7 +108,7 @@ kind: SealedSecret
 metadata:
   name: traefik-release
   namespace: default
-  annotations:
+  labels:
     app.kubernetes.io/name: traefik
 
 spec:

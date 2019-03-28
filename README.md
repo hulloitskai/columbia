@@ -11,6 +11,8 @@
 _My personal K8s cluster, configured with code (using
 [Flux](https://github.com/weaveworks/flux))._
 
+[![UptimeRobot][status-img]][status]
+
 ## Directories
 
 - [`cluster`](./cluster) – a GitOps-enabled directory that contains cluster-wide
@@ -33,3 +35,6 @@ Configuration secrets are to be hidden using
 K8s `Secret` resources should be encrypted using
 [`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets), using a
 process described in [`sealed-secrets/README.md`](./sealed-secrets/README.md).
+
+[status]: https://status.stevenxie.me
+[status-img]: https://img.shields.io/uptimerobot/ratio/m782295595-128aab6d398761c64ab1b883.svg
