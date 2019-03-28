@@ -42,6 +42,7 @@ spec:
             - --probe.kubernetes.role=host
             - --probe.docker.bridge=docker0
             - --probe.docker=true
+            - --probe.no-controls=true
             - --weave=false
             - weave-scope-app.weave.svc.cluster.local:80
           command:

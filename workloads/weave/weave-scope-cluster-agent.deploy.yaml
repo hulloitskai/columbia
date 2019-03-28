@@ -41,6 +41,7 @@ spec:
             - --mode=probe
             - --probe-only
             - --probe.kubernetes.role=cluster
+            - --probe.no-controls=true
             - --weave=false
             - weave-scope-app.weave.svc.cluster.local:80
           command:
