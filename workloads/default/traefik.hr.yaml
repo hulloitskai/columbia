@@ -7,7 +7,7 @@ metadata:
   name: traefik
   namespace: default
   annotations:
-    flux.weave.works/automated: "true"
+    flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: semver:~1.7
 
 spec:
@@ -19,7 +19,7 @@ spec:
   valueFileSecrets:
     - name: traefik-release
   values:
-    image: traefik
+    image: traefik:v1.7.9
     imageTag: 1.7.9
     cpuLimit: 250m
     memoryLimit: 100Mi
@@ -28,8 +28,8 @@ spec:
 
     kubernetes:
       namespaces:
-        - default
-        - wanderfall
+      - default
+      - wanderfall
     rbac:
       enabled: true
 
@@ -59,14 +59,14 @@ spec:
       domains:
         enabled: true
         domainsList:
-          - main: "stevenxie.me"
-          - main: "*.stevenxie.me"
-          - main: "stevenxie.com"
-          - main: "*.stevenxie.com"
-          - main: "wanderfallgames.com"
-          - sans:
-              - "www.wanderfallgames.com"
-              - "api.wanderfallgames.com"
+        - main: "stevenxie.me"
+        - main: "*.stevenxie.me"
+        - main: "stevenxie.com"
+        - main: "*.stevenxie.com"
+        - main: "wanderfallgames.com"
+        - sans:
+          - "www.wanderfallgames.com"
+          - "api.wanderfallgames.com"
       persistence:
         enabled: true
         size: 1Gi

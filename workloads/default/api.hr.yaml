@@ -8,7 +8,7 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "true"
-    flux.weave.works/tag.varnish: glob:6*-alpine
+    flux.weave.works/tag.varnish: regexp:^6\.[0-9]\.[0-9]-alpine$
 
 spec:
   releaseName: api
@@ -44,7 +44,7 @@ spec:
     varnish:
       image:
         repository: cooptilleuls/varnish
-        tag: 6.0.0-alpine
+        tag: 6-alpine
       deployment:
         strategy: *strategy
       nodeSelector:
