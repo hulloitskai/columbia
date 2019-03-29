@@ -1,0 +1,30 @@
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+
+metadata:
+  name: ghost
+  namespace: wanderfall
+  annotations:
+    ingress.kubernetes.io/custom-response-headers: X-Service:ghost
+    traefik.ingress.kubernetes.io/redirect-regex: ^https?://www.wanderfallgames.com/(.*)
+    traefik.ingress.kubernetes.io/redirect-replacement: https://wanderfallgames.com/$1
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+  labels:
+    app.kubernetes.io/name: ghost
+
+spec:
+  rules:
+    - host: wanderfallgames.com
+      http:
+        paths:
+          - backend:
+              serviceName: ghost
+              servicePort: http
+    - host: www.wanderfallgames.com
+      http:
+        paths:
+          - backend:
+              serviceName: ghost
+              servicePort: http

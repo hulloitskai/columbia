@@ -1,0 +1,17 @@
+---
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+
+metadata:
+  name: admin
+  namespace: wanderfall
+
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - apps
+      - batch
+    resources: ['*']
+    verbs: ['*']

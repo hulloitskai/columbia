@@ -1,0 +1,22 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: ghost
+  namespace: wanderfall
+  labels:
+    app.kubernetes.io/name: ghost
+
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: ghost
+    tier: frontend
+    track: stable
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
