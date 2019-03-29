@@ -46,7 +46,7 @@ spec:
     varnish:
       image:
         repository: cooptilleuls/varnish
-        tag: 6.0.3-alpine
+        tag: 6.2.0-alpine
       deployment:
         strategy: *strategy
       nodeSelector:
