@@ -7,14 +7,14 @@ metadata:
   name: http-debug
   namespace: default
   labels:
-    app: http-debug
+    app.kubernetes.io/name: http-debug
   annotations:
     flux.weave.works/ignore: "true"
 
 spec:
   type: ClusterIP
   selector:
-    app: http-debug
+    app.kubernetes.io/name: http-debug
   ports:
     - name: http
       protocol: TCP

@@ -7,7 +7,7 @@ metadata:
   name: http-debug
   namespace: default
   labels:
-    app: http-debug
+    app.kubernetes.io/name: http-debug
   annotations:
     flux.weave.works/ignore: "true"
     ingress.kubernetes.io/custom-response-headers: X-Service:http-debug

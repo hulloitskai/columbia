@@ -7,7 +7,7 @@ metadata:
   name: http-debug
   namespace: default
   labels:
-    app: http-debug
+    app.kubernetes.io/name: http-debug
   annotations:
     flux.weave.works/ignore: "true"
 
@@ -15,11 +15,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: http-debug
+      app.kubernetes.io/name: http-debug
   template:
     metadata:
       labels:
-        app: http-debug
+        app.kubernetes.io/name: http-debug
     spec:
       containers:
         - name: http-https-echo
