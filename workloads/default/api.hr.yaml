@@ -7,8 +7,8 @@ metadata:
   name: api
   namespace: default
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.varnish: regexp:^6\.[0-9]\.[0-9]-alpine$
+    flux.weave.works/automated: "false"
+    flux.weave.works/tag.chart-image: "*"
   labels:
     app.kubernetes.io/name: api
 
@@ -17,7 +17,7 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: api
-    version: 0.4.5
+    version: 0.5.0
   valueFileSecrets:
     - name: api-release
   values:
@@ -32,25 +32,21 @@ spec:
         redisAddr: redis-master:6379
         fetchMoodsCron: 0 0-59/5 * * * *
     image:
+      repository: stevenxie/api
       tag: latest
     deployment:
       strategy: &strategy
+        type: RollingUpdate
         rollingUpdate:
           maxSurge: 1
           maxUnavailable: 0
     ingress:
-      host: api.stevenxie.me
+      enabled: true
+      hosts:
+        - host: api.stevenxie.me
+          paths: ['/']
       annotations:
         ingress.kubernetes.io/custom-response-headers: X-Service:api
-
-    varnish:
-      image:
-        repository: cooptilleuls/varnish
-        tag: 6.2.0-alpine
-      deployment:
-        strategy: *strategy
-      nodeSelector:
-        node-role.kubernetes.io/storage: storage
 
     jobserver:
       enabled: false
