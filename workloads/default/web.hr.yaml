@@ -1,0 +1,27 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: web
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "false"
+    flux.weave.works/tag.chart-image: "*"
+  labels:
+    app.kubernetes.io/name: web
+
+spec:
+  releaseName: web
+  chart:
+    repository: https://charts.stevenxie.me
+    name: web
+    version: 0.1.0
+  values:
+    image:
+      repository: stevenxie/stevenxie.me
+      tag: latest
+    resources:
+      limits:
+        memory: 200Mi

@@ -26,5 +26,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: traefik
+              serviceName: web
               servicePort: 80
