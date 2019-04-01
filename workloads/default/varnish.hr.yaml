@@ -17,23 +17,34 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: varnish
-    version: 0.1.0
+    version: 0.1.1
   values:
     config:
       data: |-
         vcl 4.0;
 
-        backend default {
+        ## Backends:
+        backend web {
+          .host = "web";
+          .port = "80";
+        }
+        backend api {
           .host = "api";
           .port = "3000";
         }
 
         sub vcl_backend_response {
           set beresp.ttl = 120s;
+          set beresp.http.X-Service = beresp.backend.name;
         }
 
         sub vcl_recv {
           unset req.http.X-Body-Len;
+
+          ## Determine backend.
+          if (req.http.X-Forwarded-Host == "api.stevenxie.me") {
+            set req.backend_hint = api;
+          }
 
           ## Remove has_js and Cloudflare/Google Analytics __* cookies, and
           ## normalize cookies.
@@ -47,11 +58,9 @@ spec:
           if (req.method != "GET" && req.method != "HEAD") {
             return (pass);
           }
-
           if (req.http.Authorization) {
             return (pass);
           }
-
           if (req.http.X-Force-Backend) {
             return (pass);
           }
@@ -72,7 +81,7 @@ spec:
     ingress:
       enabled: true
       hosts:
+        - host: stevenxie.me
+          paths: ['/']
         - host: api.stevenxie.me
           paths: ['/']
-      annotations:
-        ingress.kubernetes.io/custom-response-headers: X-Service:api
