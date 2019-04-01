@@ -22,6 +22,12 @@ spec:
     image:
       repository: stevenxie/stevenxie.me
       tag: latest
+    deployment:
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
     resources:
       limits:
         memory: 200Mi

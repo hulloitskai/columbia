@@ -46,6 +46,7 @@ spec:
         httpEnabled: true
         httpsEnabled: true
     deploymentStrategy:
+      type: RollingUpdate
       rollingUpdate:
         maxSurge: 0
         maxUnavailable: 1
