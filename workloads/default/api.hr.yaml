@@ -40,13 +40,6 @@ spec:
         rollingUpdate:
           maxSurge: 1
           maxUnavailable: 0
-    ingress:
-      enabled: true
-      hosts:
-        - host: api.stevenxie.me
-          paths: ['/']
-      annotations:
-        ingress.kubernetes.io/custom-response-headers: X-Service:api
 
     jobserver:
       enabled: false

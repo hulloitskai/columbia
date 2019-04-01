@@ -5,7 +5,8 @@ kind: CustomResourceDefinition
 
 metadata:
   name: helmreleases.flux.weave.works
-  app.kubernetes.io/name: flux
+  labels:
+    app.kubernetes.io/name: flux
 
 spec:
   group: flux.weave.works
