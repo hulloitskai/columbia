@@ -34,7 +34,7 @@ spec:
 
     image:
       repository: stevenxie/api
-      tag: 0.3.4
+      tag: 0.3.4-15-g51eeb92
 
     deployment:
       strategy:
@@ -47,7 +47,6 @@ spec:
       enabled: false
     jobserver-ui:
       enabled: false
-
 ---
 
 apiVersion: bitnami.com/v1alpha1
