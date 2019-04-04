@@ -7,8 +7,8 @@ metadata:
   name: web
   namespace: default
   annotations:
-    flux.weave.works/automated: "false"
-    flux.weave.works/tag.chart-image: "*"
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: regexp:0(\.[0-9]){2}.* # 0.x.x...
   labels:
     app.kubernetes.io/name: web
 
@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: stevenxie/stevenxie.me
-      tag: latest
+      tag: 0.1.0-13-gccdafe1
     deployment:
       strategy:
         type: RollingUpdate
