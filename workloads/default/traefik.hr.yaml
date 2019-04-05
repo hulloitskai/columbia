@@ -28,6 +28,7 @@ spec:
 
     image: *repository
     imageTag: *tag
+
     cpuLimit: 250m
     memoryLimit: 100Mi
     nodeSelector:
