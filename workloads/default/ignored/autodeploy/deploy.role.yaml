@@ -6,6 +6,8 @@ kind: Role
 metadata:
   name: deploy
   namespace: default
+  annotations:
+    flux.weave.works/ignore: "true"
 
 rules:
   - apiGroups:

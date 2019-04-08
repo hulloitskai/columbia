@@ -6,3 +6,5 @@ kind: ServiceAccount
 metadata:
   name: autodeployer
   namespace: default
+  annotations:
+    flux.weave.works/ignore: "true"
