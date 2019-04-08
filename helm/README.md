@@ -1,12 +1,28 @@
 # helm
 
-This directory contains certificates that are used to secure the connection
-between `helm` and `helm-tiller`. One such certificate-key pair (i.e.
+This directory contains a CA and certificates that are used to secure the
+connection between `helm` and `helm-tiller`. One such certificate-key pair (i.e.
 `helm.cert.pem` and `helm.key.pem`) is needed for each client to access
 `helm-tiller`.
 
-For more information, see
+## Creating Certificates
+
+Follow the instructions at
 [`helm/docs/tiller_ssl.md`](https://github.com/helm/helm/blob/master/docs/tiller_ssl.md).
+You should end up with the following files:
+
+```bash
+ca.cert.pem      # CA certificate
+ca.key.pem       # CA secret key       [*]
+tiller.cert.pem  # tiller public cert
+tiller.key.pem   # tiller private key  [*]
+
+## For every client:
+[client].cert.pem  # client public cert
+[client].key.pem   # client private key  [*]
+```
+
+> Take care to secure the files marked with `[*]`!
 
 ## Installing Helm with TLS
 

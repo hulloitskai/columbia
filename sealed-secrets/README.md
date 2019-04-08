@@ -3,6 +3,17 @@
 This directory serves as a workbench from which to create
 [sealed secrets](https://github.com/bitnami-labs/sealed-secrets).
 
+### Initialization
+
+This workbench requires a `./cert.pem`, which is the public key provided by
+the `sealed-secrets-controller`:
+
+```bash
+kubeseal --fetch-cert > ./cert.pem
+```
+
+## Usage
+
 Use the [`mksecret.sh`](./mksecret.sh) script in order to create a
 `SealedSecret` resource using the public key [`cert.pem`](./cert.pem), which can
 only be decrypted by the on-cluster `sealed-secrets-controller`.
