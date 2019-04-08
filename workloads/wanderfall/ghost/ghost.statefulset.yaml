@@ -8,7 +8,7 @@ metadata:
   namespace: wanderfall
   annotations:
     flux.weave.works/automated: "true"
-    flux.weave.works/tag.ghost: glob:2*-alpine
+    flux.weave.works/tag.ghost: regexp:^2(\.[0-9]){2}-alpine$
   labels:
     app.kubernetes.io/name: ghost
 
