@@ -14,10 +14,11 @@ if ! command -v kubeseal > /dev/null; then
 fi
 
 if [[ $# -lt 2 ]] || [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
-  echo "Usage: mksecret <name> (--from-file=<file> | --from-literial=<key>=<val> | --from-env-file=<file>)" >&2 && \
-  echo "                       [--namespace=<name> | -n<name>]" >&2 && \
+  echo "Usage: mksecret.sh (--from-file=<file> | --from-literial=<key>=<val> | --from-env-file=<file>)" >&2 && \
+  echo "                   [--namespace=<name> | -n <name>]" >&2 && \
+  echo "                   <name>" >&2 && \
   exit 2
 fi
 
-kubectl create secret generic $@ --dry-run -o yaml | \
+kubectl create secret generic --dry-run -o yaml $@ | \
   kubeseal --cert=./cert.pem --format=yaml
