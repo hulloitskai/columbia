@@ -34,7 +34,7 @@ spec:
 
     image:
       repository: stevenxie/api
-      tag: 0.3.4-15-g24509b6
+      tag: 0.3.4-15-g128f4f0
 
     deployment:
       strategy:
