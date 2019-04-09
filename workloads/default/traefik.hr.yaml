@@ -38,7 +38,7 @@ spec:
       namespaces:
         - default
         - wanderfall
-        - weave
+        - weave-system
     rbac:
       enabled: true
 

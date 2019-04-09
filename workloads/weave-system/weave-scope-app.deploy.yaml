@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/name: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
-  namespace: weave
+  namespace: weave-system
 
 spec:
   replicas: 1
@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: app
-          command: ['/home/weave/scope']
+          command: ["/home/weave/scope"]
           args:
             - --mode=app
             - --weave=false

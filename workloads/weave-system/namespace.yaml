@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Namespace
 
 metadata:
-  name: weave
+  name: weave-system
   annotations:
     cloud.weave.works/version: v1.0.0-190-g3604e53
   labels:

@@ -5,11 +5,11 @@ kind: Service
 
 metadata:
   name: weave-scope-app
+  namespace: weave-system
   labels:
     app.kubernetes.io/name: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
-  namespace: weave
 
 spec:
   selector:

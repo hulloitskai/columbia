@@ -5,7 +5,7 @@ kind: Ingress
 
 metadata:
   name: weave-scope-app
-  namespace: weave
+  namespace: weave-system
   annotations:
     ingress.kubernetes.io/custom-response-headers: X-Service:weave-scope
     traefik.ingress.kubernetes.io/redirect-regex: ^https?://status.stevenxie.com/(.*)
