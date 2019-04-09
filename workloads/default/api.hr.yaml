@@ -43,6 +43,14 @@ spec:
           maxSurge: 1
           maxUnavailable: 0
 
+    ingress:
+      enabled: true
+      annotations:
+        ingress.kubernetes.io/custom-response-headers: X-Service:api-direct
+      hosts:
+        - host: api-direct.stevenxie.me
+          paths: ['/']
+
     jobserver:
       enabled: false
     jobserver-ui:
