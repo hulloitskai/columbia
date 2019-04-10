@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: stevenxie/stevenxie.me
-      tag: 0.1.0-13-gccdafe1
+      tag: 0.1.0-14-g5aedcb9
     deployment:
       strategy:
         type: RollingUpdate
@@ -36,5 +36,5 @@ spec:
       annotations:
         ingress.kubernetes.io/custom-response-headers: X-Service:web-direct
       hosts:
-        - host: web-direct.stevenxie.me
-          paths: ['/']
+      - host: web-direct.stevenxie.me
+        paths: ['/']
