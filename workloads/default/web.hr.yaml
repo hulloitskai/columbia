@@ -17,7 +17,7 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: web
-    version: 0.1.0
+    version: 0.1.1
   values:
     image:
       repository: stevenxie/stevenxie.me

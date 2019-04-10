@@ -28,36 +28,36 @@ spec:
         track: stable
     spec:
       containers:
-      - name: ghost
-        image: ghost:2.19.4-alpine
-        imagePullPolicy: IfNotPresent
-        env:
-        - name: url
-          value: https://wanderfallgames.com
-        volumeMounts:
-        - name: content
-          mountPath: /var/lib/ghost/content
-        ports:
-        - name: http
-          containerPort: 2368
-        livenessProbe: &probe
-          httpGet:
-            path: /
-            port: http
-            httpHeaders:
-            - name: Host
-              value: wanderfallgames.com
-            - name: X-Forwarded-Proto
-              value: https
-          initialDelaySeconds: 5
-        readinessProbe: *probe
+        - name: ghost
+          image: ghost:2.19.4-alpine
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: url
+              value: https://wanderfallgames.com
+          volumeMounts:
+            - name: content
+              mountPath: /var/lib/ghost/content
+          ports:
+            - name: http
+              containerPort: 2368
+          livenessProbe: &probe
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: wanderfallgames.com
+                - name: X-Forwarded-Proto
+                  value: https
+            initialDelaySeconds: 5
+          readinessProbe: *probe
   volumeClaimTemplates:
-  - metadata:
-      name: content
-      annotations:
-        volume.alpha.kubernetes.io/storage-reclaimPolicy: Retain
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storage: 4Gi
+    - metadata:
+        name: content
+        annotations:
+          volume.alpha.kubernetes.io/storage-reclaimPolicy: Retain
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 4Gi

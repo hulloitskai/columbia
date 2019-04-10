@@ -16,9 +16,13 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: rgv
-    version: 0.1.2
+    version: 0.2.0
   values:
     ingress:
-      host: rgv.stevenxie.me
+      enabled: true
+      hosts:
+        - host: rgv.stevenxie.me
+          apiPaths: ["/api"]
+          frontendPaths: ["/"]
       annotations:
         ingress.kubernetes.io/custom-response-headers: X-Service:rgv
