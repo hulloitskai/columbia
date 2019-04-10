@@ -19,7 +19,7 @@ spec:
     name: api
     version: 0.5.1
   valueFileSecrets:
-    - name: api-release
+  - name: api-release
   values:
     config:
       mongo:
@@ -34,7 +34,7 @@ spec:
 
     image:
       repository: stevenxie/api
-      tag: 0.3.4-16-gdecac9b
+      tag: 0.3.4-16-gdb5d73a
 
     deployment:
       strategy:
@@ -48,14 +48,13 @@ spec:
       annotations:
         ingress.kubernetes.io/custom-response-headers: X-Service:api-direct
       hosts:
-        - host: api-direct.stevenxie.me
-          paths: ['/']
+      - host: api-direct.stevenxie.me
+        paths: ['/']
 
     jobserver:
       enabled: false
     jobserver-ui:
       enabled: false
-
 ---
 
 apiVersion: bitnami.com/v1alpha1
