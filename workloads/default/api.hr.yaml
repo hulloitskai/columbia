@@ -19,7 +19,7 @@ spec:
     name: api
     version: 0.5.0
   valueFileSecrets:
-    - name: api-release
+  - name: api-release
   values:
     config:
       mongo:
@@ -34,7 +34,7 @@ spec:
 
     image:
       repository: stevenxie/api
-      tag: 0.3.4-15-g128f4f0
+      tag: 0.3.4-16-gdecac9b
 
     deployment:
       strategy:
@@ -48,8 +48,8 @@ spec:
       annotations:
         ingress.kubernetes.io/custom-response-headers: X-Service:api-direct
       hosts:
-        - host: api-direct.stevenxie.me
-          paths: ['/']
+      - host: api-direct.stevenxie.me
+        paths: ['/']
 
     jobserver:
       enabled: false
