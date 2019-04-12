@@ -71,12 +71,16 @@ spec:
           return (deliver);
         }
 
-    storage:
-      backend: file
-
     image:
       repository: cooptilleuls/varnish
       tag: 6.2.0-alpine
+
+    resources:
+      requests:
+        memory: 100Mi
+      limits:
+        cpu: 250m
+        memory: 200Mi
 
     deployment:
       strategy:
