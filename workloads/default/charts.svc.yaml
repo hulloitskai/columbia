@@ -8,6 +8,14 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: charts
+  annotations:
+    getambassador.io/config: |
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: charts
+      service: https://stevenxie.github.io
+      host: charts.stevenxie.me
+      prefix: /
 
 spec:
   type: ExternalName

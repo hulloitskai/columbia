@@ -10,7 +10,7 @@ metadata:
 spec:
   secretName: stevenxie-me-tls
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
   commonName: stevenxie.me
   dnsNames: &names
     - stevenxie.me

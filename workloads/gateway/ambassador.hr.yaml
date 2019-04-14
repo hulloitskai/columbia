@@ -15,9 +15,9 @@ metadata:
 spec:
   releaseName: ambassador
   chart:
-    repository: https://charts.stevenxie.me
+    repository: https://raw.githubusercontent.com/stevenxie/helm-charts/master/
     name: ambassador
-    version: 2.3.1
+    version: 2.2.1
   values:
     replicaCount: 1
     image:
@@ -30,6 +30,17 @@ spec:
         hostPort: 80
       https:
         hostPort: 443
+      annotations:
+        getambassador.io/config: |
+          apiVersion: ambassador/v1
+          kind: Module
+          name: ambassador
+          config:
+            service_port: 8443
+
+    ## Allow pod to use host network (elevate privileges).
+    securityContext:
+      runAsUser: 0
 
     deployment:
       strategy:
