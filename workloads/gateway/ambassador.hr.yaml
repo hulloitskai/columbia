@@ -1,0 +1,50 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: ambassador
+  namespace: gateway
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~0.53
+  labels:
+    app.kubernetes.io/name: ambassador
+
+spec:
+  releaseName: ambassador
+  chart:
+    repository: https://charts.stevenxie.me
+    name: ambassador
+    version: 2.3.1
+  values:
+    replicaCount: 1
+    image:
+      repository: quay.io/datawire/ambassador
+      tag: 0.53.1
+
+    service:
+      type: ClusterIP
+      http:
+        hostPort: 80
+      https:
+        hostPort: 443
+
+    deployment:
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 0
+          maxUnavailable: 1
+
+    resources:
+      requests:
+        cpu: 25m
+        memory: 25Mi
+      limits:
+        cpu: 300m
+        memory: 300Mi
+
+    nodeSelector:
+      node-role.kubernetes.io/entrypoint: entrypoint

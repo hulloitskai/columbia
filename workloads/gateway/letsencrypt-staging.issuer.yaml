@@ -1,0 +1,23 @@
+---
+
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+
+metadata:
+  name: letsencrypt-staging
+  namespace: gateway
+
+spec:
+  acme:
+    email: hello@stevenxie.me
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    dns01:
+      providers:
+        - name: cloudflare
+          cloudflare:
+            email: steven.xie@outlook.com
+            apiKeySecretRef:
+              name: cloudflare
+              key: apiKey
