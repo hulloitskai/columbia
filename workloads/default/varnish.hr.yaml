@@ -17,7 +17,7 @@ spec:
   chart:
     repository: https://charts.stevenxie.me
     name: varnish
-    version: 0.1.2
+    version: 0.2.0
   values:
     config:
       data: |-
@@ -42,7 +42,7 @@ spec:
           unset req.http.X-Body-Len;
 
           ## Determine backend.
-          if (req.http.X-Forwarded-Host == "api.stevenxie.me") {
+          if (req.http.Host == "api.stevenxie.me") {
             set req.backend_hint = api;
           }
 
@@ -88,6 +88,23 @@ spec:
         rollingUpdate:
           maxSurge: 1
           maxUnavailable: 0
+
+    service:
+      annotations:
+        getambassador.io/config: |
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: varnish-web
+          service: varnish.default
+          host: stevenxie.me
+          prefix: /
+          ---
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: varnish-api
+          service: varnish.default
+          host: api.stevenxie.me
+          prefix: /
 
     ingress:
       enabled: true

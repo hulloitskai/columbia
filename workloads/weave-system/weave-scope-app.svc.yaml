@@ -10,6 +10,25 @@ metadata:
     app.kubernetes.io/name: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
+  annotations:
+    getambassador.io/config: |
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: status
+      service: weave-scope-app.weave-system
+      host: status.stevenxie.me
+      prefix: /
+      add_response_headers:
+        X-Service: weave-scope
+      ---
+      ## Redirect from status.stevenxie.com.
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: status-redirect
+      service: status.stevenxie.me
+      host: status.stevenxie.com
+      prefix: /
+      host_redirect: true
 
 spec:
   selector:

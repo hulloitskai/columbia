@@ -16,6 +16,17 @@ metadata:
       service: https://stevenxie.github.io
       host: charts.stevenxie.me
       prefix: /
+      add_response_headers:
+        X-Service: charts
+      ---
+      ## Redirect from charts.stevenxie.com.
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: charts-redirect
+      service: charts.stevenxie.me
+      host: charts.stevenxie.com
+      prefix: /
+      host_redirect: true
 
 spec:
   type: ExternalName

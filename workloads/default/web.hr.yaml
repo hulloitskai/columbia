@@ -22,19 +22,54 @@ spec:
     image:
       repository: stevenxie/stevenxie.me
       tag: 0.1.0-14-g5aedcb9
+
     deployment:
       strategy:
         type: RollingUpdate
         rollingUpdate:
           maxSurge: 1
           maxUnavailable: 0
+
     resources:
       limits:
         memory: 200Mi
-    ingress:
-      enabled: true
+
+    service:
       annotations:
-        ingress.kubernetes.io/custom-response-headers: X-Service:web-direct
-      hosts:
-      - host: web-direct.stevenxie.me
-        paths: ['/']
+        getambassador.io/config: |
+          ## Direct access.
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: web
+          service: web.default
+          host: web-direct.stevenxie.me
+          prefix: /
+          add_response_headers:
+            X-Service: web-direct
+          ---
+          ## Redirect from www.stevenxie.me.
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: web-redirect-www
+          service: stevenxie.me
+          host: www.stevenxie.me
+          prefix: /
+          host_redirect: true
+          ---
+          ## Redirect from stevenxie.com.
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: web-redirect-com
+          service: stevenxie.me
+          host: stevenxie.com
+          prefix: /
+          host_redirect: true
+          ---
+          ## Redirect from www.stevenxie.com.
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: web-redirect-com-www
+          service: stevenxie.me
+          host: www.stevenxie.com
+          prefix: /
+          host_redirect: true
