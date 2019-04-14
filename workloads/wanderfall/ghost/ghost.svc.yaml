@@ -8,6 +8,25 @@ metadata:
   namespace: wanderfall
   labels:
     app.kubernetes.io/name: ghost
+  annotations:
+    getambassador.io/config: |
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: wanderfall-ghost
+      service: ghost.wanderfall
+      host: wanderfallgames.com
+      prefix: /
+      add_response_headers:
+        X-Service: ghost
+      ---
+      ## Redirect from www.wanderfallgames.com
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: wanderfall-ghost-redirect
+      service: wanderfallgames.com
+      host: www.wanderfallgames.com
+      prefix: /
+      host_redirect: true
 
 spec:
   type: ClusterIP

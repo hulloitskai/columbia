@@ -32,6 +32,14 @@ metadata:
         - stevenxie.com
         - "*.stevenxie.com"
       secret: stevenxie-com-tls
+      ---
+      apiVersion: ambassador/v1
+      kind: TLSContext
+      name: wanderfallgames-com
+      hosts:
+        - wanderfallgames.com
+        - www.wanderfallgames.com
+      secret: wanderfallgames-com-tls
 
 spec:
   ports:
