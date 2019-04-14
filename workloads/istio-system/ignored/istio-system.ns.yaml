@@ -6,4 +6,4 @@ metadata:
   labels:
     app.kubernetes.io/name: istio
   annotations:
-    flux.weave.works/ignored: "true"
+    flux.weave.works/ignore: "true"

@@ -8,7 +8,7 @@ metadata:
   namespace: istio-system
   annotations:
     flux.weave.works/automated: "false"
-    flux.weave.works/ignored: "true"
+    flux.weave.works/ignore: "true"
   labels:
     app.kubernetes.io/name: istio
 
