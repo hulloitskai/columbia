@@ -77,9 +77,10 @@ spec:
 
     resources:
       requests:
+        cpu: 0
         memory: 100Mi
       limits:
-        cpu: 250m
+        cpu: 200m
         memory: 200Mi
 
     deployment:

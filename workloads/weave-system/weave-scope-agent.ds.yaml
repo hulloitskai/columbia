@@ -45,8 +45,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 115m
+              memory: 125Mi
           securityContext:
             privileged: true
           volumeMounts:

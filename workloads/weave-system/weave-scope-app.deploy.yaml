@@ -39,3 +39,10 @@ spec:
           ports:
             - containerPort: 4040
               protocol: TCP
+          resources:
+            requests:
+              cpu: 15m
+              memory: 60Mi
+            limits:
+              cpu: 100m
+              memory: 150Mi
