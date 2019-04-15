@@ -1,0 +1,53 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: resume
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: regexp:0(\.[0-9]+){2}.* # 0.x.x...
+  labels:
+    app.kubernetes.io/name: resume
+
+spec:
+  releaseName: resume
+  chart:
+    repository: https://charts.stevenxie.me
+    name: resume
+    version: 0.1.0
+  values:
+    image:
+      repository: stevenxie/resume
+      tag: 1.2.0
+
+    deployment:
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+
+    service:
+      annotations:
+        getambassador.io/config: |
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: resume
+          service: resume.default
+          host: stevenxie.me
+          prefix: /resume/
+          add_response_headers:
+            X-Service: resume
+          ---
+          apiVersion: ambassador/v1
+          kind: Mapping
+          name: resume-trailing-slash-redirect
+          service: stevenxie.me
+          host: stevenxie.me
+          prefix: ^\/resume$
+          prefix_regex: true
+          host_redirect: true
+          path_redirect: /resume/
