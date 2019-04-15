@@ -42,3 +42,24 @@ specified in the [`.gitignore`](./.gitignore)._
 
 This is so that temporary files that are created during the secret-creation
 process will not be accidentally committed.
+
+### Backing Up Private Key
+
+To back up the private key that the `sealed-secrets-controller` uses to
+decrypt `SealedSecret` resources, run the following command:
+
+```bash
+kubectl -n kube-system \
+  get secrets sealed-secrets-key -o yaml > master.key.yaml
+```
+
+> **Do not expose the resulting key!** Anybody with this key can
+> decrypt _any_ `SealedSecret` resource.
+
+To restore the private key, run the following command (assuming that the
+private key is named `master.key.yaml`):
+
+```bash
+kubectl replace -f master.key.yaml && \
+kubectl delete pods -n kube-system -l app.kubernetes.io/name=sealed-secrets
+```
