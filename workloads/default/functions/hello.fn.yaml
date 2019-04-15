@@ -1,0 +1,39 @@
+---
+
+apiVersion: fission.io/v1
+kind: Function
+
+metadata:
+  name: hello
+  namespace: default
+
+spec:
+  InvokeStrategy:
+    StrategyType: execution
+    ExecutionStrategy:
+      ExecutorType: poolmgr
+  environment:
+    name: go
+    namespace: default
+  package:
+    functionName: Handler
+    packageref:
+      name: main-go-1qvl
+      namespace: default
+
+---
+
+apiVersion: fission.io/v1
+kind: HTTPTrigger
+
+metadata:
+  name: hello
+  namespace: default
+
+spec:
+  method: GET
+  host: fission.stevenxie.me
+  relativeurl: /hello
+  functionref:
+    name: hello
+    type: name

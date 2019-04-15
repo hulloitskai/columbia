@@ -14,10 +14,11 @@ metadata:
 spec:
   releaseName: fission
   chart:
-    repository: https://charts.stevenxie.me
+    repository: https://fission.github.io/fission-charts/
     name: fission-core
     version: 1.1.0
   values:
     routerServiceType: ClusterIP
+    routerRoundTripTimeout: 10s
     persistence:
       enabled: false
