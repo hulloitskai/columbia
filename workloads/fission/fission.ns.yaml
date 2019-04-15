@@ -1,0 +1,9 @@
+---
+
+apiVersion: v1
+kind: Namespace
+
+metadata:
+  name: fission
+  labels:
+    app.kubernetes.io/name: fission
