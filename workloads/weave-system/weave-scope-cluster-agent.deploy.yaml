@@ -31,6 +31,9 @@ spec:
       serviceAccountName: weave-scope
       containers:
         - name: scope-cluster-agent
+          image: weaveworks/scope:1.10.2
+          imagePullPolicy: IfNotPresent
+          command: ["/home/weave/scope"]
           args:
             - --mode=probe
             - --probe-only
@@ -38,11 +41,6 @@ spec:
             - --probe.no-controls=true
             - --weave=false
             - weave-scope-app:80
-          command:
-            - /home/weave/scope
-          env: []
-          image: weaveworks/scope:1.10.2
-          imagePullPolicy: IfNotPresent
           resources:
             requests:
               cpu: 5m

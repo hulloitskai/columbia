@@ -30,6 +30,9 @@ spec:
     spec:
       containers:
         - name: scope-agent
+          image: weaveworks/scope:1.10.2
+          imagePullPolicy: IfNotPresent
+          command: ["/home/weave/scope"]
           args:
             - --mode=probe
             - --probe-only
@@ -39,19 +42,6 @@ spec:
             - --probe.no-controls=true
             - --weave=false
             - weave-scope-app:80
-          command:
-            - /home/weave/scope
-          image: weaveworks/scope:1.10.2
-          imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              cpu: 50m
-              memory: 50Mi
-            limits:
-              cpu: 115m
-              memory: 125Mi
-          securityContext:
-            privileged: true
           volumeMounts:
             - name: scope-plugins
               mountPath: /var/run/scope/plugins
@@ -59,6 +49,15 @@ spec:
               mountPath: /sys/kernel/debug
             - name: docker-socket
               mountPath: /var/run/docker.sock
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 115m
+              memory: 125Mi
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true

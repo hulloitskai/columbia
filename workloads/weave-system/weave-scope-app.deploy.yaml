@@ -30,12 +30,12 @@ spec:
     spec:
       containers:
         - name: app
+          image: weaveworks/scope:1.10.2
+          imagePullPolicy: IfNotPresent
           command: ["/home/weave/scope"]
           args:
             - --mode=app
             - --weave=false
-          image: weaveworks/scope:1.10.2
-          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4040
               protocol: TCP
