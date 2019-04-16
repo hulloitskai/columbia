@@ -31,6 +31,8 @@ kind: HTTPTrigger
 metadata:
   name: uwu
   namespace: default
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   method: GET

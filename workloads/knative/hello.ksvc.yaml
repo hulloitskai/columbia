@@ -1,0 +1,57 @@
+---
+
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+
+metadata:
+  name: hello
+  namespace: knative
+  labels:
+    app.kubernetes.io/name: hello
+
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        metadata:
+          labels:
+            app.kubernetes.io/name: hello
+        spec:
+          container:
+            image: gcr.io/knative-samples/helloworld-go
+            env:
+              - name: TARGET
+                value: "YEET"
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: hello-mapping
+  namespace: knative
+  labels:
+    app.kubernetes.io/name: hello
+  annotations:
+    getambassador.io/config: |
+      apiVersion: ambassador/v1
+      kind: Mapping
+      name: hello
+      service: istio-ingressgateway.istio-system
+      host: fn.stevenxie.me
+      host_rewrite: hello.knative.external
+      prefix: /hello
+      rewrite: /
+      timeout_ms: 180000
+      add_response_headers:
+        X-Service: hello
+
+spec:
+  selector:
+    istio: ingressgateway
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 443
