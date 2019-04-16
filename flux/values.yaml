@@ -1,15 +1,10 @@
-image:
-  tag: 1.11.0
-
 git:
   url: git@github.com:stevenxie/columbia
   path: cluster,workloads
 
 helmOperator:
-  tag: 0.7.1
   create: true
   createCRD: false
-
   tillerNamespace: helm
   tls:
     enable: true

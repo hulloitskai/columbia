@@ -27,6 +27,7 @@ helm install \
   --name=flux \
   --namespace=flux \
   -f ./values.yaml \
+  --version 0.9.0 \
   weaveworks/flux
 ```
 
