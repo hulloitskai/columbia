@@ -6,10 +6,11 @@ kind: HelmRelease
 metadata:
   name: fission
   namespace: fission
-  annotations:
-    flux.weave.works/automated: "false"
   labels:
     app.kubernetes.io/name: fission
+  annotations:
+    flux.weave.works/ignore: "true"
+    flux.weave.works/automated: "false"
 
 spec:
   releaseName: fission

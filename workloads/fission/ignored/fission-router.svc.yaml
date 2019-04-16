@@ -5,6 +5,7 @@ metadata:
   name: fission-router
   namespace: fission
   annotations:
+    flux.weave.works/ignore: "true"
     getambassador.io/config: |
       apiVersion: ambassador/v1
       kind: Mapping
@@ -16,9 +17,9 @@ metadata:
         X-Service: fission-router
 
 spec:
+  selector:
+    svc: router
   ports:
     - port: 80
       protocol: TCP
       targetPort: 8888
-  selector:
-    svc: router

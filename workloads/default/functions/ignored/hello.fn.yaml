@@ -6,6 +6,8 @@ kind: Function
 metadata:
   name: hello
   namespace: default
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   InvokeStrategy:

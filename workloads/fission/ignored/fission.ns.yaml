@@ -7,3 +7,5 @@ metadata:
   name: fission
   labels:
     app.kubernetes.io/name: fission
+  annotations:
+    flux.weave.works/ignore: "true"
