@@ -5,5 +5,5 @@ metadata:
   name: istio-system
   labels:
     app.kubernetes.io/name: istio
-  annotations:
-    flux.weave.works/ignore: "true"
+    istio-injection: disabled
+

@@ -1,0 +1,50 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: webhook
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webhook
+      role: webhook
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: webhook
+        role: webhook
+    spec:
+      serviceAccountName: controller
+      containers:
+      - name: webhook
+        image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook@sha256:d1ba3e2c0d739084ff508629db001619cea9cc8780685e85dd910363774eaef6
+        env:
+          - name: SYSTEM_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: CONFIG_LOGGING_NAME
+            value: config-logging
+        volumeMounts:
+          - name: config-logging
+            mountPath: /etc/config-logging
+        resources:
+          requests:
+            cpu: 20m
+            memory: 20Mi
+          limits:
+            cpu: 150m
+            memory: 150Mi
+      volumes:
+        - name: config-logging
+          configMap:
+            name: config-logging

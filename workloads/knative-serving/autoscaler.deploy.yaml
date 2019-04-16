@@ -1,0 +1,66 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: autoscaler
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+  annotations:
+    flux.weave.works/automated: "false"
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autoscaler
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: autoscaler
+    spec:
+      serviceAccountName: controller
+      containers:
+        - name: autoscaler
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/autoscaler@sha256:442f99e3a55653b19137b44c1d00f681b594d322cb39c1297820eb717e2134ba
+          env:
+            - name: SYSTEM_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CONFIG_LOGGING_NAME
+              value: config-logging
+          ports:
+            - name: websocket
+              containerPort: 8080
+            - name: metrics
+              containerPort: 9090
+          resources:
+            limits:
+              cpu: 200m
+              memory: 250Mi
+            requests:
+              cpu: 30m
+              memory: 40Mi
+          volumeMounts:
+            - name: config-autoscaler
+              mountPath: /etc/config-autoscaler
+            - name: config-logging
+              mountPath: /etc/config-logging
+            - name: config-observability
+              mountPath: /etc/config-observability
+      volumes:
+        - name: config-autoscaler
+          configMap:
+            name: config-autoscaler
+        - name: config-logging
+          configMap:
+            name: config-logging
+        - name: config-observability
+          configMap:
+            name: config-observability
+
