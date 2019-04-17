@@ -2,7 +2,11 @@ git:
   url: git@github.com:stevenxie/columbia
   path: cluster,workloads
 
+image:
+  repository: weaveworks/flux
+
 helmOperator:
+  repository: weaveworks/helm-operator
   create: true
   createCRD: false
   tillerNamespace: helm
@@ -13,4 +17,4 @@ memcached:
   tag: 1.5.12-alpine
 
 prometheus:
-  enabled: true
+  enabled: false
