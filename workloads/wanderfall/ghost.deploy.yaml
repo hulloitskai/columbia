@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: ghost
-          image: ghost:2.19.4-alpine
+          image: ghost:2.20.1-alpine
           imagePullPolicy: IfNotPresent
           env:
             - name: url
@@ -56,7 +56,6 @@ spec:
         - name: content
           persistentVolumeClaim:
             claimName: ghost
-
 ---
 
 apiVersion: v1
