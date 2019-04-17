@@ -53,11 +53,11 @@ spec:
             privileged: true
           resources:
             requests:
-              cpu: 50m
+              cpu: 45m
               memory: 50Mi
             limits:
-              cpu: 115m
-              memory: 125Mi
+              cpu: 110m
+              memory: 110Mi
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true
