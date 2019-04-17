@@ -1,0 +1,33 @@
+
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+
+metadata:
+  name: gh-pages
+  namespace: default
+
+spec:
+  hosts: ["stevenxie.github.io"]
+  location: MESH_EXTERNAL
+  ports:
+    - name: http
+      number: 80
+      protocol: HTTP
+  resolution: DNS
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: charts
+  namespace: default
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["charts.stevenxie.me"]
+  http:
+    - route:
+        - destination:
+            host: stevenxie.github.io

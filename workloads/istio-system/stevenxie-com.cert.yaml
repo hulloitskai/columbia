@@ -4,17 +4,18 @@ apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 
 metadata:
-  name: stevenxie-me
-  namespace: gateway
+  name: stevenxie-com
+  namespace: istio-system
 
 spec:
-  secretName: stevenxie-me-tls
+  secretName: stevenxie-com-tls
   issuerRef:
     name: letsencrypt-prod
-  commonName: stevenxie.me
+    kind: ClusterIssuer
+  commonName: stevenxie.com
   dnsNames: &names
-    - stevenxie.me
-    - "*.stevenxie.me"
+    - stevenxie.com
+    - "*.stevenxie.com"
   acme:
     config:
       - dns01:

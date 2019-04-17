@@ -34,42 +34,23 @@ spec:
       limits:
         memory: 200Mi
 
-    service:
-      annotations:
-        getambassador.io/config: |
-          ## Direct access.
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: web
-          service: web.default
-          host: web-direct.stevenxie.me
-          prefix: /
-          add_response_headers:
-            X-Service: web-direct
-          ---
-          ## Redirect from www.stevenxie.me.
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: web-redirect-www
-          service: stevenxie.me
-          host: www.stevenxie.me
-          prefix: /
-          host_redirect: true
-          ---
-          ## Redirect from stevenxie.com.
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: web-redirect-com
-          service: stevenxie.me
-          host: stevenxie.com
-          prefix: /
-          host_redirect: true
-          ---
-          ## Redirect from www.stevenxie.com.
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: web-redirect-com-www
-          service: stevenxie.me
-          host: www.stevenxie.com
-          prefix: /
-          host_redirect: true
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: web
+  namespace: default
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["web-direct.stevenxie.me"]
+  http:
+    - route:
+        - destination:
+            host: web
+          headers:
+            response:
+              set:
+                X-Service: web-direct

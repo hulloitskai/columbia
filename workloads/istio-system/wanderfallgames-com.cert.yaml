@@ -5,12 +5,13 @@ kind: Certificate
 
 metadata:
   name: wanderfallgames-com
-  namespace: gateway
+  namespace: istio-system
 
 spec:
   secretName: wanderfallgames-com-tls
   issuerRef:
     name: letsencrypt-prod
+    kind: ClusterIssuer
   commonName: wanderfallgames.com
   dnsNames: &names
     - wanderfallgames.com

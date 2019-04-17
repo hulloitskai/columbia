@@ -30,24 +30,33 @@ spec:
           maxSurge: 1
           maxUnavailable: 0
 
-    service:
-      annotations:
-        getambassador.io/config: |
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: resume
-          service: resume.default
-          host: stevenxie.me
-          prefix: /resume/
-          add_response_headers:
-            X-Service: resume
-          ---
-          apiVersion: ambassador/v1
-          kind: Mapping
-          name: resume-trailing-slash-redirect
-          service: stevenxie.me
-          host: stevenxie.me
-          prefix: ^\/resume$
-          prefix_regex: true
-          host_redirect: true
-          path_redirect: /resume/
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: resume
+  namespace: default
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["stevenxie.me"]
+  http:
+    - match:
+        - uri:
+            prefix: /resume/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: resume
+          headers:
+            response:
+              set:
+                X-Service: resume
+    - match:
+        - uri:
+            exact: /resume
+      redirect:
+        uri: /resume/

@@ -14,9 +14,9 @@ metadata:
 spec:
   releaseName: istio
   chart:
-    repository: https://storage.googleapis.com/istio-release/releases/1.1.2/charts/
+    repository: https://raw.githubusercontent.com/stevenxie/helm-charts/master/
     name: istio
-    version: 1.1.2
+    version: 1.1.2-custom-1
   values:
     # Enabled components.
     pilot:
@@ -29,8 +29,21 @@ spec:
       istio-ingressgateway:
         type: ClusterIP
         sds:
-          enabled: false
+          enabled: true
         autoscaleEnabled: false
+        env: {}
+        ports:
+          - name: http2
+            port: 80
+            targetPort: 80
+            hostPort: 80
+          - name: https
+            port: 443
+            hostPort: 443
+          - name: status-port
+            port: 15020
+            targetPort: 15020
+        meshExpansionPorts: []
         resources:
           requests:
             cpu: 50m
@@ -38,17 +51,8 @@ spec:
           limits:
             cpu: 250m
             memory: 125Mi
-        ports:
-          - name: http2
-            port: 80
-            targetPort: 80
-          - name: https
-            port: 443
-          - name: status-port
-            port: 15020
-            targetPort: 15020
-        meshExpansionPorts: []
-        env: {}
+        nodeSelector:
+          node-role.kubernetes.io/entrypoint: entrypoint
 
     # Disabled components.
     mixer:

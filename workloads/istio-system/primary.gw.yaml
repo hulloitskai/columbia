@@ -1,0 +1,30 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+
+metadata:
+  name: primary
+  namespace: istio-system
+
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: stevenxie-me-tls
+      hosts: &hosts
+        - stevenxie.me
+        - "*.stevenxie.me"
+    - port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+      hosts: *hosts
