@@ -6,8 +6,6 @@ kind: Service
 metadata:
   name: mongo
   namespace: default
-  labels:
-    app.kubernetes.io/name: mongo
 
 spec:
   type: ExternalName

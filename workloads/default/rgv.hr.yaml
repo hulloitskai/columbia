@@ -17,39 +17,36 @@ spec:
     repository: https://charts.stevenxie.me
     name: rgv
     version: 0.2.0
-  values:
-    frontend:
-      service:
-        annotations:
-          getambassador.io/config: |
-            apiVersion: ambassador/v1
-            kind: Mapping
-            name: rgv-frontend
-            service: rgv-frontend.default
-            host: rgv.stevenxie.me
-            prefix: /
-            add_response_headers:
-              X-Service: rgv-frontend
-            ---
-            ## Redirect from rgv.stevenxie.com.
-            apiVersion: ambassador/v1
-            kind: Mapping
-            name: rgv-frontend-redirect
-            service: rgv.stevenxie.me
-            host: rgv.stevenxie.com
-            prefix: /
-            host_redirect: true
-    api:
-      service:
-        annotations:
-          getambassador.io/config: |
-            apiVersion: ambassador/v1
-            kind: Mapping
-            name: rgv-api
-            service: rgv-api.default:3000
-            host: rgv.stevenxie.me
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: rgv
+  namespace: default
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["rgv.stevenxie.me"]
+  http:
+    - match:
+        - uri:
             prefix: /api
-            rewrite: /
-            use_websocket: true
-            add_response_headers:
-              X-Service: rgv-api
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: rgv-api
+          headers:
+            response:
+              set:
+                X-Service: rgv-api
+    - route:
+        - destination:
+            host: rgv-frontend
+          headers:
+            response:
+              set:
+                X-Service: rgv-frontend
