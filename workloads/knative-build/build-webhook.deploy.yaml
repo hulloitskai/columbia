@@ -1,0 +1,46 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: build-webhook
+  namespace: knative-build
+
+spec:
+  selector:
+    matchLabels:
+      app: build-webhook
+  template:
+    metadata:
+      labels:
+        app: build-webhook
+        role: build-webhook
+    spec:
+      serviceAccountName: build-controller
+      containers:
+        - name: build-webhook
+          image: gcr.io/knative-releases/github.com/knative/build/cmd/webhook:v0.5.0
+          args:
+            - -logtostderr
+            - -stderrthreshold
+            - INFO
+          env:
+            - name: SYSTEM_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 1m
+              memory: 5Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          volumeMounts:
+            - name: config-logging
+              mountPath: /etc/config-logging
+      volumes:
+        - name: config-logging
+          configMap:
+            name: config-logging

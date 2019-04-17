@@ -1,0 +1,26 @@
+---
+
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+
+metadata:
+  name: clusterbuildtemplates.build.knative.dev
+  labels:
+    knative.dev/crd-install: "true"
+
+spec:
+  group: build.knative.dev
+  version: v1alpha1
+  scope: Cluster
+  names:
+    categories:
+      - all
+      - knative
+    kind: ClusterBuildTemplate
+    plural: clusterbuildtemplates
+  additionalPrinterColumns:
+    - JSONPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+  subresources:
+    status: {}
