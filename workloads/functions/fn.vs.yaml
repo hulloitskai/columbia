@@ -18,7 +18,7 @@ spec:
         uri: /
         authority: hello.functions.external
       route:
-        - destination:
+        - destination: &dest
             host: istio-ingressgateway.istio-system.svc.cluster.local
             port:
               number: 80
@@ -26,3 +26,15 @@ spec:
             response:
               set:
                 X-Service: hello
+    - match:
+        - uri:
+            prefix: /debug
+      rewrite:
+        uri: /
+        authority: debug.functions.external
+      route:
+        - destination: *dest
+          headers:
+            response:
+              set:
+                X-Service: debug
