@@ -52,4 +52,4 @@ spec:
           headers:
             response:
               set:
-                X-Service: hello
+                X-Service: debug

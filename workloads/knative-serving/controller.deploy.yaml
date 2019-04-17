@@ -56,17 +56,6 @@ spec:
 ---
 
 apiVersion: v1
-kind: ServiceAccount
-
-metadata:
-  name: controller
-  namespace: knative-serving
-  labels:
-    serving.knative.dev/release: devel
-
----
-
-apiVersion: v1
 kind: Service
 
 metadata:
