@@ -32,8 +32,6 @@ spec:
   type: ClusterIP
   selector:
     app.kubernetes.io/name: ghost
-    tier: frontend
-    track: stable
   ports:
     - name: http
       protocol: TCP
