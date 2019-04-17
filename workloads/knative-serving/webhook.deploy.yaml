@@ -28,25 +28,25 @@ spec:
     spec:
       serviceAccountName: controller
       containers:
-      - name: webhook
-        image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook:v0.5.1
-        env:
-          - name: SYSTEM_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          - name: CONFIG_LOGGING_NAME
-            value: config-logging
-        volumeMounts:
-          - name: config-logging
-            mountPath: /etc/config-logging
-        resources:
-          requests:
-            cpu: 20m
-            memory: 20Mi
-          limits:
-            cpu: 150m
-            memory: 150Mi
+        - name: webhook
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook:v0.5.1
+          env:
+            - name: SYSTEM_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CONFIG_LOGGING_NAME
+              value: config-logging
+          volumeMounts:
+            - name: config-logging
+              mountPath: /etc/config-logging
+          resources:
+            requests:
+              cpu: 1m
+              memory: 5Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
       volumes:
         - name: config-logging
           configMap:
