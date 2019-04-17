@@ -44,3 +44,21 @@ spec:
         - name: config-logging
           configMap:
             name: config-logging
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: build-webhook
+  namespace: knative-build
+  labels:
+    role: build-webhook
+
+spec:
+  selector:
+    role: build-webhook
+  ports:
+    - port: 443
+      targetPort: 443

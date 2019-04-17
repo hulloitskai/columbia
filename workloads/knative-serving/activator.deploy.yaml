@@ -78,3 +78,32 @@ spec:
       - name: config-observability
         configMap:
           name: config-observability
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: activator-service
+  namespace: knative-serving
+  labels:
+    app: activator
+    serving.knative.dev/release: devel
+
+spec:
+  selector:
+    app: activator
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    - name: http2
+      port: 81
+      protocol: TCP
+      targetPort: 8081
+    - name: metrics
+      port: 9090
+      protocol: TCP
+      targetPort: 9090

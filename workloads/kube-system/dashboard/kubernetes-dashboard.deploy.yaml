@@ -1,3 +1,5 @@
+---
+
 kind: Deployment
 apiVersion: apps/v1
 
@@ -62,3 +64,32 @@ spec:
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+---
+
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+spec:
+  selector:
+    k8s-app: kubernetes-dashboard
+  ports:
+    - port: 443
+      targetPort: http

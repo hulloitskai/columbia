@@ -46,3 +46,48 @@ spec:
             limits:
               cpu: 100m
               memory: 150Mi
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: weave-scope-app
+  namespace: weave-system
+  labels:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+
+spec:
+  selector:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+  ports:
+    - name: app
+      port: 80
+      protocol: TCP
+      targetPort: 4040
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: weave-scope-app
+  namespace: weave-system
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["status.stevenxie.me"]
+  http:
+    - route:
+        - destination:
+            host: weave-scope-app
+          headers:
+            response:
+              set:
+                X-Service: weave-scope-app
