@@ -9,7 +9,8 @@ metadata:
   labels:
     serving.knative.dev/release: devel
   annotations:
-    flux.weave.works/automated: "false"
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.autoscaler: regexp:^0\.5\.[0-9]+$ # 0.5.x
 
 spec:
   replicas: 1
@@ -26,7 +27,7 @@ spec:
       serviceAccountName: controller
       containers:
         - name: autoscaler
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/autoscaler@sha256:442f99e3a55653b19137b44c1d00f681b594d322cb39c1297820eb717e2134ba
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/autoscaler:v0.5.1
           env:
             - name: SYSTEM_NAMESPACE
               valueFrom:

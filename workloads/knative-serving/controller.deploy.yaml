@@ -8,6 +8,9 @@ metadata:
   namespace: knative-serving
   labels:
     serving.knative.dev/release: devel
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.autoscaler: regexp:^0\.5\.[0-9]+$ # 0.5.x
 
 spec:
   replicas: 1
@@ -24,14 +27,14 @@ spec:
       serviceAccountName: controller
       containers:
         - name: controller
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller@sha256:25af5f3adad8b65db3126e0d6e90aa36835c124c24d9d72ffbdd7ee739a7f571
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.5.1
           env:
+            - name: CONFIG_LOGGING_NAME
+              value: config-logging
             - name: SYSTEM_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-            - name: CONFIG_LOGGING_NAME
-              value: config-logging
           ports:
             - name: metrics
               containerPort: 9090

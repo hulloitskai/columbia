@@ -8,6 +8,9 @@ metadata:
   namespace: knative-serving
   labels:
     serving.knative.dev/release: devel
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.autoscaler: regexp:^0\.5\.[0-9]+$ # 0.5.x
 
 spec:
   replicas: 1
@@ -26,7 +29,7 @@ spec:
       serviceAccountName: controller
       containers:
       - name: webhook
-        image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook@sha256:d1ba3e2c0d739084ff508629db001619cea9cc8780685e85dd910363774eaef6
+        image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook:v0.5.1
         env:
           - name: SYSTEM_NAMESPACE
             valueFrom:

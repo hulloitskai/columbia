@@ -18,7 +18,7 @@ spec:
             app.kubernetes.io/name: hello
         spec:
           container:
-            image: gcr.io/knative-samples/helloworld-go
+            image: gcr.io/knative-samples/helloworld-go:latest
             env:
               - name: TARGET
                 value: "YEET"
