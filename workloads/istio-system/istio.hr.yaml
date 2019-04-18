@@ -68,6 +68,8 @@ spec:
     global:
       useMCP: false
       proxy:
+        autoInject: disabled
+
         # Sets the destination Statsd in envoy (the value of the
         # "--statsdUdpAddress" proxy argument would be <host>:<port>).
         # Disabled by default.

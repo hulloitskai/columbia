@@ -72,12 +72,12 @@ spec:
             - mountPath: /etc/config-observability
               name: config-observability
       volumes:
-      - name: config-logging
-        configMap:
-          name: config-logging
-      - name: config-observability
-        configMap:
-          name: config-observability
+        - name: config-logging
+          configMap:
+            name: config-logging
+        - name: config-observability
+          configMap:
+            name: config-observability
 
 ---
 
