@@ -6,6 +6,8 @@ kind: Deployment
 metadata:
   name: build-webhook
   namespace: knative-build
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   selector:
@@ -55,6 +57,8 @@ metadata:
   namespace: knative-build
   labels:
     role: build-webhook
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   selector:

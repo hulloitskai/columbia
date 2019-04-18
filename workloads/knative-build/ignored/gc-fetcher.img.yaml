@@ -6,6 +6,8 @@ kind: Image
 metadata:
   name: gcs-fetcher
   namespace: knative-build
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   image: gcr.io/cloud-builders/gcs-fetcher

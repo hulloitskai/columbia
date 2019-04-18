@@ -6,6 +6,8 @@ kind: Image
 metadata:
   name: creds-init
   namespace: knative-build
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   image: gcr.io/knative-releases/github.com/knative/build/cmd/creds-init:v0.5.0

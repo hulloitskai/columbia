@@ -6,6 +6,8 @@ kind: ConfigMap
 metadata:
   name: config-logging
   namespace: knative-build
+  annotations:
+    flux.weave.works/ignore: "true"
 
 data:
   loglevel.controller: info

@@ -1,0 +1,27 @@
+---
+
+apiVersion: build.knative.dev/v1alpha1
+kind: ClusterBuildTemplate
+
+metadata:
+  name: kaniko
+  annotations:
+    flux.weave.works/ignore: "true"
+
+spec:
+  parameters:
+    - name: IMAGE
+      description: Name of the image to push.
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build.
+      default: /workspace/Dockerfile
+
+  steps:
+    - name: build-and-push
+      image: gcr.io/kaniko-project/executor
+      args:
+        - --dockerfile=${DOCKERFILE}
+        - --destination=${IMAGE}
+      env:
+        - name: DOCKER_CONFIG
+          value: /builder/home/.docker
