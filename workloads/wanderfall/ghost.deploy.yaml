@@ -56,6 +56,9 @@ spec:
         - name: content
           persistentVolumeClaim:
             claimName: ghost
+      nodeSelector:
+        node-role.kubernetes.io/storage: storage
+
 ---
 
 apiVersion: v1

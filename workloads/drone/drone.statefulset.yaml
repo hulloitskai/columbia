@@ -71,6 +71,8 @@ spec:
         - name: docker-socket
           hostPath:
             path: /var/run/docker.sock
+      nodeSelector:
+        node-role.kubernetes.io/storage: storage
   volumeClaimTemplates:
     - metadata:
         name: data
