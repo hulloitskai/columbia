@@ -15,7 +15,6 @@ metadata:
     weave-scope-component: cluster-agent
 
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: weave-scope
@@ -46,6 +45,6 @@ spec:
               cpu: 5m
               memory: 35Mi
             limits:
-              cpu: 60m
-              memory: 110Mi
+              cpu: 50m
+              memory: 75Mi
 

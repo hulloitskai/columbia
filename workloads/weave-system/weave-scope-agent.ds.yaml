@@ -56,8 +56,8 @@ spec:
               cpu: 45m
               memory: 50Mi
             limits:
-              cpu: 110m
-              memory: 110Mi
+              cpu: 100m
+              memory: 100Mi
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       hostPID: true

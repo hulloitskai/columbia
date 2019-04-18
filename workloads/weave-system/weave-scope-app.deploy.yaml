@@ -15,7 +15,6 @@ metadata:
   namespace: weave-system
 
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: weave-scope
@@ -42,10 +41,10 @@ spec:
           resources:
             requests:
               cpu: 25m
-              memory: 60Mi
+              memory: 125Mi
             limits:
               cpu: 100m
-              memory: 150Mi
+              memory: 200Mi
 
 ---
 
