@@ -1,7 +1,7 @@
 ---
 
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 
 metadata:
   name: ghost
@@ -16,6 +16,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: ghost
+  serviceName: ghost
   template:
     metadata:
       labels:
@@ -52,12 +53,16 @@ spec:
             limits:
               cpu: 250m
               memory: 350Mi
-      volumes:
-        - name: content
-          persistentVolumeClaim:
-            claimName: ghost
       nodeSelector:
         node-role.kubernetes.io/storage: storage
+  volumeClaimTemplates:
+    - metadata:
+        name: content
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 4Gi
 
 ---
 
