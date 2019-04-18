@@ -40,7 +40,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /hello
+            prefix: /hello/
       rewrite:
         uri: /
         authority: hello.functions.external
@@ -53,3 +53,8 @@ spec:
             response:
               set:
                 X-Service: hello
+    - match:
+        - uri:
+            exact: /hello
+      redirect:
+        uri: /hello/

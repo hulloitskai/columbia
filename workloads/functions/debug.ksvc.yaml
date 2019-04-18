@@ -40,7 +40,7 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /debug
+            prefix: /debug/
       rewrite:
         uri: /
         authority: debug.functions.external
@@ -53,3 +53,8 @@ spec:
             response:
               set:
                 X-Service: debug
+    - match:
+        - uri:
+            exact: /debug
+      redirect:
+        uri: /debug/
