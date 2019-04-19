@@ -5,8 +5,6 @@ kind: ClusterBuildTemplate
 
 metadata:
   name: kaniko
-  annotations:
-    flux.weave.works/ignore: "true"
 
 spec:
   parameters:

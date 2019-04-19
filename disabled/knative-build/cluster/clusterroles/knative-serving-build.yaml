@@ -11,8 +11,6 @@ metadata:
   labels:
     serving.knative.dev/release: devel
     serving.knative.dev/controller: "true"
-  annotations:
-    flux.weave.works/ignore: "true"
 
 rules:
   - apiGroups: ["build.knative.dev"]

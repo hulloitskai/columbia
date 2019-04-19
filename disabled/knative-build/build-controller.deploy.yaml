@@ -6,8 +6,6 @@ kind: Deployment
 metadata:
   name: build-controller
   namespace: knative-build
-  annotations:
-    flux.weave.works/ignore: "true"
 
 spec:
   selector:
@@ -60,8 +58,6 @@ kind: ServiceAccount
 metadata:
   name: build-controller
   namespace: knative-build
-  annotations:
-    flux.weave.works/ignore: "true"
 
 ---
 
@@ -73,8 +69,6 @@ metadata:
   namespace: knative-build
   labels:
     app: build-controller
-  annotations:
-    flux.weave.works/ignore: "true"
 
 spec:
   selector:

@@ -1,15 +1,13 @@
 ---
 
-apiVersion: apps/v1beta1
-kind: Deployment
+apiVersion: extensions/v1beta1
+kind: DaemonSet
 
 metadata:
   name: fs-debug
   namespace: default
   annotations:
     flux.weave.works/ignore: "true"
-  labels:
-    app.kubernetes.io/name: fs-debug
 
 spec:
   selector:
@@ -38,3 +36,7 @@ spec:
           hostPath:
             type: Directory
             path: /
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1

@@ -5,5 +5,3 @@ kind: Namespace
 
 metadata:
   name: knative-build
-  annotations:
-    flux.weave.works/ignore: "true"

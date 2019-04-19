@@ -1,0 +1,30 @@
+---
+
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+  annotations:
+    flux.weave.works/automated: "false"
+  labels:
+    app.kubernetes.io/name: rook-ceph
+
+spec:
+  releaseName: rook-ceph
+  chart:
+    repository: http://charts.rook.io/stable
+    name: rook-ceph
+    version: v0.9.3
+  values:
+    agent:
+      mountSecurityMode: Any
+      flexVolumeDirPath: /usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+    resources:
+      requests:
+        cpu: 80m
+        memory: 60Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
