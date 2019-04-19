@@ -5,6 +5,7 @@ kind: Deployment
 
 metadata:
   name: weave-scope-app
+  namespace: weave-scope
   annotations:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.app: semver:~1
@@ -12,7 +13,6 @@ metadata:
     app.kubernetes.io/name: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
-  namespace: weave-system
 
 spec:
   selector:
@@ -53,7 +53,7 @@ kind: Service
 
 metadata:
   name: weave-scope-app
-  namespace: weave-system
+  namespace: weave-scope
   labels:
     app.kubernetes.io/name: weave-scope
     weave-cloud-component: scope
@@ -77,7 +77,7 @@ kind: VirtualService
 
 metadata:
   name: weave-scope-app
-  namespace: weave-system
+  namespace: weave-scope
 
 spec:
   gateways: ["primary.istio-system"]

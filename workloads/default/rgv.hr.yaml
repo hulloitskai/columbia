@@ -28,9 +28,18 @@ metadata:
   namespace: default
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["rgv.stevenxie.me"]
+  gateways:
+    - primary.istio-system
+    - secondary.istio-system
+  hosts:
+    - rgv.stevenxie.me
+    - rgv.stevenxie.com
   http:
+    - match:
+        - authority:
+            exact: rgv.stevenxie.com
+      redirect:
+        authority: rgv.stevenxie.me
     - match:
         - uri:
             prefix: /api

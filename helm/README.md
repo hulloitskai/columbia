@@ -26,6 +26,14 @@ tiller.key.pem   # tiller private key  [*]
 
 ## Installing Helm with TLS
 
+First, ensure that the `helm` namespace exists, and to configure RBAC for
+the `helm-tiller` service account:
+
+```bash
+kb apply -f ../workloads/helm/ && \
+kb apply -f ../cluster/clusterrolebindings/helm-tiller.yaml
+```
+
 ### Configuring `helm-tiller`
 
 From the `helm` directory:
@@ -36,7 +44,7 @@ helm init \
   --tiller-tls-cert=./tiller.cert.pem \
   --tiller-tls-key=./tiller.key.pem \
   --tiller-tls-verify \
-  --tls-ca-cert=./ca.cert.pem
+  --tls-ca-cert=./ca.cert.pem \
   --tiller-namespace=helm \
   --service-account=helm-tiller
 ```
@@ -59,7 +67,7 @@ export HELM_TLS_ENABLE=1
 export TILLER_NAMESPACE=helm
 ```
 
-Make sure everything works—try a command, like `helm ls`!
+Make sure everything works—try a command, like `helm version`!
 
 ## Certificate Expiry
 

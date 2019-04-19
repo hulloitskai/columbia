@@ -5,6 +5,8 @@ kind: ClusterRoleBinding
 
 metadata:
   name: build-controller-admin
+  annotations:
+    flux.weave.works/ignore: "true"
 
 roleRef:
   apiGroup: rbac.authorization.k8s.io

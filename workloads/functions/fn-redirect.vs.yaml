@@ -1,0 +1,15 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: fn-redirect
+  namespace: functions
+
+spec:
+  gateways: ["secondary.istio-system"]
+  hosts: ["fn.stevenxie.com"]
+  http:
+    - redirect:
+        authority: fn.stevenxie.me

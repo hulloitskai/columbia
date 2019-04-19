@@ -25,9 +25,18 @@ metadata:
   namespace: default
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["charts.stevenxie.me"]
+  gateways:
+    - primary.istio-system
+    - secondary.istio-system
+  hosts:
+    - charts.stevenxie.me
+    - charts.stevenxie.com
   http:
+    - match:
+        - authority:
+            exact: charts.stevenxie.com
+      redirect:
+        authority: charts.stevenxie.me
     - route:
         - destination:
             host: stevenxie.github.io

@@ -16,7 +16,7 @@ spec:
   chart:
     repository: https://raw.githubusercontent.com/stevenxie/helm-charts/master
     name: istio
-    version: 1.1.2-custom-1
+    version: 1.1.2-custom-2
   values:
     # Enabled components.
     pilot:
@@ -32,14 +32,19 @@ spec:
           enabled: true
         autoscaleEnabled: false
         env: {}
+        # Current K8s provider, DigitalOcean, uses Cilium for cluster
+        # networking. Cilium does not support hostPort right now:
+        #   https://github.com/cilium/cilium/issues/5088
+        # As a workaround, use host network.
+        hostNetwork: true
         ports:
           - name: http2
             port: 80
             targetPort: 80
-            hostPort: 80
+            # hostPort: 80
           - name: https
             port: 443
-            hostPort: 443
+            # hostPort: 443
           - name: status-port
             port: 15020
             targetPort: 15020

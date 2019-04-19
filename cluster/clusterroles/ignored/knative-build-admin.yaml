@@ -5,6 +5,8 @@ kind: ClusterRole
 
 metadata:
   name: knative-build-admin
+  annotations:
+    flux.weave.works/ignore: "true"
 
 rules:
   - apiGroups: [""]

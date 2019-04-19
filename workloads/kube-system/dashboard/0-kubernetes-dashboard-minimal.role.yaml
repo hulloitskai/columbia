@@ -8,17 +8,17 @@ metadata:
   namespace: kube-system
 
 rules:
-  ## Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
+  # Allow Dashboard to create 'kubernetes-dashboard-key-holder' secret.
   - apiGroups: [""]
     resources: ["secrets"]
     verbs: ["create"]
 
-  ## Allow Dashboard to create 'kubernetes-dashboard-settings' config map.
+  # Allow Dashboard to create 'kubernetes-dashboard-settings' config map.
   - apiGroups: [""]
     resources: ["configmaps"]
     verbs: ["create"]
 
-  ## Allow Dashboard to get, update and delete Dashboard exclusive secrets.
+  # Allow Dashboard to get, update and delete Dashboard exclusive secrets.
   - apiGroups: [""]
     resources: ["secrets"]
     resourceNames:
@@ -26,14 +26,14 @@ rules:
       - kubernetes-dashboard-certs
     verbs: ["get", "update", "delete"]
 
-  ## Allow Dashboard to get and update 'kubernetes-dashboard-settings' config
-  ## map.
+  # Allow Dashboard to get and update 'kubernetes-dashboard-settings' config
+  # map.
   - apiGroups: [""]
     resources: ["configmaps"]
     resourceNames: ["kubernetes-dashboard-settings"]
     verbs: ["get", "update"]
 
-  ## Allow Dashboard to get metrics from heapster.
+  # Allow Dashboard to get metrics from heapster.
   - apiGroups: [""]
     resources: ["services"]
     resourceNames: ["heapster"]

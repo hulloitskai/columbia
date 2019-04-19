@@ -135,9 +135,18 @@ metadata:
   namespace: drone
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["ci.stevenxie.me"]
+  gateways:
+    - primary.istio-system
+    - secondary.istio-system
+  hosts:
+    - ci.stevenxie.me
+    - ci.stevenxie.com
   http:
+    - match:
+        - authority:
+            exact: ci.stevenxie.com
+      redirect:
+        authority: ci.stevenxie.me
     - route:
         - destination:
             host: drone

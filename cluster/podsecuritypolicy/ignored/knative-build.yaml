@@ -5,6 +5,8 @@ kind: PodSecurityPolicy
 
 metadata:
   name: knative-build
+  annotations:
+    flux.weave.works/ignore: "true'"
 
 spec:
   allowPrivilegeEscalation: false

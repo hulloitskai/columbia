@@ -23,7 +23,7 @@ spec:
       data: |-
         vcl 4.0;
 
-        ## Backends:
+        # Backends:
         backend web {
           .host = "web";
           .port = "80";
@@ -41,13 +41,13 @@ spec:
         sub vcl_recv {
           unset req.http.X-Body-Len;
 
-          ## Determine backend.
+          # Determine backend.
           if (req.http.Host == "api.stevenxie.me") {
             set req.backend_hint = api;
           }
 
-          ## Remove has_js and Cloudflare/Google Analytics __* cookies, and
-          ## normalize cookies.
+          # Remove has_js and Cloudflare/Google Analytics __* cookies, and
+          # normalize cookies.
           set req.http.Cookie = regsuball(req.http.Cookie,
             "(^|;\s*)(_[_a-z]+|has_js)=[^;]*", "");
           set req.http.Cookie = regsub(req.http.Cookie, "^;\s*", "");
@@ -100,11 +100,32 @@ metadata:
   namespace: default
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways:
+    - primary.istio-system
+    - secondary.istio-system
   hosts:
     - stevenxie.me
+    - stevenxie.com
+    - www.stevenxie.me
+    - www.stevenxie.com
     - api.stevenxie.me
+    - api.stevenxie.com
   http:
+    - match:
+        - authority:
+            prefix: www
+      redirect:
+        authority: stevenxie.me
+    - match:
+        - authority:
+            exact: stevenxie.com
+      redirect:
+        authority: stevenxie.me
+    - match:
+        - authority:
+            exact: api.stevenxie.com
+      redirect:
+        authority: api.stevenxie.me
     - route:
         - destination:
             host: varnish

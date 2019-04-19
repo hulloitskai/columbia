@@ -15,8 +15,8 @@ Prepare the namespace `flux`, and install the `helm-client-certs` secrets:
 kubectl create namespace flux && \
 kubectl create secret generic helm-client-certs \
   --namespace flux \
-  --from-file tls.key=../helm/tls/flux.key.pem \
-  --from-file tls.crt=../helm/tls/flux.cert.pem
+  --from-file tls.key=../helm/flux.key.pem \
+  --from-file tls.crt=../helm/flux.cert.pem
 ```
 
 Install the chart as follows:

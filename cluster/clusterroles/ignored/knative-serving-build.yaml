@@ -1,3 +1,5 @@
+---
+
 # This ClusterRole enables the aggregated ClusterRole used by the
 # knative/serving controller to interact with Build resources.
 
@@ -9,6 +11,8 @@ metadata:
   labels:
     serving.knative.dev/release: devel
     serving.knative.dev/controller: "true"
+  annotations:
+    flux.weave.works/ignore: "true"
 
 rules:
   - apiGroups: ["build.knative.dev"]

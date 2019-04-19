@@ -45,7 +45,7 @@ metadata:
 
 spec:
   gateways: ["primary.istio-system"]
-  hosts: ["web-direct.stevenxie.me"]
+  hosts: ["web-origin.stevenxie.me"]
   http:
     - route:
         - destination:
@@ -53,4 +53,4 @@ spec:
           headers:
             response:
               set:
-                X-Service: web-direct
+                X-Service: web-origin

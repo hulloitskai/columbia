@@ -100,6 +100,11 @@ spec:
     - wanderfallgames.com
     - www.wanderfallgames.com
   http:
+    - match:
+        - authority:
+            exact: www.wanderfallgames.com
+      redirect:
+        authority: wanderfallgames.com
     - route:
         - destination:
             host: ghost
@@ -107,8 +112,3 @@ spec:
             response:
               set:
                 X-Service: ghost
-    - match:
-        - authority:
-            exact: www.wanderfallgames.com
-      redirect:
-        authority: wanderfallgames.com

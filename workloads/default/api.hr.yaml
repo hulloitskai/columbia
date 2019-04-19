@@ -74,7 +74,7 @@ metadata:
 
 spec:
   gateways: ["primary.istio-system"]
-  hosts: ["api-direct.stevenxie.me"]
+  hosts: ["api-origin.stevenxie.me"]
   http:
     - route:
         - destination:
@@ -82,4 +82,4 @@ spec:
           headers:
             response:
               set:
-                X-Service: api-direct
+                X-Service: api-origin

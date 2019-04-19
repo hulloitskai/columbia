@@ -5,7 +5,7 @@ kind: DaemonSet
 
 metadata:
   name: weave-scope-agent
-  namespace: weave-system
+  namespace: weave-scope
   annotations:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.scope-agent: semver:~1

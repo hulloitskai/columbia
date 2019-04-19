@@ -7,6 +7,8 @@ metadata:
   name: clusterbuildtemplates.build.knative.dev
   labels:
     knative.dev/crd-install: "true"
+  annotations:
+    flux.weave.works/ignore: "true"
 
 spec:
   group: build.knative.dev
