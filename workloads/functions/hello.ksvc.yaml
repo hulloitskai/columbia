@@ -40,6 +40,11 @@ spec:
   http:
     - match:
         - uri:
+            exact: /hello
+      redirect:
+        uri: /hello/
+    - match:
+        - uri:
             prefix: /hello/
       rewrite:
         uri: /
@@ -53,8 +58,3 @@ spec:
             response:
               set:
                 X-Service: hello
-    - match:
-        - uri:
-            exact: /hello
-      redirect:
-        uri: /hello/

@@ -4,10 +4,10 @@ apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 
 metadata:
-  name: debug
+  name: http-debug
   namespace: functions
   labels:
-    app.kubernetes.io/name: debug
+    app.kubernetes.io/name: http-debug
 
 spec:
   runLatest:
@@ -15,7 +15,7 @@ spec:
       revisionTemplate:
         metadata:
           labels:
-            app.kubernetes.io/name: debug
+            app.kubernetes.io/name: http-debug
           annotations:
             flux.weave.works/automated: "false"
         spec:
@@ -31,7 +31,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 
 metadata:
-  name: debug
+  name: http-debug
   namespace: functions
 
 spec:
@@ -40,10 +40,15 @@ spec:
   http:
     - match:
         - uri:
+            exact: /debug
+      redirect:
+        uri: /debug/
+    - match:
+        - uri:
             prefix: /debug/
       rewrite:
         uri: /
-        authority: debug.functions.external
+        authority: http-debug.functions.external
       route:
         - destination:
             host: istio-ingressgateway.istio-system.svc.cluster.local
@@ -52,9 +57,4 @@ spec:
           headers:
             response:
               set:
-                X-Service: debug
-    - match:
-        - uri:
-            exact: /debug
-      redirect:
-        uri: /debug/
+                X-Service: http-debug
