@@ -35,8 +35,8 @@ spec:
               value: https
             - name: DRONE_USER_CREATE
               value: username:stevenxie,machine:false,admin:true
-            - name: DRONE_RUNNER_CAPACITY
-              value: "2"
+            - name: DRONE_AGENTS_ENABLED
+              value: "true"
           envFrom:
             - secretRef:
                 name: drone
@@ -46,9 +46,6 @@ spec:
               protocol: TCP
             - name: https
               containerPort: 443
-              protocol: TCP
-            - name: grpc
-              containerPort: 9000
               protocol: TCP
           readinessProbe: &probe
             httpGet:
@@ -61,13 +58,15 @@ spec:
               cpu: 1m
               memory: 15Mi
             limits:
-              cpu: 200m
-              memory: 200Mi
+              cpu: 25m
+              memory: 75Mi
           volumeMounts:
             - name: data
               mountPath: /data
             - name: docker-socket
               mountPath: /var/run/docker.sock
+            - name: docker-config
+              mountPath: /secrets/docker-config
       volumes:
         - name: docker-socket
           hostPath:
