@@ -32,14 +32,13 @@ spec:
           enabled: true
         autoscaleEnabled: false
         env: {}
+        hostNetwork: true
         ports:
           - name: http2
             port: 80
             targetPort: 80
-            hostPort: 80
           - name: https
             port: 443
-            hostPort: 443
           - name: status-port
             port: 15020
             targetPort: 15020
