@@ -27,4 +27,4 @@ spec:
         protocol: HTTPS
       tls:
         mode: PASSTHROUGH
-      hosts: ["monastary-cluster.stevenxie.me"]
+      hosts: ["monastery-cluster.stevenxie.me"]

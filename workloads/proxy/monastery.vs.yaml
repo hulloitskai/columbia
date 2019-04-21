@@ -4,14 +4,14 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 
 metadata:
-  name: monastary
+  name: monastery
   namespace: proxy
 
 spec:
   gateways: ["proxy", "primary.istio-system"]
   hosts:
-    - monastary.stevenxie.me
-    - monastary-cluster.stevenxie.me
+    - monastery.stevenxie.me
+    - monastery-cluster.stevenxie.me
   tcp:
     - match:
         - port: 30022
@@ -22,7 +22,7 @@ spec:
               number: 22
   tls:
     - match:
-        - sniHosts: ["monastary-cluster.stevenxie.me"]
+        - sniHosts: ["monastery-cluster.stevenxie.me"]
       route:
         - destination:
             host: frps
@@ -31,7 +31,7 @@ spec:
   http:
     - match:
         - authority:
-            exact: monastary.stevenxie.me
+            exact: monastery.stevenxie.me
       route:
         - destination:
             host: frps
