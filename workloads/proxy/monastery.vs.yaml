@@ -11,7 +11,7 @@ spec:
   gateways: ["proxy", "primary.istio-system"]
   hosts:
     - monastery.stevenxie.me
-    - monastery-cluster.stevenxie.me
+    - "*.monastery.stevenxie.me"
   tcp:
     - match:
         - port: 30022
@@ -22,7 +22,7 @@ spec:
               number: 22
   tls:
     - match:
-        - sniHosts: ["monastery-cluster.stevenxie.me"]
+        - sniHosts: ["k8s.monastery.stevenxie.me"]
       route:
         - destination:
             host: frps

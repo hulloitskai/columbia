@@ -14,6 +14,6 @@ metadata:
 spec:
   releaseName: istio-init
   chart:
-    repository: https://storage.googleapis.com/istio-release/releases/1.1.2/charts/
+    repository: https://storage.googleapis.com/istio-release/releases/1.1.2/charts
     name: istio-init
     version: 1.1.2

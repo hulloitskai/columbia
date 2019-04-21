@@ -65,8 +65,6 @@ spec:
               mountPath: /data
             - name: docker-socket
               mountPath: /var/run/docker.sock
-            - name: docker-config
-              mountPath: /secrets/docker-config
       volumes:
         - name: docker-socket
           hostPath:
