@@ -82,7 +82,9 @@ metadata:
 
 spec:
   gateways: ["primary.istio-system"]
-  hosts: ["status.stevenxie.me"]
+  hosts:
+    - status.stevenxie.me
+    - columbia.stevenxie.me
   http:
     - route:
         - destination:

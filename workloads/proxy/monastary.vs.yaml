@@ -28,3 +28,16 @@ spec:
             host: frps
             port:
               number: 443
+  http:
+    - match:
+        - authority:
+            exact: monastary.stevenxie.me
+      route:
+        - destination:
+            host: frps
+            port:
+              number: 80
+          headers:
+            response:
+              set:
+                X-Service: frps
