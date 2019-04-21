@@ -34,6 +34,7 @@ spec:
           command: ["/home/weave/scope"]
           args:
             - --mode=app
+            - --app-only
             - --weave=false
           ports:
             - containerPort: 4040

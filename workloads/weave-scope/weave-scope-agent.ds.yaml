@@ -47,8 +47,10 @@ spec:
               mountPath: /var/run/scope/plugins
             - name: sys-kernel-debug
               mountPath: /sys/kernel/debug
+              readOnly: true
             - name: docker-socket
               mountPath: /var/run/docker.sock
+              readOnly: true
           securityContext:
             privileged: true
           resources:

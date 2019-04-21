@@ -19,6 +19,13 @@ kubectl create secret generic helm-client-certs \
   --from-file tls.crt=../helm/flux.cert.pem
 ```
 
+Install the associated CRDs:
+
+```bash
+kubectl apply -f \
+  ../cluster/customresourcedefinitions/helmreleases.flux.weave.works.yaml
+```
+
 Install the chart as follows:
 
 ```bash
@@ -27,7 +34,7 @@ helm install \
   --name=flux \
   --namespace=flux \
   -f ./values.yaml \
-  --version 0.9.0 \
+  --version 0.9.1 \
   weaveworks/flux
 ```
 
