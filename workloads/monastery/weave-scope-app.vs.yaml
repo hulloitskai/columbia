@@ -1,0 +1,22 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: weave-scope-app
+  namespace: monastery
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["monastery.stevenxie.me"]
+  http:
+    - route:
+        - destination:
+            host: frps.proxy.svc.cluster.local
+            port:
+              number: 80
+          headers:
+            response:
+              set:
+                X-Service: frps

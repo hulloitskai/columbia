@@ -10,8 +10,6 @@ metadata:
     k8s-app: kubernetes-dashboard
 
 spec:
-  replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       k8s-app: kubernetes-dashboard
@@ -92,5 +90,6 @@ spec:
   selector:
     k8s-app: kubernetes-dashboard
   ports:
-    - port: 443
+    - name: https
+      port: 443
       targetPort: http

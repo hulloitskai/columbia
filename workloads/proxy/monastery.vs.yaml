@@ -8,10 +8,10 @@ metadata:
   namespace: proxy
 
 spec:
-  gateways: ["proxy", "primary.istio-system"]
+  gateways: ["proxy"]
   hosts:
     - monastery.stevenxie.me
-    - "*.monastery.stevenxie.me"
+    - k8s.monastery.stevenxie.me
   tcp:
     - match:
         - port: 30022
@@ -28,16 +28,3 @@ spec:
             host: frps
             port:
               number: 443
-  http:
-    - match:
-        - authority:
-            exact: monastery.stevenxie.me
-      route:
-        - destination:
-            host: frps
-            port:
-              number: 80
-          headers:
-            response:
-              set:
-                X-Service: frps

@@ -13,12 +13,15 @@ spec:
     istio: ingressgateway
   ports:
     - name: frps
-      protocol: TCP
       port: 30070
       targetPort: 30070
       nodePort: 30070
     - name: ssh
-      protocol: TCP
       port: 30022
       targetPort: 30022
       nodePort: 30022
+    # Multicluster ingress endpoint (disabled).
+    # - name: tls
+    #   port: 30443
+    #   targetPort: 15443
+    #   nodePort: 30443

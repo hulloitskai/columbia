@@ -24,7 +24,6 @@ spec:
           image: stevenxie/frp:0.26.0
           args: [
             "--bind_port", "7000",
-            "--vhost_http_port", "8080",
             "--vhost_https_port", "8443",
             "--dashboard_port", "7500",
             "--dashboard_user", "stevenxie",
@@ -39,12 +38,12 @@ spec:
               containerPort: 7000
             - name: dashboard
               containerPort: 7500
-            - name: http
-              containerPort: 8080
             - name: https
               containerPort: 8443
             - name: ssh
               containerPort: 8022
+            - name: ingress
+              containerPort: 8000
           readinessProbe: &probe
             tcpSocket:
               port: bind
@@ -56,10 +55,6 @@ spec:
           #   limits:
           #     cpu: 100m
           #     memory: 100Mi
-      volumes:
-        - name: config
-          configMap:
-            name: frps
 
 ---
 
@@ -96,15 +91,15 @@ spec:
     - name: dashboard
       port: 7500
       targetPort: dashboard
-    - name: http
-      port: 80
-      targetPort: http
     - name: https
       port: 443
       targetPort: https
     - name: ssh
       port: 22
       targetPort: ssh
+    - name: ingress
+      port: 80
+      targetPort: 8000
 
 ---
 

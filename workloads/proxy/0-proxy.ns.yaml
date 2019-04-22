@@ -5,3 +5,5 @@ kind: Namespace
 
 metadata:
   name: proxy
+  labels:
+    istio-injection: enabled

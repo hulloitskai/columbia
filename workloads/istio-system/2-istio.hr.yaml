@@ -18,7 +18,7 @@ spec:
     name: istio
     version: 1.1.2-custom-2
   values:
-    # Enabled components.
+    # Enabled components:
     pilot:
       autoscaleEnabled: false
       resources:
@@ -31,7 +31,7 @@ spec:
         sds:
           enabled: true
         autoscaleEnabled: false
-        env: {}
+        env: {} # remove to enable multi-cluster networking
         ports:
           - name: http2
             port: 80
@@ -44,6 +44,10 @@ spec:
           - name: status-port
             port: 15020
             targetPort: 15020
+          # Multicluster ingress endpoint (disabled).
+          # - name: tls
+          #   port: 15443
+          #   targetPort: 15443
         meshExpansionPorts: []
         resources:
           requests:
@@ -55,7 +59,17 @@ spec:
         nodeSelector:
           node-role.kubernetes.io/entrypoint: entrypoint
 
-    # Disabled components.
+    # Multicluster components (disabled):
+    #
+    # Multicluster with gateways requires a common root CA; do not boostrap
+    # root CA during installation.
+    # security:
+    #   selfSigned: false
+    # Provides dns resolution for service entries of form name.namespace.global.
+    # istiocoredns:
+    #   enabled: true
+
+    # Disabled components:
     mixer:
       enabled: false
       policy:
@@ -65,12 +79,10 @@ spec:
     prometheus:
       enabled: false
 
-    # Common settings.
+    # Common settings:
     global:
       useMCP: false
       proxy:
-        autoInject: disabled
-
         # Sets the destination Statsd in envoy (the value of the
         # "--statsdUdpAddress" proxy argument would be <host>:<port>).
         # Disabled by default.
@@ -80,9 +92,7 @@ spec:
           # If enabled is set to true, host and port must also be provided.
           # Istio no longer provides a statsd collector.
           enabled: false
-          host: # example: statsd-svc.istio-system
-          port: # example: 9125
-
+        autoInject: disabled
         resources:
           requests:
             cpu: 10m
@@ -91,3 +101,12 @@ spec:
             cpu: 256m
             memory: 128Mi
 
+      # Multicluster settings (disabled):
+      #
+      # Provides DNS resolution for global services.
+      # podDNSSearchNamespaces:
+      #   - global
+      #   - "[[ valueOrDefault .DeploymentMeta.Namespace \"default\" ]].global"
+      # multiCluster:
+      #   enabled: true
+      # controlPlaneSecurityEnabled: true
