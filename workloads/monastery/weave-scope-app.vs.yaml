@@ -11,12 +11,14 @@ spec:
   gateways: ["primary.istio-system"]
   hosts: ["monastery.stevenxie.me"]
   http:
-    - route:
+    - rewrite:
+        authority: weave-scope-app.weave-scope.global
+      route:
         - destination:
             host: frps.proxy.svc.cluster.local
             port:
               number: 80
           headers:
             response:
-              set:
+              add:
                 X-Service: frps

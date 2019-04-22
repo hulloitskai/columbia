@@ -22,14 +22,6 @@ spec:
       containers:
         - name: frp
           image: stevenxie/frp:0.26.0
-          args: [
-            "--bind_port", "7000",
-            "--vhost_https_port", "8443",
-            "--dashboard_port", "7500",
-            "--dashboard_user", "stevenxie",
-            "--dashboard_pwd", "$(DASHBOARD_PASS)",
-            "--token", "$(TOKEN)",
-          ]
           envFrom:
             - secretRef:
                 name: frps
@@ -44,80 +36,40 @@ spec:
               containerPort: 8022
             - name: ingress
               containerPort: 8000
+          volumeMounts:
+            - name: config
+              mountPath: /etc/frp
           readinessProbe: &probe
             tcpSocket:
               port: bind
           livenessProbe: *probe
-          # resources:
-          #   requests:
-          #     cpu: 1m
-          #     memory: 5Mi
-          #   limits:
-          #     cpu: 100m
-          #     memory: 100Mi
-
----
-
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-
-metadata:
-  name: frps
-  namespace: proxy
-
-spec:
-  encryptedData:
-    DASHBOARD_PASS: AgASTQq3RGoScK2PL//uY9RthvWB1Ozrs4afNX8HTg1TrZJbwSaXHi7X83geLeQfc6lfSad0tB1hrKF1zIRxpgvWQs/EiXE3QXbfRUWok5og25nYbaAeKRc9jR44UfZ8SxWsCxiqN6UXXtIuEEqDnd7ph5J56BXxyehF8KCuIVF9khk7/LGEmJYGOo/lGBJcn5JwKs7F75OMdbMao5SKxUe0+XWInyREhGbEZyogiyuVWmfghlK68VQwLfiVkcZXutwqV/1ekJEb9wMgLI3p9N0gQQ+FdB+LoBdfSwAjIeBedTkBUoWbHR9kkofHl02kTHwVJowCpvvPRagCqe4WjTwlDjD69FoFkn7Xx3klZkyBIxlvhpNDAyBpnhmkPhFgtyTR6zCGl7Uw8DHGvMupwoJXZVLBlfa5q/XfmIT05LTV6FaGIFIA1gpEnxBRwrKWs48ZB5QGMAmaDV+tQYb4V9a25ibcbL8yF0g7kPPVym2/NorRrhdEMf28IAoNfMT/iTVEPaBOrt1AbWtV8fKcNQ/1jx4Sa4l/ZULz66dgx6oilzoCzYIOswDwJtt10Xy+vraFdrfxq0ImRohpwbUTkeNfi2o9cp34vwW2zLY3EFA6Vn9thMlIwwHVkDcxWbXmwCYC2uDrLEnKxQ9PETsZZwsG5FL/vVWZsRQsyFaYomoq8T6PeKvzrCGwXiX7e1Oyosn93gCa1HhOCp80UA==
-    TOKEN: AgDbxE7eCY8sTTskZVcFFquA4IualtyTz1Y+d1YHjvKJE85zz5p+IUlJ5pzkBR0/bTGcR6npL6UPN9mqvEhA9BRalkgrgKY9sWBhfRRse/1ZWwB/g2xPw7Le7MFpj/gb3kJCrriOasHC1pkxWl62OWL0eiLiDCeOxFrodIHwnqc9wSuPNXDdFqY6FXQNRuZr3kIQdLjt+BMbMlZLIr/8h4dj9ROullhYNznwL0Jr2ySCOYDim5ZH52xm1WvZVZjyLl/TTq7rqhK7G20aHvfdLqDsvlfkzaZxVNuQli/VrdnbYVoHj2kaMLwbw88Wl2BDl8QUa0I2dCyrI1JkGsPn4c+lzGFTs0yeK6RnNEWlOmOkeafSboyzwo+x7SOwv0XSec8goYnpEgzuHrnP2IKvmUVuEVE9GQoSoRKcGTjaDuAnl6uU1xbYl05pSg7TEEL7NOrYOu2TS0zUeW0Hto+yikIbjW+k7xlwTW2Zr1KADWWyCBzxrMyrZImfoz5EVD8So++rWo9K4cYuXhG5d2FpJP2KadkGbnEVxbHDoGEmZTbjcIeHQFB61mbRoUSha1elYl9NlInDKk9bZ0Uxc8z2mYF9GScgI5VIESFyB5K4wOLjLHpjrEQ5qYilZ9RrzfOiGkIHHJSHHZwGGIWMGMqyoDb7PDsuOFQrpMN9muC1aEEfmtaRoGclJ5LrJ+0lGRnEMEw7Y5hxP8jWOzc/J6YjdpT7JrPYyyflL7j4aMCpmME6RrYFywKEuA+rPWOj9vb3JatjEd+cxUOvImvoJGG/YG8F
+          resources:
+            requests:
+              cpu: 1m
+              memory: 10Mi
+            limits:
+              cpu: 75m
+              memory: 75Mi
+      volumes:
+        - name: config
+          configMap:
+            name: frps
 
 ---
 
 apiVersion: v1
-kind: Service
-
-metadata:
-  name: frps
-  namespace: proxy
-  labels:
-    app.kubernetes.io/name: frps
-
-spec:
-  selector:
-    app.kubernetes.io/name: frps
-  ports:
-    - name: bind
-      port: 7000
-      targetPort: bind
-    - name: dashboard
-      port: 7500
-      targetPort: dashboard
-    - name: https
-      port: 443
-      targetPort: https
-    - name: ssh
-      port: 22
-      targetPort: ssh
-    - name: ingress
-      port: 80
-      targetPort: 8000
-
----
-
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+kind: ConfigMap
 
 metadata:
   name: frps
   namespace: proxy
 
-spec:
-  gateways: ["proxy"]
-  hosts: ["frps.stevenxie.me"]
-  tcp:
-    - match:
-        - port: 30070
-      route:
-        - destination:
-            host: frps
-            port:
-              number: 7000
+data:
+  frps.ini: |
+    [common]
+    bind_port = 7000
+    vhost_https_port = 8443
+    dashboard_port = 7500
+    dashboard_user = stevenxie
+    dashboard_pwd = {{ .Envs.DASHBOARD_PASS }}
+    token = {{ .Envs.TOKEN }}
