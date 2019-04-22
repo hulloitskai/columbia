@@ -18,8 +18,9 @@ spec:
     repository: https://charts.stevenxie.me
     name: api
     version: 0.5.1
-  valueFileSecrets:
-    - name: api-release
+  valuesFrom:
+    - secretKeyRef:
+        name: api-release
   values:
     config:
       mongo:
