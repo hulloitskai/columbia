@@ -38,6 +38,8 @@ spec:
             - --probe-only
             - --probe.kubernetes.role=cluster
             - --probe.no-controls=true
+            - --probe.spy.interval=5s
+            - --probe.publish.interval=5s
             - --weave=false
             - weave-scope-app:80
           resources:

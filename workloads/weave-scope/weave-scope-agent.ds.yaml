@@ -40,6 +40,8 @@ spec:
             - --probe.docker.bridge=docker0
             - --probe.docker=true
             - --probe.no-controls=true
+            - --probe.spy.interval=5s
+            - --probe.publish.interval=5s
             - --weave=false
             - weave-scope-app:80
           volumeMounts:
