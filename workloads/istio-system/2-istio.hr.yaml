@@ -70,6 +70,8 @@ spec:
     #   enabled: true
 
     # Disabled components:
+    security:
+      enabled: false
     mixer:
       enabled: false
       policy:
