@@ -27,7 +27,7 @@ spec:
       serviceAccountName: controller
       containers:
         - name: controller
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.5.1
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.5.2
           env:
             - name: CONFIG_LOGGING_NAME
               value: config-logging
