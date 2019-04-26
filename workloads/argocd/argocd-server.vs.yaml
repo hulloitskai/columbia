@@ -1,0 +1,28 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: argocd-server
+  namespace: argocd
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts:
+    - cd.stevenxie.me
+    - argocd.stevenxie.me
+  http:
+    - match:
+        - authority:
+            exact: cd.stevenxie.me
+      route:
+        - destination:
+            host: argocd-server
+            port:
+              number: 80
+    - route:
+        - destination:
+            host: argocd-server
+            port:
+              number: 3000

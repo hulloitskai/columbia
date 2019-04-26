@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: argocd-cm
+
+data:
+  repositories: |
+    - url: https://github.com/stevenxie/columbia
+    - url: https://github.com/stevenxie/monastery
+
+  helm.repositories: |
+    - name: istio
+      url: https://storage.googleapis.com/istio-release/releases/1.1.2/charts/
+    - name: stevenxie
+      url: https://charts.stevenxie.me
+    - name: rook
+      url: https://charts.rook.io/stable
+    - name: jetstack
+      url: https://charts.jetstack.io
