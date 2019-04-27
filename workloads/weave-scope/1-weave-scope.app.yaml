@@ -1,0 +1,29 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: weave-scope
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: weave-scope
+  syncPolicy:
+    automated:
+      prune: true
+
+  source:
+    repoURL: https://github.com/stevenxie/columbia
+    targetRevision: argo
+    path: workloads/weave-scope/weave-scope
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers: ["/spec/replicas"]

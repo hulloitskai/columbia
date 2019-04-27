@@ -1,0 +1,10 @@
+---
+
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: weave-scope
+  namespace: weave-scope
+  labels:
+    app.kubernetes.io/name: weave-scope

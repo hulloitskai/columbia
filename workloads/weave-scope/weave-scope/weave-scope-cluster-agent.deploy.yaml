@@ -1,0 +1,49 @@
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: weave-scope-cluster-agent
+  namespace: weave-scope
+  labels:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: cluster-agent
+
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-scope
+      weave-cloud-component: scope
+      weave-scope-component: cluster-agent
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: weave-scope
+        weave-cloud-component: scope
+        weave-scope-component: cluster-agent
+    spec:
+      serviceAccountName: weave-scope
+      containers:
+        - name: scope-cluster-agent
+          image: weaveworks/scope:1.10.2
+          imagePullPolicy: IfNotPresent
+          command: ["/home/weave/scope"]
+          args:
+            - --mode=probe
+            - --probe-only
+            - --probe.kubernetes.role=cluster
+            - --probe.no-controls=true
+            - --probe.spy.interval=5s
+            - --probe.publish.interval=5s
+            - --weave=false
+            - weave-scope-app:80
+          resources:
+            requests:
+              cpu: 5m
+              memory: 35Mi
+            limits:
+              cpu: 50m
+              memory: 75Mi
+

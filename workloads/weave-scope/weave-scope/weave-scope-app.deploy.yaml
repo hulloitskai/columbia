@@ -1,0 +1,92 @@
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: weave-scope-app
+  namespace: weave-scope
+  labels:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: weave-scope
+      weave-cloud-component: scope
+      weave-scope-component: app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: weave-scope
+        weave-cloud-component: scope
+        weave-scope-component: app
+    spec:
+      containers:
+        - name: app
+          image: weaveworks/scope:1.10.2
+          imagePullPolicy: IfNotPresent
+          command: ["/home/weave/scope"]
+          args:
+            - --mode=app
+            - --app-only
+            - --weave=false
+          ports:
+            - containerPort: 4040
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 25m
+              memory: 125Mi
+            limits:
+              cpu: 100m
+              memory: 200Mi
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: weave-scope-app
+  namespace: weave-scope
+  labels:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+
+spec:
+  selector:
+    app.kubernetes.io/name: weave-scope
+    weave-cloud-component: scope
+    weave-scope-component: app
+  ports:
+    - name: app
+      port: 80
+      protocol: TCP
+      targetPort: 4040
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: weave-scope-app
+  namespace: weave-scope
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts:
+    - status.stevenxie.me
+    - columbia.stevenxie.me
+  http:
+    - route:
+        - destination:
+            host: weave-scope-app
+          headers:
+            response:
+              set:
+                X-Service: weave-scope-app
