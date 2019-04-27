@@ -1,0 +1,4 @@
+dependencies:
+  - name: varnish
+    version: 0.2.0
+    repository: "@stevenxie"

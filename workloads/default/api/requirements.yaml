@@ -1,0 +1,4 @@
+dependencies:
+  - name: api
+    version: 0.5.1
+    repository: "@stevenxie"

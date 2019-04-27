@@ -4,33 +4,28 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: argocd
+  name: default-apps
   namespace: argocd
   finalizers: ["resources-finalizer.argocd.argoproj.io"]
 
 spec:
-  project: columbia-system
+  project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: default
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
 
   source:
     repoURL: https://github.com/stevenxie/columbia
     targetRevision: argo
-    path: workloads/argocd/argocd
+    path: workloads/default/apps
+    directory:
+      recurse: true
 
+  # Allow for variance in number of replicas.
   ignoreDifferences:
-      # Allow for variance in number of replicas.
     - group: apps
       kind: Deployment
       jsonPointers: ["/spec/replicas"]
-    - group: ""
-      kind: Secret
-      name: argocd-secret
-      jsonPointers: ["/metadata/labels"]
-    - group: ""
-      kind: ConfigMap
-      name: argocd-cm
-      jsonPointers: ["/data/resource.exclusions"]

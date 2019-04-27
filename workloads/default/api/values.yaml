@@ -1,0 +1,29 @@
+api:
+  image:
+    tag: 0.3.4-16-g714d976
+
+  config:
+    mongo:
+      db: self
+    airtable:
+      baseId: appDm0Ts20KbQ0rG0
+      moodSource:
+        limit: 15
+    jobserver:
+      redisAddr: redis-master:6379
+      fetchMoodsCron: 0 0-59/5 * * * *
+
+  secrets:
+    HACK: HACK
+
+  deployment:
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+        maxUnavailable: 0
+
+  jobserver:
+    enabled: false
+  jobserver-ui:
+    enabled: false

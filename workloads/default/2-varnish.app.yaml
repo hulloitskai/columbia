@@ -4,19 +4,26 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: istio-init
+  name: varnish
   namespace: argocd
   finalizers: ["resources-finalizer.argocd.argoproj.io"]
 
 spec:
-  project: columbia-system
+  project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: istio-system
+    namespace: default
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
 
   source:
     repoURL: https://github.com/stevenxie/columbia
     targetRevision: argo
-    path: workloads/istio-system/istio-init
+    path: workloads/default/varnish
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers: ["/spec/replicas"]
