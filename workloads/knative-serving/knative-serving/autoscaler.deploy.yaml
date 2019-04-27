@@ -1,0 +1,87 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: autoscaler
+  namespace: knative-serving
+  labels:
+    serving.knative.dev/release: devel
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autoscaler
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: autoscaler
+    spec:
+      serviceAccountName: controller
+      containers:
+        - name: autoscaler
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/autoscaler:v0.5.1
+          env:
+            - name: SYSTEM_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: CONFIG_LOGGING_NAME
+              value: config-logging
+          ports:
+            - name: websocket
+              containerPort: 8080
+            - name: metrics
+              containerPort: 9090
+          resources:
+            limits:
+              cpu: 200m
+              memory: 225Mi
+            requests:
+              cpu: 30m
+              memory: 40Mi
+          volumeMounts:
+            - name: config-autoscaler
+              mountPath: /etc/config-autoscaler
+            - name: config-logging
+              mountPath: /etc/config-logging
+            - name: config-observability
+              mountPath: /etc/config-observability
+      volumes:
+        - name: config-autoscaler
+          configMap:
+            name: config-autoscaler
+        - name: config-logging
+          configMap:
+            name: config-logging
+        - name: config-observability
+          configMap:
+            name: config-observability
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: autoscaler
+  namespace: knative-serving
+  labels:
+    app: autoscaler
+    serving.knative.dev/release: devel
+
+spec:
+  selector:
+    app: autoscaler
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: metrics
+      port: 9090
+      protocol: TCP
+      targetPort: 9090

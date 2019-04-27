@@ -1,0 +1,29 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: knative-serving
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+
+spec:
+  project: columbia-system
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: knative-serving
+  syncPolicy:
+    automated:
+      prune: true
+
+  source:
+    repoURL: https://github.com/stevenxie/columbia
+    targetRevision: argo
+    path: workloads/knative-serving/knative-serving
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers: ["/spec/replicas"]
