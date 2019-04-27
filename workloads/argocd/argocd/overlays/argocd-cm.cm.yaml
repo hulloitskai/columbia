@@ -5,6 +5,8 @@ metadata:
   name: argocd-cm
 
 data:
+  url: "cd.stevenxie.me"
+
   repositories: |
     - url: https://github.com/stevenxie/columbia
     - url: https://github.com/stevenxie/monastery
@@ -23,11 +25,11 @@ data:
     admissionregistration.k8s.io/MutatingWebhookConfiguration:
       ignoreDifferences: |
         jsonPointers: ["/webhooks/0/clientConfig/caBundle"]
-    # apiregistration.k8s.io/APIService:
-    #   ignoreDifferences: |
-    #     jsonPointers: ["/webhooks/0/clientConfig/caBundle"]
 
   resource.exclusions: |
     - apiGroups: ["apiregistration.k8s.io"]
       kinds: ["APIService"]
+      clusters: ["*"]
+    - apiGroups: ["serving.knative.dev"] # prevent resource spam
+      kinds: ["Revision"]
       clusters: ["*"]

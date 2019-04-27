@@ -10,10 +10,12 @@ bases:
 
 resources:
   - argocd-server.vs.yaml
+  - argocd-secret.ss.yaml
   - projects/columbia-system.appproj.yaml
   - projects/default.appproj.yaml
 
 patchesStrategicMerge:
+  - overlays/argocd-dex-server.deploy.yaml
   - overlays/argocd-server.deploy.yaml
   - overlays/argocd-server.svc.yaml
   - overlays/argocd-cm.cm.yaml
