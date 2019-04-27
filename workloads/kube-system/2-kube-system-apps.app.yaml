@@ -1,0 +1,31 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: kube-system-apps
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+
+spec:
+  project: columbia-system
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+
+  source:
+    repoURL: https://github.com/stevenxie/columbia
+    targetRevision: argo
+    path: workloads/kube-system/apps
+    directory:
+      recurse: true
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers: ["/spec/replicas"]

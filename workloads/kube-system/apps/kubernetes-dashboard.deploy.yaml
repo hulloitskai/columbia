@@ -1,0 +1,95 @@
+---
+
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+spec:
+  selector:
+    matchLabels:
+      k8s-app: kubernetes-dashboard
+  template:
+    metadata:
+      labels:
+        k8s-app: kubernetes-dashboard
+    spec:
+      serviceAccountName: kubernetes-dashboard
+      containers:
+        - name: kubernetes-dashboard
+          image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+          args:
+            - --auto-generate-certificates
+            # Uncomment the following line to manually specify Kubernetes API
+            # server Host. If not specified, Dashboard will attempt to auto
+            # discover the API server and connect to it. Uncomment only if the
+            # default does not work.
+            #
+            # - --apiserver-host=http://my-address:port
+          volumeMounts:
+            - name: kubernetes-dashboard-certs
+              mountPath: /certs
+              ## Create on-disk volume to store exec logs
+            - mountPath: /tmp
+              name: tmp-volume
+          ports:
+            - name: http
+              containerPort: 8443
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              scheme: HTTPS
+              path: /
+              port: 8443
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          resources:
+            limits:
+              cpu: 75m
+              memory: 50Mi
+      volumes:
+        - name: kubernetes-dashboard-certs
+          secret:
+            secretName: kubernetes-dashboard-certs
+        - name: tmp-volume
+          emptyDir: {}
+
+      # Comment the following tolerations if Dashboard must not be deployed on
+      # master.
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          effect: NoSchedule
+
+---
+
+apiVersion: v1
+kind: ServiceAccount
+
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+---
+
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+spec:
+  selector:
+    k8s-app: kubernetes-dashboard
+  ports:
+    - name: https
+      port: 443
+      targetPort: http
