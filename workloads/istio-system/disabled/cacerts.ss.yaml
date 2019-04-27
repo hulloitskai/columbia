@@ -6,8 +6,6 @@ kind: SealedSecret
 metadata:
   name: cacerts
   namespace: istio-system
-  annotations:
-    flux.weave.works/ignore: "true"
 
 spec:
   encryptedData:

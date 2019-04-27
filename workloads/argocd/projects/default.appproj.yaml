@@ -10,8 +10,8 @@ spec:
   description: Apps for stevenxie.me.
   sourceRepos: ["https://github.com/stevenxie/columbia"]
   destinations:
-    - namespace: default
+    - namespace: "*"
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+    - group: "*"
+      kind: "*"
