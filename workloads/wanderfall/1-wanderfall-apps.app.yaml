@@ -1,0 +1,31 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: wanderfall-apps
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+
+spec:
+  project: wanderfall
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: wanderfall
+  syncPolicy:
+    automated:
+      prune: true
+
+  source:
+    repoURL: https://github.com/stevenxie/columbia
+    targetRevision: argo
+    path: workloads/wanderfall/apps
+    directory:
+      recurse: true
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      jsonPointers: ["/spec/replicas"]

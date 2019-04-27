@@ -12,6 +12,7 @@ resources:
   - argocd-server.vs.yaml
   - argocd-secret.ss.yaml
   - projects/columbia-system.appproj.yaml
+  - projects/wanderfall.appproj.yaml
   - projects/default.appproj.yaml
 
 patchesStrategicMerge:
