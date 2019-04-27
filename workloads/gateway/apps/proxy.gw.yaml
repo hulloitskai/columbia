@@ -1,0 +1,30 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+
+metadata:
+  name: proxy
+  namespace: gateway
+
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: tcp-frps
+        number: 30070
+        protocol: TCP
+      hosts: ["*.stevenxie.me"]
+    - port:
+        name: tcp-ssh
+        number: 30022
+        protocol: TCP
+      hosts: ["*.stevenxie.me"]
+    - port:
+        name: https-passthrough
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: PASSTHROUGH
+      hosts: ["*.stevenxie.me"]
