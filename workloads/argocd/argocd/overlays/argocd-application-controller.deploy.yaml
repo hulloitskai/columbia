@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: argocd-application-controller
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: argocd-application-controller
+          command:
+            - argocd-application-controller
+            - --status-processors
+            - "2"
+            - --operation-processors
+            - "1"
+            - --app-resync
+            - "300"
+          resources:
+            requests:
+              memory: 60Mi
+              cpu: 2m
+            limits:
+              memory: 300Mi
+              cpu: 250m

@@ -2,18 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 
 metadata:
-  name: argocd-server
+  name: argocd-redis
 
 spec:
   template:
     spec:
       containers:
-        - name: argocd-server
-          args: ["--insecure"]
+        - name: redis
           resources:
             requests:
-              memory: 30Mi
-              cpu: 2m
+              memory: 5Mi
+              cpu: 1m
             limits:
               memory: 50Mi
-              cpu: 250m
+              cpu: 150m

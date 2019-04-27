@@ -16,7 +16,10 @@ resources:
   - projects/default.appproj.yaml
 
 patchesStrategicMerge:
+  - overlays/argocd-application-controller.deploy.yaml
+  - overlays/argocd-repo-server.deploy.yaml
   - overlays/argocd-dex-server.deploy.yaml
   - overlays/argocd-server.deploy.yaml
   - overlays/argocd-server.svc.yaml
+  - overlays/argocd-redis.deploy.yaml
   - overlays/argocd-cm.cm.yaml
