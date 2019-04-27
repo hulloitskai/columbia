@@ -1,0 +1,29 @@
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+
+metadata:
+  name: metrics-server
+  namespace: argocd
+  finalizers: ["resources-finalizer.argocd.argoproj.io"]
+
+spec:
+  project: columbia-system
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy: {}
+
+  source:
+    repoURL: https://github.com/stevenxie/columbia
+    targetRevision: argo
+    path: workloads/kube-system/metrics-server
+
+  # Allow for variance in number of replicas.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+        - /spec/template/spec/containers/0/securityContext/runAsGroup

@@ -1,0 +1,4 @@
+dependencies:
+  - name: metrics-server
+    version: 2.6.0
+    repository: "@stable"
