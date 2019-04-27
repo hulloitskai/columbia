@@ -1,0 +1,4 @@
+dependencies:
+  - name: istio
+    version: 1.1.2-custom-2
+    repository: https://raw.githubusercontent.com/stevenxie/helm-charts/master

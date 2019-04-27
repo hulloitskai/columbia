@@ -1,0 +1,101 @@
+istio:
+  # Enabled components:
+  pilot:
+    autoscaleEnabled: false
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
+  gateways:
+    istio-ingressgateway:
+      type: ClusterIP
+      sds:
+        enabled: true
+      autoscaleEnabled: false
+      env: {} # remove to enable multi-cluster networking
+      ports:
+        - name: http2
+          port: 80
+          targetPort: 80
+          hostPort: 80
+        - name: https
+          port: 443
+          targetPort: 443
+          hostPort: 443
+        - name: status-port
+          port: 15020
+          targetPort: 15020
+        # Multicluster ingress endpoint (disabled).
+        # - name: tls
+        #   port: 15443
+        #   targetPort: 15443
+      meshExpansionPorts: []
+      resources:
+        requests:
+          cpu: 50m
+          memory: 50Mi
+        limits:
+          cpu: 250m
+          memory: 125Mi
+      nodeSelector:
+        node-role.kubernetes.io/entrypoint: entrypoint
+
+  # Multicluster components (disabled):
+  #
+  # Multicluster with gateways requires a common root CA; do not boostrap
+  # root CA during installation.
+  # security:
+  #   selfSigned: false
+  # Provides dns resolution for service entries of form name.namespace.global.
+  # istiocoredns:
+  #   enabled: true
+
+  # Disabled components:
+  security:
+    enabled: false
+  mixer:
+    enabled: false
+    policy:
+      enabled: false
+    telemetry:
+      enabled: false
+  prometheus:
+    enabled: false
+
+  # Common settings:
+  global:
+    useMCP: false
+    proxy:
+      # Sets the destination Statsd in envoy (the value of the
+      # "--statsdUdpAddress" proxy argument would be <host>:<port>).
+      # Disabled by default.
+      # The istio-statsd-prom-bridge is deprecated and should not be used
+      # moving forward.
+      envoyStatsd:
+        # If enabled is set to true, host and port must also be provided.
+        # Istio no longer provides a statsd collector.
+        enabled: false
+      autoInject: disabled
+      resources:
+        requests:
+          cpu: 10m
+          memory: 10Mi
+        limits:
+          cpu: 256m
+          memory: 128Mi
+
+    # Multicluster settings (disabled):
+    #
+    # Provides DNS resolution for global services.
+    # podDNSSearchNamespaces:
+    #   - global
+    #   - "[[ valueOrDefault .DeploymentMeta.Namespace \"default\" ]].global"
+    # multiCluster:
+    #   enabled: true
+    # controlPlaneSecurityEnabled: true
+
+# Disable dependencies.
+security: &disabled
+  enabled: false
+mixer: *disabled
+prometheus: *disabled

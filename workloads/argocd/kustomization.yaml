@@ -12,7 +12,6 @@ resources:
   - argocd-server.vs.yaml
   - projects/columbia-system.appproj.yaml
   - projects/default.appproj.yaml
-  - apps/sealed-secrets.app.yaml
 
 patchesStrategicMerge:
   - overlays/argocd-server.deploy.yaml

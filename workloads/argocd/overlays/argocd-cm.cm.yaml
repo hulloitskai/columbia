@@ -11,9 +11,9 @@ data:
 
   helm.repositories: |
     - name: istio
-      url: https://storage.googleapis.com/istio-release/releases/1.1.2/charts/
+      url: https://storage.googleapis.com/istio-release/releases/1.1.2/charts
     - name: stevenxie
-      url: https://charts.stevenxie.me
+      url: https://raw.githubusercontent.com/stevenxie/helm-charts/master
     - name: rook
       url: https://charts.rook.io/stable
     - name: jetstack

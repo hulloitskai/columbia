@@ -4,7 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: sealed-secrets
+  name: istio
   namespace: argocd
   finalizers: ["resources-finalizer.argocd.argoproj.io"]
 
@@ -12,7 +12,7 @@ spec:
   project: columbia-system
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: istio-system
   syncPolicy:
     automated:
       prune: true
@@ -20,7 +20,7 @@ spec:
   source:
     repoURL: https://github.com/stevenxie/columbia
     targetRevision: argo
-    path: workloads/kube-system/sealed-secrets
+    path: workloads/istio-system/istio
 
   # Allow for variance in number of replicas.
   ignoreDifferences:
