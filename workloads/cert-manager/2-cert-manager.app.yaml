@@ -5,7 +5,7 @@ kind: Application
 
 metadata:
   name: cert-manager
-  namespace: cert-manager
+  namespace: argocd
   finalizers: ["resources-finalizer.argocd.argoproj.io"]
 
 spec:
@@ -13,9 +13,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
-  syncPolicy:
-    automated:
-      prune: true
+  syncPolicy: {}
 
   source:
     repoURL: https://github.com/stevenxie/columbia
@@ -27,3 +25,6 @@ spec:
     - group: apps
       kind: Deployment
       jsonPointers: ["/spec/replicas"]
+    - group: certmanager.k8s.io
+      kind: Certificate
+      jsonPointers: ["/spec/duration"]
