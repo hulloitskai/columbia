@@ -60,7 +60,7 @@ To back up the private key that the `sealed-secrets-controller` uses to
 decrypt `SealedSecret` resources, run the following command:
 
 ```bash
-kubectl -n sealed-secrets \
+kubectl --namespace kube-system \
   get secrets sealed-secrets-key -o yaml > master.key.yaml
 ```
 
@@ -72,5 +72,5 @@ private key is named `master.key.yaml`):
 
 ```bash
 kubectl replace -f master.key.yaml && \
-kubectl delete pods -n sealed-secrets -l app.kubernetes.io/name=sealed-secrets
+kubectl -n kube-system delete pods -l app.kubernetes.io/name=sealed-secrets
 ```

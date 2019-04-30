@@ -9,6 +9,9 @@ namespace `flux`. Use the guide at
 [`flux/site/helm-get-started`](https://github.com/weaveworks/flux/blob/master/site/helm-get-started.md)
 for reference.
 
+> `flux` requires `helm` to be installed first. See the
+> [docs on installing `helm` with TLS](../helm/README.md).
+
 Prepare the namespace `flux`, and install the `helm-client-certs` secrets:
 
 ```bash
@@ -22,19 +25,19 @@ kubectl create secret generic helm-client-certs \
 Install the associated CRDs:
 
 ```bash
-kubectl apply -f \
-  ../cluster/customresourcedefinitions/helmreleases.flux.weave.works.yaml
+kubectl apply -f ./crd.yaml
 ```
 
 Install the chart as follows:
 
 ```bash
 helm repo add weaveworks https://weaveworks.github.io/flux && \
-helm install \
-  --name=flux \
+helm upgrade flux \
+  --install \
   --namespace=flux \
   -f ./values.yaml \
-  --version 0.9.1 \
+  --version 0.9.2 \
+  --atomic \
   weaveworks/flux
 ```
 

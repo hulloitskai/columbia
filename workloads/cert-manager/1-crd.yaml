@@ -1,40 +1,41 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
+
 metadata:
-  creationTimestamp: null
+  name: certificates.certmanager.k8s.io
   labels:
     controller-tools.k8s.io: "1.0"
-  name: certificates.certmanager.k8s.io
+
 spec:
   additionalPrinterColumns:
-  - JSONPath: .status.conditions[?(@.type==\"Ready\")].status
-    name: Ready
-    type: string
-  - JSONPath: .spec.secretName
-    name: Secret
-    type: string
-  - JSONPath: .spec.issuerRef.name
-    name: Issuer
-    priority: 1
-    type: string
-  - JSONPath: .status.conditions[?(@.type==\"Ready\")].message
-    name: Status
-    priority: 1
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC.
-    name: Age
-    type: date
+    - JSONPath: .status.conditions[?(@.type==\"Ready\")].status
+      name: Ready
+      type: string
+    - JSONPath: .spec.secretName
+      name: Secret
+      type: string
+    - JSONPath: .spec.issuerRef.name
+      name: Issuer
+      priority: 1
+      type: string
+    - JSONPath: .status.conditions[?(@.type==\"Ready\")].message
+      name: Status
+      priority: 1
+      type: string
+    - JSONPath: .metadata.creationTimestamp
+      description: CreationTimestamp is a timestamp representing the server time when
+        this object was created. It is not guaranteed to be set in happens-before order
+        across separate operations. Clients may not set this value. It is represented
+        in RFC3339 form and is in UTC.
+      name: Age
+      type: date
   group: certmanager.k8s.io
   names:
     kind: Certificate
     plural: certificates
     shortNames:
-    - cert
-    - certs
+      - cert
+      - certs
   scope: Namespaced
   validation:
     openAPIV3Schema:
@@ -68,12 +69,10 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - domains
+                    required: ["domains"]
                     type: object
                   type: array
-              required:
-              - config
+              required: ["config"]
               type: object
             commonName:
               description: CommonName is a common name to be used on the Certificate
@@ -109,8 +108,7 @@ spec:
                   type: string
                 name:
                   type: string
-              required:
-              - name
+              required: ["name"]
               type: object
             keyAlgorithm:
               description: KeyAlgorithm is the private key algorithm of the corresponding
@@ -119,8 +117,8 @@ spec:
                 not provided, key size of 256 will be used for "ecdsa" key algorithm
                 and key size of 2048 will be used for "rsa" key algorithm.
               enum:
-              - rsa
-              - ecdsa
+                - rsa
+                - ecdsa
               type: string
             keySize:
               description: KeySize is the key bit size of the corresponding private
@@ -143,8 +141,8 @@ spec:
                 this secret in
               type: string
           required:
-          - secretName
-          - issuerRef
+            - secretName
+            - issuerRef
           type: object
         status:
           properties:
@@ -168,19 +166,19 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                    - "True"
-                    - "False"
-                    - Unknown
+                      - "True"
+                      - "False"
+                      - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                - type
-                - status
-                - lastTransitionTime
-                - reason
-                - message
+                  - type
+                  - status
+                  - lastTransitionTime
+                  - reason
+                  - message
                 type: object
               type: array
             lastFailureTime:
@@ -193,39 +191,36 @@ spec:
               type: string
           type: object
   version: v1alpha1
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
+
 ---
+
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
+
 metadata:
-  creationTimestamp: null
+  name: challenges.certmanager.k8s.io
   labels:
     controller-tools.k8s.io: "1.0"
-  name: challenges.certmanager.k8s.io
+
 spec:
   additionalPrinterColumns:
-  - JSONPath: .status.state
-    name: State
-    type: string
-  - JSONPath: .spec.dnsName
-    name: Domain
-    type: string
-  - JSONPath: .status.reason
-    name: Reason
-    priority: 1
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC.
-    name: Age
-    type: date
+    - JSONPath: .status.state
+      name: State
+      type: string
+    - JSONPath: .spec.dnsName
+      name: Domain
+      type: string
+    - JSONPath: .status.reason
+      name: Reason
+      priority: 1
+      type: string
+    - JSONPath: .metadata.creationTimestamp
+      description: CreationTimestamp is a timestamp representing the server time when
+        this object was created. It is not guaranteed to be set in happens-before order
+        across separate operations. Clients may not set this value. It is represented
+        in RFC3339 form and is in UTC.
+      name: Age
+      type: date
   group: certmanager.k8s.io
   names:
     kind: Challenge
@@ -270,8 +265,7 @@ spec:
                   type: string
                 name:
                   type: string
-              required:
-              - name
+              required: ["name"]
               type: object
             key:
               description: Key is the ACME challenge key for this challenge
@@ -293,15 +287,15 @@ spec:
                 identifier, for example '*.example.com'
               type: boolean
           required:
-          - authzURL
-          - type
-          - url
-          - dnsName
-          - token
-          - key
-          - wildcard
-          - config
-          - issuerRef
+            - authzURL
+            - type
+            - url
+            - dnsName
+            - token
+            - key
+            - wildcard
+            - config
+            - issuerRef
           type: object
         status:
           properties:
@@ -328,39 +322,36 @@ spec:
               description: State contains the current 'state' of the challenge. If
                 not set, the state of the challenge is unknown.
               enum:
-              - ""
-              - valid
-              - ready
-              - pending
-              - processing
-              - invalid
-              - expired
-              - errored
+                - ""
+                - valid
+                - ready
+                - pending
+                - processing
+                - invalid
+                - expired
+                - errored
               type: string
           required:
-          - processing
-          - presented
-          - reason
+            - processing
+            - presented
+            - reason
           type: object
       required:
-      - metadata
-      - spec
-      - status
+        - metadata
+        - spec
+        - status
   version: v1alpha1
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
+
 ---
+
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
+
 metadata:
-  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
   name: clusterissuers.certmanager.k8s.io
+
 spec:
   group: certmanager.k8s.io
   names:
@@ -401,8 +392,7 @@ spec:
                       description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                         TODO: Add other useful fields. apiVersion, kind, uid?'
                       type: string
-                  required:
-                  - name
+                  required: ["name"]
                   type: object
                 server:
                   description: Server is the ACME server URL
@@ -411,9 +401,9 @@ spec:
                   description: If true, skip verifying the ACME server TLS certificate
                   type: boolean
               required:
-              - email
-              - server
-              - privateKeySecretRef
+                - email
+                - server
+                - privateKeySecretRef
               type: object
             ca:
               properties:
@@ -421,8 +411,7 @@ spec:
                   description: SecretName is the name of the secret used to sign Certificates
                     issued by this Issuer.
                   type: string
-              required:
-              - secretName
+              required: ["secretName"]
               type: object
             selfSigned:
               type: object
@@ -450,13 +439,12 @@ spec:
                               description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                                 TODO: Add other useful fields. apiVersion, kind, uid?'
                               type: string
-                          required:
-                          - name
+                          required: ["name"]
                           type: object
                       required:
-                      - path
-                      - roleId
-                      - secretRef
+                        - path
+                        - roleId
+                        - secretRef
                       type: object
                     tokenSecretRef:
                       description: This Secret contains the Vault token key
@@ -469,8 +457,7 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required:
-                      - name
+                      required: ["name"]
                       type: object
                   type: object
                 caBundle:
@@ -487,9 +474,9 @@ spec:
                   description: Server is the vault connection address
                   type: string
               required:
-              - auth
-              - server
-              - path
+                - auth
+                - server
+                - path
               type: object
             venafi:
               properties:
@@ -509,15 +496,14 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required:
-                      - name
+                      required: ["name"]
                       type: object
                     url:
                       description: URL is the base URL for Venafi Cloud
                       type: string
                   required:
-                  - url
-                  - apiTokenSecretRef
+                    - url
+                    - apiTokenSecretRef
                   type: object
                 tpp:
                   description: TPP specifies Trust Protection Platform configuration
@@ -541,23 +527,21 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required:
-                      - name
+                      required: ["name"]
                       type: object
                     url:
                       description: URL is the base URL for the Venafi TPP instance
                       type: string
                   required:
-                  - url
-                  - credentialsRef
+                    - url
+                    - credentialsRef
                   type: object
                 zone:
                   description: Zone is the Venafi Policy Zone to use for this issuer.
                     All requests made to the Venafi platform will be restricted by
                     the named zone policy. This field is required.
                   type: string
-              required:
-              - zone
+              required: ["zone"]
               type: object
           type: object
         status:
@@ -589,37 +573,34 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                    - "True"
-                    - "False"
-                    - Unknown
+                      - "True"
+                      - "False"
+                      - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                - type
-                - status
-                - lastTransitionTime
-                - reason
-                - message
+                  - type
+                  - status
+                  - lastTransitionTime
+                  - reason
+                  - message
                 type: object
               type: array
           type: object
   version: v1alpha1
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
+
 ---
+
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
+
 metadata:
-  creationTimestamp: null
+  name: issuers.certmanager.k8s.io
   labels:
     controller-tools.k8s.io: "1.0"
-  name: issuers.certmanager.k8s.io
+
 spec:
   group: certmanager.k8s.io
   names:
@@ -660,8 +641,7 @@ spec:
                       description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                         TODO: Add other useful fields. apiVersion, kind, uid?'
                       type: string
-                  required:
-                  - name
+                  required: ["name"]
                   type: object
                 server:
                   description: Server is the ACME server URL
@@ -670,9 +650,9 @@ spec:
                   description: If true, skip verifying the ACME server TLS certificate
                   type: boolean
               required:
-              - email
-              - server
-              - privateKeySecretRef
+                - email
+                - server
+                - privateKeySecretRef
               type: object
             ca:
               properties:
@@ -680,8 +660,7 @@ spec:
                   description: SecretName is the name of the secret used to sign Certificates
                     issued by this Issuer.
                   type: string
-              required:
-              - secretName
+              required: ["secretName"]
               type: object
             selfSigned:
               type: object
@@ -709,13 +688,12 @@ spec:
                               description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                                 TODO: Add other useful fields. apiVersion, kind, uid?'
                               type: string
-                          required:
-                          - name
+                          required: ["name"]
                           type: object
                       required:
-                      - path
-                      - roleId
-                      - secretRef
+                        - path
+                        - roleId
+                        - secretRef
                       type: object
                     tokenSecretRef:
                       description: This Secret contains the Vault token key
@@ -728,8 +706,7 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required:
-                      - name
+                      required: ["name"]
                       type: object
                   type: object
                 caBundle:
@@ -746,9 +723,9 @@ spec:
                   description: Server is the vault connection address
                   type: string
               required:
-              - auth
-              - server
-              - path
+                - auth
+                - server
+                - path
               type: object
             venafi:
               properties:
@@ -768,15 +745,14 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required:
-                      - name
+                      required: ["name"]
                       type: object
                     url:
                       description: URL is the base URL for Venafi Cloud
                       type: string
                   required:
-                  - url
-                  - apiTokenSecretRef
+                    - url
+                    - apiTokenSecretRef
                   type: object
                 tpp:
                   description: TPP specifies Trust Protection Platform configuration
@@ -807,16 +783,15 @@ spec:
                       description: URL is the base URL for the Venafi TPP instance
                       type: string
                   required:
-                  - url
-                  - credentialsRef
+                    - url
+                    - credentialsRef
                   type: object
                 zone:
                   description: Zone is the Venafi Policy Zone to use for this issuer.
                     All requests made to the Venafi platform will be restricted by
                     the named zone policy. This field is required.
                   type: string
-              required:
-              - zone
+              required: ["zone"]
               type: object
           type: object
         status:
@@ -848,57 +823,54 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                    - "True"
-                    - "False"
-                    - Unknown
+                      - "True"
+                      - "False"
+                      - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                - type
-                - status
-                - lastTransitionTime
-                - reason
-                - message
+                  - type
+                  - status
+                  - lastTransitionTime
+                  - reason
+                  - message
                 type: object
               type: array
           type: object
   version: v1alpha1
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
+
 ---
+
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
+
 metadata:
-  creationTimestamp: null
+  name: orders.certmanager.k8s.io
   labels:
     controller-tools.k8s.io: "1.0"
-  name: orders.certmanager.k8s.io
+
 spec:
   additionalPrinterColumns:
-  - JSONPath: .status.state
-    name: State
-    type: string
-  - JSONPath: .spec.issuerRef.name
-    name: Issuer
-    priority: 1
-    type: string
-  - JSONPath: .status.reason
-    name: Reason
-    priority: 1
-    type: string
-  - JSONPath: .metadata.creationTimestamp
-    description: CreationTimestamp is a timestamp representing the server time when
-      this object was created. It is not guaranteed to be set in happens-before order
-      across separate operations. Clients may not set this value. It is represented
-      in RFC3339 form and is in UTC.
-    name: Age
-    type: date
+    - JSONPath: .status.state
+      name: State
+      type: string
+    - JSONPath: .spec.issuerRef.name
+      name: Issuer
+      priority: 1
+      type: string
+    - JSONPath: .status.reason
+      name: Reason
+      priority: 1
+      type: string
+    - JSONPath: .metadata.creationTimestamp
+      description: CreationTimestamp is a timestamp representing the server time when
+        this object was created. It is not guaranteed to be set in happens-before order
+        across separate operations. Clients may not set this value. It is represented
+        in RFC3339 form and is in UTC.
+      name: Age
+      type: date
   group: certmanager.k8s.io
   names:
     kind: Order
@@ -940,8 +912,7 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - domains
+                required: ["domains"]
                 type: object
               type: array
             csr:
@@ -970,13 +941,12 @@ spec:
                   type: string
                 name:
                   type: string
-              required:
-              - name
+              required: ["name"]
               type: object
           required:
-          - csr
-          - issuerRef
-          - config
+            - csr
+            - issuerRef
+            - config
           type: object
         status:
           properties:
@@ -1015,8 +985,7 @@ spec:
                         type: string
                       name:
                         type: string
-                    required:
-                    - name
+                    required: ["name"]
                     type: object
                   key:
                     description: Key is the ACME challenge key for this challenge
@@ -1038,15 +1007,15 @@ spec:
                       wildcard identifier, for example '*.example.com'
                     type: boolean
                 required:
-                - authzURL
-                - type
-                - url
-                - dnsName
-                - token
-                - key
-                - wildcard
-                - config
-                - issuerRef
+                  - authzURL
+                  - type
+                  - url
+                  - dnsName
+                  - token
+                  - key
+                  - wildcard
+                  - config
+                  - issuerRef
                 type: object
               type: array
             failureTime:
@@ -1066,14 +1035,14 @@ spec:
               description: State contains the current state of this Order resource.
                 States 'success' and 'expired' are 'final'
               enum:
-              - ""
-              - valid
-              - ready
-              - pending
-              - processing
-              - invalid
-              - expired
-              - errored
+                - ""
+                - valid
+                - ready
+                - pending
+                - processing
+                - invalid
+                - expired
+                - errored
               type: string
             url:
               description: URL of the Order. This will initially be empty when the
@@ -1083,14 +1052,7 @@ spec:
               type: string
           type: object
       required:
-      - metadata
-      - spec
-      - status
+        - metadata
+        - spec
+        - status
   version: v1alpha1
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []
----

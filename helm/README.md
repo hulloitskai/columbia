@@ -30,8 +30,7 @@ First, ensure that the `helm` namespace exists, and to configure RBAC for
 the `helm-tiller` service account:
 
 ```bash
-kb apply -f ../workloads/helm/ && \
-kb apply -f ../cluster/clusterrolebindings/helm-tiller.yaml
+kb apply -f ../workloads/helm/
 ```
 
 ### Configuring `helm-tiller`

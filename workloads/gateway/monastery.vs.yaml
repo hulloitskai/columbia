@@ -5,7 +5,7 @@ kind: VirtualService
 
 metadata:
   name: monastery
-  namespace: proxy
+  namespace: gateway
 
 spec:
   gateways: ["proxy", "primary.istio-system"]
