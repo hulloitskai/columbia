@@ -18,3 +18,10 @@ memcached:
 
 prometheus:
   enabled: false
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    memory: 100Mi
