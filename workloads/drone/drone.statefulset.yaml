@@ -36,6 +36,8 @@ spec:
               value: https
             - name: DRONE_USER_CREATE
               value: username:stevenxie,machine:false,admin:true
+            - name: DRONE_USER_FILTER
+              value: stevenxie,DangAsian,tugolo
             - name: DRONE_AGENTS_ENABLED
               value: "true"
           envFrom:
@@ -118,10 +120,6 @@ spec:
       port: 443
       protocol: TCP
       targetPort: https
-    - name: grpc
-      port: 9000
-      protocol: TCP
-      targetPort: grpc
 
 ---
 
