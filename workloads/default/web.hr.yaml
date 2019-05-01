@@ -21,7 +21,7 @@ spec:
   values:
     image:
       repository: stevenxie/stevenxie.me
-      tag: 0.1.0-14-g5aedcb9
+      tag: 0.1.0-14-g064ab56
 
     deployment:
       strategy:

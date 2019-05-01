@@ -29,7 +29,7 @@ spec:
       serviceAccountName: controller
       containers:
         - name: webhook
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook:v0.5.2
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/webhook:v0.6.0
           env:
             - name: SYSTEM_NAMESPACE
               valueFrom:
