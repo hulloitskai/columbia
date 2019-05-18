@@ -81,6 +81,8 @@ spec:
 
     # Common settings:
     global:
+      tag: 1.1.7
+
       useMCP: false
       proxy:
         # Sets the destination Statsd in envoy (the value of the
