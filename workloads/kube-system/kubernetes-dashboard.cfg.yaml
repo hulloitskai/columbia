@@ -1,6 +1,21 @@
 ---
 
 apiVersion: v1
+kind: Secret
+type: Opaque
+
+metadata:
+  name: kubernetes-dashboard-csrf
+  namespace: kube-system
+  labels:
+    k8s-app: kubernetes-dashboard
+
+data:
+  csrf: ""
+
+---
+
+apiVersion: v1
 kind: ServiceAccount
 
 metadata:
