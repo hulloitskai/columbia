@@ -33,24 +33,3 @@ spec:
     resources:
       limits:
         memory: 200Mi
-
----
-
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-
-metadata:
-  name: web
-  namespace: default
-
-spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["web-origin.stevenxie.me"]
-  http:
-    - route:
-        - destination:
-            host: web
-          headers:
-            response:
-              set:
-                X-Service: web-origin

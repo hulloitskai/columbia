@@ -72,21 +72,3 @@ metadata:
 
 data:
   csrf: ""
-
----
-
-kind: Service
-apiVersion: v1
-
-metadata:
-  name: kubernetes-dashboard
-  namespace: kube-system
-  labels:
-    k8s-app: kubernetes-dashboard
-
-spec:
-  selector:
-    k8s-app: kubernetes-dashboard
-  ports:
-    - port: 80
-      targetPort: http
