@@ -23,43 +23,43 @@ spec:
         app.kubernetes.io/name: ghost
     spec:
       containers:
-        - name: ghost
-          image: ghost:2.22.1-alpine
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: url
-              value: https://wanderfallgames.com
-          volumeMounts:
-            - name: content
-              mountPath: /var/lib/ghost/content
-          ports:
-            - name: http
-              containerPort: 2368
-          livenessProbe: &probe
-            httpGet:
-              path: /
-              port: http
-              httpHeaders:
-                - name: Host
-                  value: wanderfallgames.com
-                - name: X-Forwarded-Proto
-                  value: https
-            initialDelaySeconds: 5
-          readinessProbe: *probe
-          resources:
-            requests:
-              cpu: 5m
-              memory: 10M
-            limits:
-              cpu: 250m
-              memory: 350Mi
+      - name: ghost
+        image: ghost:2.22.3-alpine
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: url
+          value: https://wanderfallgames.com
+        volumeMounts:
+        - name: content
+          mountPath: /var/lib/ghost/content
+        ports:
+        - name: http
+          containerPort: 2368
+        livenessProbe: &probe
+          httpGet:
+            path: /
+            port: http
+            httpHeaders:
+            - name: Host
+              value: wanderfallgames.com
+            - name: X-Forwarded-Proto
+              value: https
+          initialDelaySeconds: 5
+        readinessProbe: *probe
+        resources:
+          requests:
+            cpu: 5m
+            memory: 10M
+          limits:
+            cpu: 250m
+            memory: 350Mi
       nodeSelector:
         node-role.kubernetes.io/storage: storage
   volumeClaimTemplates:
-    - metadata:
-        name: content
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 4Gi
+  - metadata:
+      name: content
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 4Gi
