@@ -1,41 +1,40 @@
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
-
 metadata:
-  name: certificates.certmanager.k8s.io
+  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
-
+  name: certificates.certmanager.k8s.io
 spec:
   additionalPrinterColumns:
-    - JSONPath: .status.conditions[?(@.type==\"Ready\")].status
-      name: Ready
-      type: string
-    - JSONPath: .spec.secretName
-      name: Secret
-      type: string
-    - JSONPath: .spec.issuerRef.name
-      name: Issuer
-      priority: 1
-      type: string
-    - JSONPath: .status.conditions[?(@.type==\"Ready\")].message
-      name: Status
-      priority: 1
-      type: string
-    - JSONPath: .metadata.creationTimestamp
-      description: CreationTimestamp is a timestamp representing the server time when
-        this object was created. It is not guaranteed to be set in happens-before order
-        across separate operations. Clients may not set this value. It is represented
-        in RFC3339 form and is in UTC.
-      name: Age
-      type: date
+  - JSONPath: .status.conditions[?(@.type=="Ready")].status
+    name: Ready
+    type: string
+  - JSONPath: .spec.secretName
+    name: Secret
+    type: string
+  - JSONPath: .spec.issuerRef.name
+    name: Issuer
+    priority: 1
+    type: string
+  - JSONPath: .status.conditions[?(@.type=="Ready")].message
+    name: Status
+    priority: 1
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    description: CreationTimestamp is a timestamp representing the server time when
+      this object was created. It is not guaranteed to be set in happens-before order
+      across separate operations. Clients may not set this value. It is represented
+      in RFC3339 form and is in UTC.
+    name: Age
+    type: date
   group: certmanager.k8s.io
   names:
     kind: Certificate
     plural: certificates
     shortNames:
-      - cert
-      - certs
+    - cert
+    - certs
   scope: Namespaced
   validation:
     openAPIV3Schema:
@@ -69,10 +68,12 @@ spec:
                         items:
                           type: string
                         type: array
-                    required: ["domains"]
+                    required:
+                    - domains
                     type: object
                   type: array
-              required: ["config"]
+              required:
+              - config
               type: object
             commonName:
               description: CommonName is a common name to be used on the Certificate
@@ -108,7 +109,8 @@ spec:
                   type: string
                 name:
                   type: string
-              required: ["name"]
+              required:
+              - name
               type: object
             keyAlgorithm:
               description: KeyAlgorithm is the private key algorithm of the corresponding
@@ -117,8 +119,8 @@ spec:
                 not provided, key size of 256 will be used for "ecdsa" key algorithm
                 and key size of 2048 will be used for "rsa" key algorithm.
               enum:
-                - rsa
-                - ecdsa
+              - rsa
+              - ecdsa
               type: string
             keySize:
               description: KeySize is the key bit size of the corresponding private
@@ -141,8 +143,8 @@ spec:
                 this secret in
               type: string
           required:
-            - secretName
-            - issuerRef
+          - secretName
+          - issuerRef
           type: object
         status:
           properties:
@@ -166,19 +168,16 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                      - "True"
-                      - "False"
-                      - Unknown
+                    - "True"
+                    - "False"
+                    - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                  - type
-                  - status
-                  - lastTransitionTime
-                  - reason
-                  - message
+                - type
+                - status
                 type: object
               type: array
             lastFailureTime:
@@ -191,36 +190,39 @@ spec:
               type: string
           type: object
   version: v1alpha1
-
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
 ---
-
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
-
 metadata:
-  name: challenges.certmanager.k8s.io
+  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
-
+  name: challenges.certmanager.k8s.io
 spec:
   additionalPrinterColumns:
-    - JSONPath: .status.state
-      name: State
-      type: string
-    - JSONPath: .spec.dnsName
-      name: Domain
-      type: string
-    - JSONPath: .status.reason
-      name: Reason
-      priority: 1
-      type: string
-    - JSONPath: .metadata.creationTimestamp
-      description: CreationTimestamp is a timestamp representing the server time when
-        this object was created. It is not guaranteed to be set in happens-before order
-        across separate operations. Clients may not set this value. It is represented
-        in RFC3339 form and is in UTC.
-      name: Age
-      type: date
+  - JSONPath: .status.state
+    name: State
+    type: string
+  - JSONPath: .spec.dnsName
+    name: Domain
+    type: string
+  - JSONPath: .status.reason
+    name: Reason
+    priority: 1
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    description: CreationTimestamp is a timestamp representing the server time when
+      this object was created. It is not guaranteed to be set in happens-before order
+      across separate operations. Clients may not set this value. It is represented
+      in RFC3339 form and is in UTC.
+    name: Age
+    type: date
   group: certmanager.k8s.io
   names:
     kind: Challenge
@@ -248,7 +250,10 @@ spec:
                 that this challenge is a part of.
               type: string
             config:
-              description: Config specifies the solver configuration for this challenge.
+              description: 'Config specifies the solver configuration for this challenge.
+                Only **one** of ''config'' or ''solver'' may be specified, and if
+                both are specified then no action will be performed on the Challenge
+                resource. DEPRECATED: the ''solver'' field should be specified instead'
               type: object
             dnsName:
               description: DNSName is the identifier that this challenge is for, e.g.
@@ -265,11 +270,35 @@ spec:
                   type: string
                 name:
                   type: string
-              required: ["name"]
+              required:
+              - name
               type: object
             key:
               description: Key is the ACME challenge key for this challenge
               type: string
+            solver:
+              description: Solver contains the domain solving configuration that should
+                be used to solve this challenge resource. Only **one** of 'config'
+                or 'solver' may be specified, and if both are specified then no action
+                will be performed on the Challenge resource.
+              properties:
+                selector:
+                  description: Selector selects a set of DNSNames on the Certificate
+                    resource that should be solved using this challenge solver.
+                  properties:
+                    dnsNames:
+                      description: List of DNSNames that can be used to further refine
+                        the domains that this solver applies to.
+                      items:
+                        type: string
+                      type: array
+                    matchLabels:
+                      description: 'A label selector that is used to refine the set
+                        of certificate''s that this challenge solver will apply to.
+                        TODO: use kubernetes standard types for matchLabels'
+                      type: object
+                  type: object
+              type: object
             token:
               description: Token is the ACME challenge token for this challenge.
               type: string
@@ -287,15 +316,14 @@ spec:
                 identifier, for example '*.example.com'
               type: boolean
           required:
-            - authzURL
-            - type
-            - url
-            - dnsName
-            - token
-            - key
-            - wildcard
-            - config
-            - issuerRef
+          - authzURL
+          - type
+          - url
+          - dnsName
+          - token
+          - key
+          - wildcard
+          - issuerRef
           type: object
         status:
           properties:
@@ -322,36 +350,39 @@ spec:
               description: State contains the current 'state' of the challenge. If
                 not set, the state of the challenge is unknown.
               enum:
-                - ""
-                - valid
-                - ready
-                - pending
-                - processing
-                - invalid
-                - expired
-                - errored
+              - ""
+              - valid
+              - ready
+              - pending
+              - processing
+              - invalid
+              - expired
+              - errored
               type: string
           required:
-            - processing
-            - presented
-            - reason
+          - processing
+          - presented
+          - reason
           type: object
       required:
-        - metadata
-        - spec
-        - status
+      - metadata
+      - spec
+      - status
   version: v1alpha1
-
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
 ---
-
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
-
 metadata:
+  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
   name: clusterissuers.certmanager.k8s.io
-
 spec:
   group: certmanager.k8s.io
   names:
@@ -392,7 +423,8 @@ spec:
                       description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                         TODO: Add other useful fields. apiVersion, kind, uid?'
                       type: string
-                  required: ["name"]
+                  required:
+                  - name
                   type: object
                 server:
                   description: Server is the ACME server URL
@@ -400,10 +432,33 @@ spec:
                 skipTLSVerify:
                   description: If true, skip verifying the ACME server TLS certificate
                   type: boolean
+                solvers:
+                  description: Solvers is a list of challenge solvers that will be
+                    used to solve ACME challenges for the matching domains.
+                  items:
+                    properties:
+                      selector:
+                        description: Selector selects a set of DNSNames on the Certificate
+                          resource that should be solved using this challenge solver.
+                        properties:
+                          dnsNames:
+                            description: List of DNSNames that can be used to further
+                              refine the domains that this solver applies to.
+                            items:
+                              type: string
+                            type: array
+                          matchLabels:
+                            description: 'A label selector that is used to refine
+                              the set of certificate''s that this challenge solver
+                              will apply to. TODO: use kubernetes standard types for
+                              matchLabels'
+                            type: object
+                        type: object
+                    type: object
+                  type: array
               required:
-                - email
-                - server
-                - privateKeySecretRef
+              - server
+              - privateKeySecretRef
               type: object
             ca:
               properties:
@@ -411,7 +466,8 @@ spec:
                   description: SecretName is the name of the secret used to sign Certificates
                     issued by this Issuer.
                   type: string
-              required: ["secretName"]
+              required:
+              - secretName
               type: object
             selfSigned:
               type: object
@@ -439,12 +495,13 @@ spec:
                               description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                                 TODO: Add other useful fields. apiVersion, kind, uid?'
                               type: string
-                          required: ["name"]
+                          required:
+                          - name
                           type: object
                       required:
-                        - path
-                        - roleId
-                        - secretRef
+                      - path
+                      - roleId
+                      - secretRef
                       type: object
                     tokenSecretRef:
                       description: This Secret contains the Vault token key
@@ -457,7 +514,8 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required: ["name"]
+                      required:
+                      - name
                       type: object
                   type: object
                 caBundle:
@@ -474,9 +532,9 @@ spec:
                   description: Server is the vault connection address
                   type: string
               required:
-                - auth
-                - server
-                - path
+              - auth
+              - server
+              - path
               type: object
             venafi:
               properties:
@@ -496,14 +554,15 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required: ["name"]
+                      required:
+                      - name
                       type: object
                     url:
                       description: URL is the base URL for Venafi Cloud
                       type: string
                   required:
-                    - url
-                    - apiTokenSecretRef
+                  - url
+                  - apiTokenSecretRef
                   type: object
                 tpp:
                   description: TPP specifies Trust Protection Platform configuration
@@ -527,21 +586,23 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required: ["name"]
+                      required:
+                      - name
                       type: object
                     url:
                       description: URL is the base URL for the Venafi TPP instance
                       type: string
                   required:
-                    - url
-                    - credentialsRef
+                  - url
+                  - credentialsRef
                   type: object
                 zone:
                   description: Zone is the Venafi Policy Zone to use for this issuer.
                     All requests made to the Venafi platform will be restricted by
                     the named zone policy. This field is required.
                   type: string
-              required: ["zone"]
+              required:
+              - zone
               type: object
           type: object
         status:
@@ -573,34 +634,34 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                      - "True"
-                      - "False"
-                      - Unknown
+                    - "True"
+                    - "False"
+                    - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                  - type
-                  - status
-                  - lastTransitionTime
-                  - reason
-                  - message
+                - type
+                - status
                 type: object
               type: array
           type: object
   version: v1alpha1
-
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
 ---
-
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
-
 metadata:
-  name: issuers.certmanager.k8s.io
+  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
-
+  name: issuers.certmanager.k8s.io
 spec:
   group: certmanager.k8s.io
   names:
@@ -641,7 +702,8 @@ spec:
                       description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                         TODO: Add other useful fields. apiVersion, kind, uid?'
                       type: string
-                  required: ["name"]
+                  required:
+                  - name
                   type: object
                 server:
                   description: Server is the ACME server URL
@@ -649,10 +711,33 @@ spec:
                 skipTLSVerify:
                   description: If true, skip verifying the ACME server TLS certificate
                   type: boolean
+                solvers:
+                  description: Solvers is a list of challenge solvers that will be
+                    used to solve ACME challenges for the matching domains.
+                  items:
+                    properties:
+                      selector:
+                        description: Selector selects a set of DNSNames on the Certificate
+                          resource that should be solved using this challenge solver.
+                        properties:
+                          dnsNames:
+                            description: List of DNSNames that can be used to further
+                              refine the domains that this solver applies to.
+                            items:
+                              type: string
+                            type: array
+                          matchLabels:
+                            description: 'A label selector that is used to refine
+                              the set of certificate''s that this challenge solver
+                              will apply to. TODO: use kubernetes standard types for
+                              matchLabels'
+                            type: object
+                        type: object
+                    type: object
+                  type: array
               required:
-                - email
-                - server
-                - privateKeySecretRef
+              - server
+              - privateKeySecretRef
               type: object
             ca:
               properties:
@@ -660,7 +745,8 @@ spec:
                   description: SecretName is the name of the secret used to sign Certificates
                     issued by this Issuer.
                   type: string
-              required: ["secretName"]
+              required:
+              - secretName
               type: object
             selfSigned:
               type: object
@@ -688,12 +774,13 @@ spec:
                               description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                                 TODO: Add other useful fields. apiVersion, kind, uid?'
                               type: string
-                          required: ["name"]
+                          required:
+                          - name
                           type: object
                       required:
-                        - path
-                        - roleId
-                        - secretRef
+                      - path
+                      - roleId
+                      - secretRef
                       type: object
                     tokenSecretRef:
                       description: This Secret contains the Vault token key
@@ -706,7 +793,8 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required: ["name"]
+                      required:
+                      - name
                       type: object
                   type: object
                 caBundle:
@@ -723,9 +811,9 @@ spec:
                   description: Server is the vault connection address
                   type: string
               required:
-                - auth
-                - server
-                - path
+              - auth
+              - server
+              - path
               type: object
             venafi:
               properties:
@@ -745,14 +833,15 @@ spec:
                           description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
                             TODO: Add other useful fields. apiVersion, kind, uid?'
                           type: string
-                      required: ["name"]
+                      required:
+                      - name
                       type: object
                     url:
                       description: URL is the base URL for Venafi Cloud
                       type: string
                   required:
-                    - url
-                    - apiTokenSecretRef
+                  - url
+                  - apiTokenSecretRef
                   type: object
                 tpp:
                   description: TPP specifies Trust Protection Platform configuration
@@ -783,15 +872,16 @@ spec:
                       description: URL is the base URL for the Venafi TPP instance
                       type: string
                   required:
-                    - url
-                    - credentialsRef
+                  - url
+                  - credentialsRef
                   type: object
                 zone:
                   description: Zone is the Venafi Policy Zone to use for this issuer.
                     All requests made to the Venafi platform will be restricted by
                     the named zone policy. This field is required.
                   type: string
-              required: ["zone"]
+              required:
+              - zone
               type: object
           type: object
         status:
@@ -823,54 +913,54 @@ spec:
                     description: Status of the condition, one of ('True', 'False',
                       'Unknown').
                     enum:
-                      - "True"
-                      - "False"
-                      - Unknown
+                    - "True"
+                    - "False"
+                    - Unknown
                     type: string
                   type:
                     description: Type of the condition, currently ('Ready').
                     type: string
                 required:
-                  - type
-                  - status
-                  - lastTransitionTime
-                  - reason
-                  - message
+                - type
+                - status
                 type: object
               type: array
           type: object
   version: v1alpha1
-
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
 ---
-
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
-
 metadata:
-  name: orders.certmanager.k8s.io
+  creationTimestamp: null
   labels:
     controller-tools.k8s.io: "1.0"
-
+  name: orders.certmanager.k8s.io
 spec:
   additionalPrinterColumns:
-    - JSONPath: .status.state
-      name: State
-      type: string
-    - JSONPath: .spec.issuerRef.name
-      name: Issuer
-      priority: 1
-      type: string
-    - JSONPath: .status.reason
-      name: Reason
-      priority: 1
-      type: string
-    - JSONPath: .metadata.creationTimestamp
-      description: CreationTimestamp is a timestamp representing the server time when
-        this object was created. It is not guaranteed to be set in happens-before order
-        across separate operations. Clients may not set this value. It is represented
-        in RFC3339 form and is in UTC.
-      name: Age
-      type: date
+  - JSONPath: .status.state
+    name: State
+    type: string
+  - JSONPath: .spec.issuerRef.name
+    name: Issuer
+    priority: 1
+    type: string
+  - JSONPath: .status.reason
+    name: Reason
+    priority: 1
+    type: string
+  - JSONPath: .metadata.creationTimestamp
+    description: CreationTimestamp is a timestamp representing the server time when
+      this object was created. It is not guaranteed to be set in happens-before order
+      across separate operations. Clients may not set this value. It is represented
+      in RFC3339 form and is in UTC.
+    name: Age
+    type: date
   group: certmanager.k8s.io
   names:
     kind: Order
@@ -901,9 +991,15 @@ spec:
                 DER encoded CSR.
               type: string
             config:
-              description: Config specifies a mapping from DNS identifiers to how
+              description: 'Config specifies a mapping from DNS identifiers to how
                 those identifiers should be solved when performing ACME challenges.
                 A config entry must exist for each domain listed in DNSNames and CommonName.
+                Only **one** of ''config'' or ''solvers'' may be specified, and if
+                both are specified then no action will be performed on the Order resource.  This
+                field will be removed when support for solver config specified on
+                the Certificate under certificate.spec.acme has been removed. DEPRECATED:
+                this field will be removed in future. Solver configuration must instead
+                be provided on ACME Issuer resources.'
               items:
                 properties:
                   domains:
@@ -912,7 +1008,8 @@ spec:
                     items:
                       type: string
                     type: array
-                required: ["domains"]
+                required:
+                - domains
                 type: object
               type: array
             csr:
@@ -941,12 +1038,12 @@ spec:
                   type: string
                 name:
                   type: string
-              required: ["name"]
+              required:
+              - name
               type: object
           required:
-            - csr
-            - issuerRef
-            - config
+          - csr
+          - issuerRef
           type: object
         status:
           properties:
@@ -967,8 +1064,11 @@ spec:
                       that this challenge is a part of.
                     type: string
                   config:
-                    description: Config specifies the solver configuration for this
-                      challenge.
+                    description: 'Config specifies the solver configuration for this
+                      challenge. Only **one** of ''config'' or ''solver'' may be specified,
+                      and if both are specified then no action will be performed on
+                      the Challenge resource. DEPRECATED: the ''solver'' field should
+                      be specified instead'
                     type: object
                   dnsName:
                     description: DNSName is the identifier that this challenge is
@@ -985,11 +1085,36 @@ spec:
                         type: string
                       name:
                         type: string
-                    required: ["name"]
+                    required:
+                    - name
                     type: object
                   key:
                     description: Key is the ACME challenge key for this challenge
                     type: string
+                  solver:
+                    description: Solver contains the domain solving configuration
+                      that should be used to solve this challenge resource. Only **one**
+                      of 'config' or 'solver' may be specified, and if both are specified
+                      then no action will be performed on the Challenge resource.
+                    properties:
+                      selector:
+                        description: Selector selects a set of DNSNames on the Certificate
+                          resource that should be solved using this challenge solver.
+                        properties:
+                          dnsNames:
+                            description: List of DNSNames that can be used to further
+                              refine the domains that this solver applies to.
+                            items:
+                              type: string
+                            type: array
+                          matchLabels:
+                            description: 'A label selector that is used to refine
+                              the set of certificate''s that this challenge solver
+                              will apply to. TODO: use kubernetes standard types for
+                              matchLabels'
+                            type: object
+                        type: object
+                    type: object
                   token:
                     description: Token is the ACME challenge token for this challenge.
                     type: string
@@ -1007,15 +1132,14 @@ spec:
                       wildcard identifier, for example '*.example.com'
                     type: boolean
                 required:
-                  - authzURL
-                  - type
-                  - url
-                  - dnsName
-                  - token
-                  - key
-                  - wildcard
-                  - config
-                  - issuerRef
+                - authzURL
+                - type
+                - url
+                - dnsName
+                - token
+                - key
+                - wildcard
+                - issuerRef
                 type: object
               type: array
             failureTime:
@@ -1035,14 +1159,14 @@ spec:
               description: State contains the current state of this Order resource.
                 States 'success' and 'expired' are 'final'
               enum:
-                - ""
-                - valid
-                - ready
-                - pending
-                - processing
-                - invalid
-                - expired
-                - errored
+              - ""
+              - valid
+              - ready
+              - pending
+              - processing
+              - invalid
+              - expired
+              - errored
               type: string
             url:
               description: URL of the Order. This will initially be empty when the
@@ -1052,7 +1176,14 @@ spec:
               type: string
           type: object
       required:
-        - metadata
-        - spec
-        - status
+      - metadata
+      - spec
+      - status
   version: v1alpha1
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
+---

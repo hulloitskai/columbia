@@ -36,7 +36,7 @@ helm upgrade flux \
   --install \
   --namespace=flux \
   -f ./values.yaml \
-  --version 0.9.4 \
+  --version 0.9.5 \
   --atomic \
   weaveworks/flux
 ```
