@@ -5,12 +5,10 @@ This directory serves as a workbench from which to create
 
 ### Initialization
 
-Install `sealed-secrets` using the resources in
-[`workloads/sealed-secrets`](../workloads/sealed-secrets/):
+Install `sealed-secrets`:
 
 ```bash
-kb apply -f ../workloads/sealed-secrets/sealed-secrets.ns.yaml && \
-kb apply -f ../workloads/sealed-secrets/sealed-secrets.hr.yaml
+kb apply -f ../workloads/kube-system/sealed-secrets.hr.yaml
 ```
 
 > This relies on the existence of `flux`'s Helm operator. If `flux` is not
@@ -20,7 +18,7 @@ This workbench requires a `./cert.pem`, which is the public key provided by
 the `sealed-secrets-controller`:
 
 ```bash
-kubeseal --controller-namespace sealed-secrets --fetch-cert > ./cert.pem
+kubeseal --fetch-cert > ./cert.pem
 ```
 
 ## Usage
@@ -72,5 +70,6 @@ private key is named `master.key.yaml`):
 
 ```bash
 kubectl replace -f master.key.yaml && \
-kubectl -n kube-system delete pods -l app.kubernetes.io/name=sealed-secrets
+kubectl --namespace kube-system \
+  delete pods -l app.kubernetes.io/name=sealed-secrets
 ```
