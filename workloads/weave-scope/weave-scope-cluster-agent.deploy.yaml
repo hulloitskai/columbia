@@ -29,24 +29,24 @@ spec:
     spec:
       serviceAccountName: weave-scope
       containers:
-        - name: scope-cluster-agent
-          image: weaveworks/scope:1.11.0
-          imagePullPolicy: IfNotPresent
-          command: ["/home/weave/scope"]
-          args:
-            - --mode=probe
-            - --probe-only
-            - --probe.kubernetes.role=cluster
-            - --probe.no-controls=true
-            - --probe.spy.interval=5s
-            - --probe.publish.interval=5s
-            - --weave=false
-            - weave-scope-app:80
-          resources:
-            requests:
-              cpu: 5m
-              memory: 35Mi
-            limits:
-              cpu: 50m
-              memory: 75Mi
+      - name: scope-cluster-agent
+        image: weaveworks/scope:1.11.1
+        imagePullPolicy: IfNotPresent
+        command: ["/home/weave/scope"]
+        args:
+        - --mode=probe
+        - --probe-only
+        - --probe.kubernetes.role=cluster
+        - --probe.no-controls=true
+        - --probe.spy.interval=5s
+        - --probe.publish.interval=5s
+        - --weave=false
+        - weave-scope-app:80
+        resources:
+          requests:
+            cpu: 5m
+            memory: 35Mi
+          limits:
+            cpu: 50m
+            memory: 75Mi
 

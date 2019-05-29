@@ -28,21 +28,21 @@ spec:
         weave-scope-component: app
     spec:
       containers:
-        - name: app
-          image: weaveworks/scope:1.11.0
-          imagePullPolicy: IfNotPresent
-          command: ["/home/weave/scope"]
-          args:
-            - --mode=app
-            - --app-only
-            - --weave=false
-          ports:
-            - containerPort: 4040
-              protocol: TCP
-          resources:
-            requests:
-              cpu: 25m
-              memory: 125Mi
-            limits:
-              cpu: 100m
-              memory: 200Mi
+      - name: app
+        image: weaveworks/scope:1.11.1
+        imagePullPolicy: IfNotPresent
+        command: ["/home/weave/scope"]
+        args:
+        - --mode=app
+        - --app-only
+        - --weave=false
+        ports:
+        - containerPort: 4040
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 25m
+            memory: 125Mi
+          limits:
+            cpu: 100m
+            memory: 200Mi
