@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: apisrv
-        image: stevenxie/api:1.0.0
+        image: stevenxie/api:1.0.0-1-gb3deba1
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
