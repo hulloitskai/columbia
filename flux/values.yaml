@@ -13,9 +13,6 @@ helmOperator:
   tls:
     enable: true
 
-memcached:
-  tag: 1.5.12-alpine
-
 prometheus:
   enabled: false
 
