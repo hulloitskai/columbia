@@ -13,7 +13,6 @@ metadata:
     flux.weave.works/tag.autoscaler: regexp:^0\.5\.[0-9]+$ # 0.5.x
 
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: controller
@@ -27,7 +26,7 @@ spec:
       serviceAccountName: controller
       containers:
         - name: controller
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.6.0
+          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.5.1
           env:
             - name: CONFIG_LOGGING_NAME
               value: config-logging
