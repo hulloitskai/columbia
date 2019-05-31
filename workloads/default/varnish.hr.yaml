@@ -41,6 +41,9 @@ spec:
             if (bereq.url == "/" || bereq.url == "/nowplaying") {
               set beresp.ttl = 1s;
             }
+            if (bereq.url == "/nowplaying") {
+              set beresp.grace = 0s; # disable grace mode
+            }
           }
         }
 
