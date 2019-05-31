@@ -30,7 +30,7 @@ spec:
         }
         backend api {
           .host = "api";
-          .port = "3000";
+          .port = "80";
         }
 
         sub vcl_backend_response {
