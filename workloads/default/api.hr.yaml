@@ -19,8 +19,8 @@ spec:
     name: api
     version: 0.5.1
   valuesFrom:
-    - secretKeyRef:
-        name: api-release
+  - secretKeyRef:
+      name: api-release
   values:
     config:
       mongo:
@@ -35,7 +35,7 @@ spec:
 
     image:
       repository: stevenxie/api
-      tag: 0.3.4-16-g714d976
+      tag: 0.4.0-5-g2dabad1
 
     deployment:
       strategy:
