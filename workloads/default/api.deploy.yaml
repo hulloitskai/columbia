@@ -20,26 +20,26 @@ spec:
         app.kubernetes.io/name: api
     spec:
       containers:
-        - name: apisrv
-          image: stevenxie/api:0.4.0-6-ga783655
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: GOENV
-              value: production
-          envFrom:
-            - secretRef:
-                name: api
-          ports:
-            - name: http
-              containerPort: 3000
-          volumeMounts:
-            - name: config
-              mountPath: /etc/api
-          readinessProbe: &probe
-            httpGet:
-              path: /
-              port: http
-          livenessProbe: *probe
+      - name: apisrv
+        image: stevenxie/api:0.4.0-7-g33ec7a7
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: GOENV
+          value: production
+        envFrom:
+        - secretRef:
+            name: api
+        ports:
+        - name: http
+          containerPort: 3000
+        volumeMounts:
+        - name: config
+          mountPath: /etc/api
+        readinessProbe: &probe
+          httpGet:
+            path: /
+            port: http
+        livenessProbe: *probe
           # resources:
           #   requests:
           #     cpu: 25m
@@ -48,6 +48,6 @@ spec:
           #     cpu: 100m
           #     memory: 200Mi
       volumes:
-        - name: config
-          configMap:
-            name: api
+      - name: config
+        configMap:
+          name: api
