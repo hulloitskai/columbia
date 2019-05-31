@@ -36,6 +36,12 @@ spec:
         sub vcl_backend_response {
           set beresp.ttl = 120s;
           set beresp.http.X-Service = beresp.backend.name;
+
+          if (beresp.backend.name == "api") {
+            if (bereq.url == "/" || bereq.url == "/nowplaying") {
+              set beresp.ttl = 1s;
+            }
+          }
         }
 
         sub vcl_recv {
