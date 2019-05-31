@@ -8,7 +8,7 @@ metadata:
   namespace: default
   annotations:
     flux.weave.works/automated: "true"
-    flux.weave.works/tag.apisrv: regexp:^0(\.[0-9]+){2} # 0.x.x...
+    flux.weave.works/tag.apisrv: regexp:^1(\.[0-9]+){2} # 1.x.x...
 
 spec:
   selector:
