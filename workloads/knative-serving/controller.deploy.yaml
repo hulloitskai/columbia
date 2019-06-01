@@ -25,33 +25,32 @@ spec:
     spec:
       serviceAccountName: controller
       containers:
-        - name: controller
-          image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.5.1
-          env:
-            - name: CONFIG_LOGGING_NAME
-              value: config-logging
-            - name: SYSTEM_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-          ports:
-            - name: metrics
-              containerPort: 9090
-          resources:
-            requests:
-              cpu: 75m
-              memory: 75Mi
-            limits:
-              cpu: 300m
-              memory: 300Mi
-          volumeMounts:
-            - name: config-logging
-              mountPath: /etc/config-logging
-      volumes:
+      - name: controller
+        image: gcr.io/knative-releases/github.com/knative/serving/cmd/controller:v0.6.0
+        env:
+        - name: CONFIG_LOGGING_NAME
+          value: config-logging
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - name: metrics
+          containerPort: 9090
+        resources:
+          requests:
+            cpu: 75m
+            memory: 75Mi
+          limits:
+            cpu: 300m
+            memory: 300Mi
+        volumeMounts:
         - name: config-logging
-          configMap:
-            name: config-logging
-
+          mountPath: /etc/config-logging
+      volumes:
+      - name: config-logging
+        configMap:
+          name: config-logging
 ---
 
 apiVersion: v1
@@ -99,7 +98,7 @@ spec:
   selector:
     app: controller
   ports:
-    - name: metrics
-      port: 9090
-      protocol: TCP
-      targetPort: 9090
+  - name: metrics
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
