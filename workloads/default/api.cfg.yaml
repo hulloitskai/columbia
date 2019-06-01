@@ -7,7 +7,7 @@ metadata:
   name: api
   namespace: default
   labels:
-    app.kubernetes.io/name: api
+    app: api
 
 spec:
   encryptedData:
@@ -16,6 +16,9 @@ spec:
     SPOTIFY_ID: AgC5x4NY3xpw1hff8PMb6ixDK4N7IU4C54iSi0KTp8P8a/J5OZ6pHpo0h+ZK+aOaiQLxBTyUiyvIGJmrOEwV7cDKB07gmRN6ebr/1Egztk8xqcrh/TW+0Hsj2pi+Y/1uLV8kxYzQBa+L1sgg2eHjkACUYzF9p/yZ9ldUgBo1yH5NDbwDbRwDAoWW8EsQJYQOIizKT20hyvGuScS1b18mkeq79vGBLFPzPFk3UnPpn7gSfMgSdbS6uNOsrQyijUVXwpmiaHgex/5Ae00sZQyJYPPPAlmi3gr7OMrtrDDTzUzgcHW9S1PnDcSe77XhGRF93t+TS7B7DnmuReinJ0gCCQenNdM6PrT+BfytGC0v/keBlLKglLVIVuIQK2QgMumC4tQZnElNNmKf7c3ATXOJPpPPIfuRWR/uD0KJCvvS8E+OiPCr9Ok6YHNNAIFOLcyZOgWXHpt0Fe7BHzfIudG5dhxNL67NJQom2JBhairYc0cV3LorDM5GYEDGE9wnRiBjDDkb39G1EPfzWLzCsPXDqf+XAXV5amh4pjgq4koNl7sYqFQkvFRCJTTHKbuIwME3fG/+n6H7y9hNHyslowrBoAFeEINBTdGAyMVI3YmZgMr/Q96FfKNa/Ili2W9L0Uw9j1t7JS+Z+TdS6+4niiNzioQ7G1rfG0CTpqzYobj3lHiqcCMHWodJ6v0j3izotZt9ogI3uJi5c7PwkI23dgLDeKPZH4Lot55Xwvub9OKBQzrmWg==
     SPOTIFY_SECRET: AgDgdbKO3yiusrmVTS94su75JVZ5gBRvIUlFtoi0QXvIbDmOKd3Io9Y4jl7DaWZwOAuCI7eSgMjiLXEAQxIaw111h53TVSDjHHhEUrWq8DgRYtNml0gvT4l3FWbI2wZselm6vx8jOik+cAxjxTo96pMNBhNHzx1ygOayDQw7wT6gWPuZIADE+Iwpw4kCj1ySmSstew/9MLoU4RGajphnVmCpxx0rErtb3xJv+ki5JYITO11+bnyYy7q1eku31zJiU15p3jgXnQoiCu/UmIMhL0qtaqNakaVM5QAbSvRLqV6oOWR9Eh2UhW3y4C0F0rN/n1VPBLQrWAqM2xH983Tq/9DPxitrteGJhVIERGJjOQVriCkfUCMcviWp+ylZwFIrQ9n0V2TAg5iTavRFYyHPS5rg1T32SFyB0Bo9bLb87qmNwYhw4dxkPc4c+3hctmlE+wd+K95zum+CCO60zDHqyRT1jbJ0H0ea1ljf3ppofLCIOIiqGfGJSxdA5GWIAZ+enIEpQ6oL7ue1eOklUF3qFUslEin0dIs6GMrYNHOK0mN/riENVFg52/QIY6fTgqaCIFrZ1BUiE/to+3hHHTuDHi0fd2IH0JYdGDfRH9oGAKtNwvJYgRAubjxQM4t+9ufjbiP+SvGQ2QypBuqMJXZ/WugXUZggYFr4R8/lizUiCJ98voWrWs1uBtUV0JoDcd2u7AqigOL/lGngJ4GXa/zz5c12+TMu0OLsAS9xVDq2XbqFpw==
     SPOTIFY_TOKEN: AgCUlP1vDjcn2jT//YzAoLuca8H4qC0FWZuV72OXWWtqYPNWjin6i0V22nLxo64IQ91UGUA3uCq3dXJxH0NxTkaCw+NY3jbvAa93u6XaiS9TmT65XHqFs5QFOnIrrsC5t9V95S2FSYWpNcDs9q1qarRXrWM4JEaAwuoe06XDuJrflGFYyf6n+RYA7cBauXR30Zr6ieVvxNHw2NHrObM1hrJrCp6Fqr3VmcEnD4XtXKNJTnrb+2bd2M+M7P0Wg1nyBDf4UYgw7x93ZG4PEz92neYwBkJYAr8z63F6Ap4nzAUV0f8X4NbV/SfKUsylzLsfqQyP0ORRg42ymOgwJsp+CSZj3wT80/iFS6bvc6vx2gdd6vZpnC5t3gO9DLi10GlXyr84e5EVXcTwGCblHKMp3ZXfl5cTNbKSihqxEb33/n3TDiZy9dtF31ryd+iYZtlocViDn8nRky+aLO+zGd1hVKR0ofGrNzAfyJCnFaQ2qGdAItUxtwZ0ke2aKbNQegPVa3P2kqeli47tmkmKY5c35CjeMU2rvfzCGFHcXpyK+/+neYFpQmNIwpnqOv7kaUYK2Io1Hn1P23StgnC0XaVQ0VQTXu09coDnWtaPIr/C2Ajbje0I0cuTcDMG9JOQ3/ht0Ns+0bDWq++IUANHl5mi4i0Ns7gjD5bwKDe3s+K2bUVMIYHwsM0n/D8f8lLi31Lk266sGoR9TffryHnuH9I3Eux0yojfADgIzod8H7ajx27Yz3eKE6EUGf+rNi514enOwm3sRAEuvumwmCSmAIJ4xtk3xwmjBd+v9bjMk63trLz7y+mvoI57aWMVccnaxlULp9jN1oeRfDRuzBc4YObFpWSa7fbK4EC6G9e03NqL1reVGxROu2eWBQ==
+    GOOGLE_ID: AgC3gYwTCgvo8WpG199OHDI3oJDJWwR19J4a+bCjH+SUZpf7HztwnXiGaFQbax8viYcHBEfG/3qj2qNFSKohC6Qt7gHr8LHJXcZe8e2QOfBpcnFuyXIzd0iN+wQqqYw7CeEs0SX+E6UrUMVePO6gT6WcGukwV7ksZRDi6DcclJ+u/FE8Qz3/l28/sXRibPoxw/uhHPg69fYdY6akl0hEBbceBMZxURZyT2y4ILHygfxoPD2+bZnfoYHR2JISGc03HNX6YFydnoo63LGJxaG9Yf6uHR745hBszj2pUpD4VuVxF3rBOnxUbILix+vqlwhauY0doivns47vtsfha5oqAd4yXsXY8FkZmKlBhTQBDMl//0dMnbsca6jvVzLrhhkqqV2J3ii/1NTceDq+jqV9fKqfrvh63giUk8tfsTs1yaQqol46kgtS8/23julPkKFP7/abvxn/aJWCYHV8lbbhBYgUI8a76i6+nirIOB9JTmC25anhsRdF0z9sHMp1KEqgy3+LB9HqrEsIiZ8lZdEiLY4+7LelXDgztrfLUZ7M3wnVwnbT1ch790sCvLO/XjZM2H/oqTLRwyFkGSBNl90uqzbRJXb1prx/hTWFWqyJn7ZEEA5RKx9CvvyQ7/c5YYp85oxk5LLhmdRdrn1ILTIZWZ7h6jUfeHGiyeN6E18l5R5dOmwejSujdnbkbZyQQlIgQNZdrdQUuz0s0qRCJ+y7q9SefhXOct4URCbqprcEm1dlj/7UHT7OHCiVLrqkodO49oUM5YrH9WVxbmcAaqchm/avVDeuc1I9ik8=
+    GOOGLE_SECRET: AgAjK7LDZta0qpKTz+fEIOfVtBj0p1XkPMLkvtSf6qEvduqkrRbXZ9ORbP7vgT/h6fIRfQoGXUSmc0cvkmeDj33640bZZxJRfIo8jTdoU33ov4rkIjywT7+70ta0K7CX9fJXF0M+rupZ9xydGDcDJtgBE0/FFqAOxa9Tp1N++lPTY4bIToNaTj5mUOp1pJ3nrRz0poA/t8QOGGZoddndqtb96sI1Mknigx2za0+0LOTplBSTxDLm4WBGOc9ZBlChy2PWbnmy8CQvkV2C8Q9wNIvxbRv2prJoA06WmOVYDElm4m0yyupSuQM4HDkTdpX3c9/fRgKxP7xX9LTtDHtFI85coeVRzznnRrMPOXsrKAUtfrun9xQvdEFvNddJ0Bitlm9ZokIFGVzko9fSO9ognCGCHcVW5SdNLudieE6r+8FyyuQHaGsY4FqEg7au+Vy7moeSqN3dqAJuB37yAeozSgqxck1o5VSIqaAphTCH9hnyEN6cWuPEETNdgImaPYBRQxxoyQerR5XAADiSngaoJfLjnt3c0N3ugEPNvph2vyQN3GDlSxmmyvFpisjD5mvqhZMidUp+xZ/8UCJ3H/dM7tD1VOeoDkHh20SSKjCFzc/uuvoK0d5LX5YylgmUSQXY0CwFv/orIWhDFBDJh31P3tTOlj3M/I9JdTZpA1zyLRRRWHG+w2N/Dq1eQXeB18NDZZfZIogodX7SAkmHuokp6ZXcCLRSxTSZr9s=
+    GOOGLE_TOKEN: AgDGWs2sAA9D9IWN+kkOdMa9hcDXb3EWglIgNmtnszCgn5fHuGS+geZJQYrMfqEvSzhA+fymwALz6Nh4PjS5V6dlMyedtSZjwDUz5JjcbmOhMcThX4+vaRkJbN4pRZg6QNhnkuZTZItD9Rq6hAHRvuh6yNayuH0cz+GfJDPwjcrNRZOUrjnwGX6uTnBAEm9ZmGSfYU/lh/GSrDENdloOiteajcDFgxVpHlfiuTbFa6Q2ioGZIuv0IirvOblueCclyS7lOYwP7PsbKKRI6MqOIf+YM0h/iH19ysRPd+6iG0T7755FPVD02DhRnEGq9P+a61HANH3oonPZvKIe8U6s84b5eR4ygBNWIkiNIemQqN6mRR2jRGWslDBva52Skj8oPBO/FCmZqyvoKZo+1op0FhXfwMp/jXdqS0ypSbD2zgG0Me3OaPqESNFEx8B7VGozRyEyNf4wMMFrmyz0mDCxlWrG5QCmRwlJE/EkEpFCjqI0ccuf2wZOlljSrElG9ioLthyv5dXvRZqSM0wj7til7EEOONYpRf5Sec0Gl0HLEmqZBuX5ysEV2YnPtxgYkylho9AkGhDezYF2jgqacgCWLFpQGNzUK6M6OOQq7h6HLlAQtCOnKbY4W4jcXpk2X/OIK7tINSTQIjJCrKlyJRnCF+3qOJKSwCZdbK5mX7JlA1fXQBIBx9zXZ4J0twVZ8O1PRXTWxIcXmZQgC8uOWYHUUgJ06/s8YN7Ivy5W0eGMDrgNriYKIQM6J4KRLlijY5c=
 
 ---
 
@@ -24,6 +27,8 @@ kind: ConfigMap
 
 metadata:
   name: api
+  labels:
+    app: api
 
 data:
   config.yaml: |
@@ -31,3 +36,16 @@ data:
       gist:
         id: 6793872b77b4a04c15baf9c894b3674c
         file: me.json
+
+    commits:
+      limit: 10
+      interval: 1m
+
+    availability:
+      gcal:
+        calendarIDs:
+          - steven.xie@outlook.com                               # Personal
+          - qsiavniormjhl7mu5aopfk8n70@group.calendar.google.com # Blocks
+          - qti3gn2uct5fiqbg5klammdh98@group.calendar.google.com # Standard
+          - 68v7il185c926v3as7suni9nn0@group.calendar.google.com # Nonstandard
+          - 8d5u1kvp4ltf5orta3j6g1mnq4@group.calendar.google.com # Recreational

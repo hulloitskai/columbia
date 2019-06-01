@@ -34,10 +34,13 @@ spec:
             exact: api.stevenxie.com
       redirect:
         authority: api.stevenxie.me
-    - route:
+    - match:
+        - authority:
+            exact: api.stevenxie.me
+      route: &route
         - destination:
             host: varnish
-          headers:
-            response:
-              add:
-                X-Service: web-direct
+      corsPolicy:
+        allowOrigin: ["*"]
+        allowMethods: ["GET"]
+    - route: *route

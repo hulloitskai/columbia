@@ -7,11 +7,11 @@ metadata:
   name: api
   namespace: default
   labels:
-    app.kubernetes.io/name: api
+    app: api
 
 spec:
   selector:
-    app.kubernetes.io/name: api
+    app: api
   ports:
     - name: http
       port: 80
