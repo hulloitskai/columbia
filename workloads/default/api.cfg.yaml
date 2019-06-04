@@ -40,7 +40,7 @@ data:
 
     commits:
       limit: 10
-      interval: 1m
+      interval: 10m
 
     availability:
       gcal:
