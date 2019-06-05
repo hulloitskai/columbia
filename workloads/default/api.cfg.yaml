@@ -45,7 +45,8 @@ data:
     availability:
       gcal:
         calendarIDs:
-          - steven.xie@outlook.com                               # Personal
+          - steven.xie@outlook.com                               # Prsonal
+          - l1rsg2tcoon122t481o683ijg0@group.calendar.google.com # Allocations
           - qsiavniormjhl7mu5aopfk8n70@group.calendar.google.com # Blocks
           - qti3gn2uct5fiqbg5klammdh98@group.calendar.google.com # Standard
           - 68v7il185c926v3as7suni9nn0@group.calendar.google.com # Nonstandard
