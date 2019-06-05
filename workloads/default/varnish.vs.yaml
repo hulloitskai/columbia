@@ -12,23 +12,9 @@ spec:
     - primary.istio-system
     - secondary.istio-system
   hosts:
-    - stevenxie.me
-    - stevenxie.com
-    - www.stevenxie.me
-    - www.stevenxie.com
     - api.stevenxie.me
     - api.stevenxie.com
   http:
-    - match:
-        - authority:
-            prefix: www
-      redirect:
-        authority: stevenxie.me
-    - match:
-        - authority:
-            exact: stevenxie.com
-      redirect:
-        authority: stevenxie.me
     - match:
         - authority:
             exact: api.stevenxie.com

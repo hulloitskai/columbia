@@ -24,10 +24,6 @@ spec:
         vcl 4.0;
 
         # Backends:
-        backend web {
-          .host = "web";
-          .port = "80";
-        }
         backend api {
           .host = "api";
           .port = "80";

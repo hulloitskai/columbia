@@ -8,13 +8,10 @@ metadata:
   namespace: default
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["web-origin.stevenxie.me"]
+  gateways: ["secondary.istio-system"]
+  hosts:
+    - stevenxie.com
+    - www.stevenxie.me
   http:
-    - route:
-        - destination:
-            host: web
-          headers:
-            response:
-              set:
-                X-Service: web-origin
+    - redirect:
+        authority: stevenxie.me
