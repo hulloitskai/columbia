@@ -9,22 +9,12 @@ metadata:
 
 spec:
   gateways: ["primary.istio-system"]
-  hosts: ["stevenxie.me"]
+  hosts: ["resume.stevenxie.me"]
   http:
-    - match:
-        - uri:
-            prefix: /resume/
-      rewrite:
-        uri: /
-      route:
+    - route:
         - destination:
             host: resume
           headers:
             response:
               set:
                 X-Service: resume
-    - match:
-        - uri:
-            exact: /resume
-      redirect:
-        uri: /resume/
