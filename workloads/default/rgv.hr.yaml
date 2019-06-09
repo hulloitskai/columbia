@@ -9,7 +9,7 @@ metadata:
   annotations:
     flux.weave.works/automated: "true"
   labels:
-    app.kubernetes.io/name: rgv
+    app: rgv
 
 spec:
   releaseName: rgv

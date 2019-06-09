@@ -7,7 +7,7 @@ metadata:
   name: ghost
   namespace: wanderfall
   labels:
-    app.kubernetes.io/name: ghost
+    app: ghost
 
 spec:
   type: ClusterIP
@@ -26,6 +26,8 @@ kind: VirtualService
 metadata:
   name: ghost
   namespace: wanderfall
+  labels:
+    app: ghost
 
 spec:
   gateways: ["wanderfall.istio-system"]

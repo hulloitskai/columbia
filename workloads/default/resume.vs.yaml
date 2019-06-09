@@ -6,6 +6,8 @@ kind: VirtualService
 metadata:
   name: resume
   namespace: default
+  labels:
+    app: resume
 
 spec:
   gateways: ["primary.istio-system"]

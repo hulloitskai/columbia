@@ -5,5 +5,3 @@ kind: Namespace
 
 metadata:
   name: helm
-  labels:
-    app.kubernetes.io/name: helm

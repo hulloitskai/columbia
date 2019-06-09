@@ -10,7 +10,7 @@ metadata:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.scope-agent: semver:~1
   labels:
-    app.kubernetes.io/name: weave-scope
+    app: weave-scope
     weave-cloud-component: scope
     weave-scope-component: agent
 
@@ -18,13 +18,13 @@ spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app.kubernetes.io/name: weave-scope
+      app: weave-scope
       weave-cloud-component: scope
       weave-scope-component: agent
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: weave-scope
+        app: weave-scope
         weave-cloud-component: scope
         weave-scope-component: agent
     spec:

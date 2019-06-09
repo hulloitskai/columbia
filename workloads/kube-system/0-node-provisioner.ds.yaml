@@ -7,16 +7,16 @@ metadata:
   name: node-provisioner
   namespace: kube-system
   labels:
-    app.kubernetes.io/name: node-provisioner
+    app: node-provisioner
 
 spec:
   selector:
     matchLabels:
-      app.kubenetes.io/name: node-provisioner
+      app: node-provisioner
   template:
     metadata:
       labels:
-        app.kubenetes.io/name: node-provisioner
+        app: node-provisioner
     spec:
       containers:
         - name: provisioner

@@ -6,5 +6,4 @@ kind: Namespace
 metadata:
   name: istio-system
   labels:
-    app.kubernetes.io/name: istio
     istio-injection: disabled

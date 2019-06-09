@@ -6,6 +6,8 @@ kind: VirtualService
 metadata:
   name: web
   namespace: default
+  labels:
+    app: web
 
 spec:
   gateways: ["secondary.istio-system"]

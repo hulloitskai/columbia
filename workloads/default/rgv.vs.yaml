@@ -6,6 +6,8 @@ kind: VirtualService
 metadata:
   name: rgv
   namespace: default
+  labels:
+    app: rgv
 
 spec:
   gateways:

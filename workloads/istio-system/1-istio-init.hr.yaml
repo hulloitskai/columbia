@@ -9,7 +9,7 @@ metadata:
   annotations:
     flux.weave.works/automated: "false"
   labels:
-    app.kubernetes.io/name: istio-init
+    app: istio-init
 
 spec:
   releaseName: istio-init

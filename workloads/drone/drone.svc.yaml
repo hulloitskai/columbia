@@ -7,7 +7,7 @@ metadata:
   name: drone
   namespace: drone
   labels:
-    app.kubernetes.io/name: drone
+    app: drone
 
 spec:
   selector:
@@ -30,6 +30,8 @@ kind: VirtualService
 metadata:
   name: drone
   namespace: drone
+  labels:
+    app: drone
 
 spec:
   gateways:

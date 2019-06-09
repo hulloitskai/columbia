@@ -6,6 +6,8 @@ kind: VirtualService
 metadata:
   name: varnish
   namespace: default
+  labels:
+    app: varnish
 
 spec:
   gateways:

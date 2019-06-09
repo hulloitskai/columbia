@@ -6,6 +6,8 @@ kind: SealedSecret
 metadata:
   name: drone
   namespace: drone
+  labels:
+    app: weave-scope
 
 spec:
   encryptedData:

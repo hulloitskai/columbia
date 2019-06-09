@@ -7,13 +7,13 @@ metadata:
   name: weave-scope-app
   namespace: weave-scope
   labels:
-    app.kubernetes.io/name: weave-scope
+    app: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
 
 spec:
   selector:
-    app.kubernetes.io/name: weave-scope
+    app: weave-scope
     weave-cloud-component: scope
     weave-scope-component: app
   ports:
@@ -30,6 +30,8 @@ kind: VirtualService
 metadata:
   name: weave-scope-app
   namespace: weave-scope
+  labels:
+    app: weave-scope
 
 spec:
   gateways: ["primary.istio-system"]

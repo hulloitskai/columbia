@@ -9,7 +9,7 @@ metadata:
   annotations:
     flux.weave.works/automated: "false"
   labels:
-    app.kubernetes.io/name: istio
+    app: istio
 
 spec:
   releaseName: istio

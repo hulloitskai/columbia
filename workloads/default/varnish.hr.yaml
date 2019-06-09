@@ -10,7 +10,7 @@ metadata:
     flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: "semver:~6"
   labels:
-    app.kubernetes.io/name: varnish
+    app: varnish
 
 spec:
   releaseName: varnish

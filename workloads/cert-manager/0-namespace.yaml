@@ -6,5 +6,4 @@ kind: Namespace
 metadata:
   name: cert-manager
   labels:
-    app.kubernetes.io/name: cert-manager
     certmanager.k8s.io/disable-validation: "true"
