@@ -30,7 +30,7 @@ spec:
       serviceAccountName: weave-scope
       containers:
       - name: scope-cluster-agent
-        image: weaveworks/scope:1.11.1
+        image: weaveworks/scope:1.11.2
         imagePullPolicy: IfNotPresent
         command: ["/home/weave/scope"]
         args:
