@@ -4,10 +4,10 @@ apiVersion: apps/v1beta1
 kind: Deployment
 
 metadata:
-  name: api
+  name: api-v1
   namespace: default
   labels:
-    app: api
+    app: api-v1
   annotations:
     flux.weave.works/automated: "true"
     flux.weave.works/tag.apisrv: regexp:^1(\.[0-9]+){2} # 1.x.x...
@@ -15,11 +15,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: api
+      app: api-v1
   template:
     metadata:
       labels:
-        app: api
+        app: api-v1
     spec:
       containers:
       - name: apisrv
@@ -30,7 +30,7 @@ spec:
           value: production
         envFrom:
         - secretRef:
-            name: api
+            name: api-v1
         ports:
         - name: http
           containerPort: 3000
@@ -52,4 +52,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: api
+          name: api-v1

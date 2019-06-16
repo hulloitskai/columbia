@@ -24,8 +24,8 @@ spec:
         vcl 4.0;
 
         # Backends:
-        backend api {
-          .host = "api";
+        backend api-v1 {
+          .host = "api-v1";
           .port = "80";
         }
 
@@ -33,7 +33,7 @@ spec:
           set beresp.ttl = 120s;
           set beresp.http.X-Service = beresp.backend.name;
 
-          if (beresp.backend.name == "api") {
+          if (beresp.backend.name == "api-v1") {
             if (bereq.url == "/" || bereq.url == "/nowplaying") {
               set beresp.ttl = 1s;
             }
@@ -47,8 +47,8 @@ spec:
           unset req.http.X-Body-Len;
 
           # Determine backend.
-          if (req.http.Host == "api.stevenxie.me") {
-            set req.backend_hint = api;
+          if (req.http.X-Destination == "api-v1") {
+            set req.backend_hint = api-v1;
           }
 
           # Remove has_js and Cloudflare/Google Analytics __* cookies, and

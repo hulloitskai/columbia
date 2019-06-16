@@ -17,18 +17,36 @@ spec:
     - api.stevenxie.me
     - api.stevenxie.com
   http:
+    # Redirect '*.com' to '*.me'.
     - match:
         - authority:
             exact: api.stevenxie.com
       redirect:
         authority: api.stevenxie.me
+
+    # Enforce trailing slash.
     - match:
-        - authority:
-            exact: api.stevenxie.me
-      route: &route
+        - uri:
+            exact: /v1
+      redirect:
+        uri: /v1/
+
+    # Route traffic to Varnish.
+    - match:
+        - uri:
+            prefix: /v1/
+      rewrite:
+        uri: /
+      route:
         - destination:
             host: varnish
+          headers:
+            request:
+              set:
+                X-Destination: api-v1
+            response:
+              add:
+                X-Service: varnish
       corsPolicy:
         allowOrigin: ["*"]
         allowMethods: ["GET"]
-    - route: *route
