@@ -31,6 +31,19 @@ spec:
       redirect:
         uri: /v1/
 
+    # Route websocket traffic to API server.
+    - match:
+        - uri:
+            exact: /v1/nowplaying/ws
+      rewrite:
+        uri: /nowplaying/ws
+      route:
+        - destination:
+            host: api-v1
+          response:
+            add:
+              X-Service: api
+
     # Route traffic to Varnish.
     - match:
         - uri:

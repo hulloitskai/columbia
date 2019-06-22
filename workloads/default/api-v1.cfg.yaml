@@ -40,7 +40,7 @@ data:
 
     commits:
       limit: 10
-      interval: 10m
+      pollInterval: 10m
 
     availability:
       gcal:
@@ -51,3 +51,6 @@ data:
           - qti3gn2uct5fiqbg5klammdh98@group.calendar.google.com # Standard
           - 68v7il185c926v3as7suni9nn0@group.calendar.google.com # Nonstandard
           - 8d5u1kvp4ltf5orta3j6g1mnq4@group.calendar.google.com # Recreational
+
+    nowPlaying:
+      pollInterval: 1s
