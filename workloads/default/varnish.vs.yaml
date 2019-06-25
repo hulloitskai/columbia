@@ -60,6 +60,8 @@ spec:
             response:
               add:
                 X-Service: varnish
+              set:
+                Vary: Origin
       corsPolicy:
         allowOrigin: ["*"]
         allowMethods: ["GET"]
