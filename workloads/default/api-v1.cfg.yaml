@@ -29,7 +29,8 @@ kind: ConfigMap
 metadata:
   name: api-v1
   labels:
-    app: api-v1
+    app: api
+    version: v1
 
 data:
   config.yaml: |

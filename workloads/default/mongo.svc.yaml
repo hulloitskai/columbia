@@ -6,6 +6,8 @@ kind: Service
 metadata:
   name: mongo
   namespace: default
+  labels:
+    app: mongo
 
 spec:
   type: ExternalName

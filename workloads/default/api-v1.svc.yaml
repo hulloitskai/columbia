@@ -7,11 +7,13 @@ metadata:
   name: api-v1
   namespace: default
   labels:
-    app: api-v1
+    app: api
+    version: v1
 
 spec:
   selector:
-    app: api-v1
+    app: api
+    version: v1
   ports:
     - name: http
       port: 80
@@ -25,6 +27,9 @@ kind: VirtualService
 metadata:
   name: api-v1
   namespace: default
+  labels:
+    app: api
+    version: v1
 
 spec:
   gateways: ["primary.istio-system"]
