@@ -45,4 +45,4 @@ spec:
             memory: 125Mi
           limits:
             cpu: 100m
-            memory: 300Mi
+            memory: 400Mi
