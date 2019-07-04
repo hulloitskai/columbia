@@ -13,6 +13,7 @@ spec:
   gateways: ["secondary.istio-system"]
   hosts:
     - stevenxie.com
+    - www.stevenxie.com
     - www.stevenxie.me
   http:
     - redirect:
