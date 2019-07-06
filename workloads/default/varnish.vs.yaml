@@ -65,3 +65,4 @@ spec:
       corsPolicy:
         allowOrigin: ["*"]
         allowMethods: ["GET"]
+        allowHeaders: ["Authorization"]
