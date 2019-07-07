@@ -40,15 +40,12 @@ data:
       polling:
         enabled: true
         interval: 5m
-
       airtable:
         baseID: appGghqOnhR9uaj3m
         table: location
         view: non-expired
       here:
         appID: NJBvN0hkaR2Fv7bNpNpU
-      historian:
-        timezone: America/Toronto
 
 ---
 

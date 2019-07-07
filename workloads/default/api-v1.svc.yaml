@@ -32,26 +32,57 @@ metadata:
     version: v1
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["api-origin.stevenxie.me"]
+  gateways:
+    - primary.istio-system
+    - cluster.istio-system
+  hosts:
+    - api-v1-origin.stevenxie.me
+    - api-v1.default.svc.cluster.local
   http:
-    # Enforce trailing slash.
+    # Short cache on '/'.
     - match:
         - uri:
-            exact: /v1
-      redirect:
-        uri: /v1/
-
-    # Route traffic to 'api-v1'.
-    - match:
-        - uri:
-            prefix: /v1/
-      rewrite:
-        uri: /
+            exact: /
       route:
-        - destination:
+        - destination: &destination
             host: api-v1
           headers:
             response:
               set:
-                X-Service: api-v1-origin
+                X-Service: &service api-v1
+                Cache-Control: public, max-age=1
+
+    # Short cache, disable grace on '/nowplaying/**/*'.
+    - match:
+        - uri:
+            prefix: /nowplaying
+      route:
+        - destination: *destination
+          headers:
+            response:
+              set:
+                X-Service: *service
+                X-No-Grace: "true"
+                Cache-Control: public, max-age=1
+
+    # No cache on '/location/history'.
+    - match:
+        - uri:
+            exact: /location/history
+      route:
+        - destination: *destination
+          headers:
+            response:
+              set:
+                X-Service: *service
+                Cache-Control: no-cache, no-store, must-revalidate
+                Pragma: no-cache
+
+    # Set a cache of 120s on all other rquests.
+    - route:
+        - destination: *destination
+          headers:
+            response:
+              set:
+                X-Service: *service
+                Cache-Control: public, max-age=120

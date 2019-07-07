@@ -24,31 +24,15 @@ spec:
         vcl 4.0;
 
         # Backends:
-        backend api-v1 {
-          .host = "api-v1";
+        backend ingress {
+          .host = "istio-ingressgateway.istio-system.svc.cluster.local";
           .port = "80";
-        }
-
-        sub vcl_backend_response {
-          set beresp.ttl = 120s;
-          set beresp.http.X-Service = beresp.backend.name;
-
-          if (beresp.backend.name == "api-v1") {
-            if (bereq.url == "/" || bereq.url == "/nowplaying") {
-              set beresp.ttl = 1s;
-            }
-            if (bereq.url == "/nowplaying") {
-              set beresp.grace = 0s; # disable grace mode
-            }
-          }
         }
 
         sub vcl_recv {
           unset req.http.X-Body-Len;
-
-          # Determine backend.
-          if (req.http.X-Destination == "api-v1") {
-            set req.backend_hint = api-v1;
+          if (req.http.X-Destination) {
+            set req.http.Host = req.http.X-Destination;
           }
 
           # Remove has_js and Cloudflare/Google Analytics __* cookies, and
@@ -60,6 +44,9 @@ spec:
             unset req.http.Cookie;
           }
 
+          if (req.http.upgrade ~ "(?i)websocket") {
+              return (pipe);
+          }
           if (req.method != "GET" && req.method != "HEAD") {
             return (pass);
           }
@@ -68,6 +55,20 @@ spec:
           }
           if (req.http.X-Force-Backend) {
             return (pass);
+          }
+        }
+
+        sub vcl_pipe {
+          if (req.http.upgrade) {
+            set bereq.http.upgrade = req.http.upgrade;
+            set bereq.http.connection = req.http.connection;
+          }
+        }
+
+        sub vcl_backend_response {
+          if (beresp.http.X-No-Grace) {
+            set beresp.grace = 0s;
+            unset beresp.http.X-No-Grace;
           }
         }
 

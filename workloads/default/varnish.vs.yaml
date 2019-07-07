@@ -26,27 +26,18 @@ spec:
 
     # Enforce trailing slash.
     - match:
-        - uri:
+        - authority:
+            exact: api.stevenxie.me
+          uri:
             exact: /v1
       redirect:
         uri: /v1/
 
-    # Route websocket traffic to API server.
-    - match:
-        - uri:
-            exact: /v1/nowplaying/ws
-      rewrite:
-        uri: /nowplaying/ws
-      route:
-        - destination:
-            host: api-v1
-          response:
-            add:
-              X-Service: api
-
     # Route traffic to Varnish.
     - match:
-        - uri:
+        - authority:
+            exact: api.stevenxie.me
+          uri:
             prefix: /v1/
       rewrite:
         uri: /
@@ -56,7 +47,7 @@ spec:
           headers:
             request:
               set:
-                X-Destination: api-v1
+                X-Destination: api-v1.default.svc.cluster.local
             response:
               add:
                 X-Service: varnish
