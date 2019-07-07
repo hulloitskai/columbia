@@ -17,8 +17,10 @@ data:
         file: me.json
 
     commits:
-      limit: 10
-      pollInterval: 10m
+      polling:
+        enabled: true
+        interval: 10m
+        limit: 10
 
     availability:
       gcal:
@@ -31,16 +33,22 @@ data:
           - 8d5u1kvp4ltf5orta3j6g1mnq4@group.calendar.google.com # Recreational
 
     music:
-      pollInterval: 1s
+      polling:
+        interval: 1s
 
     location:
+      polling:
+        enabled: true
+        interval: 5m
+
       airtable:
         baseID: appGghqOnhR9uaj3m
         table: location
         view: non-expired
       here:
         appID: NJBvN0hkaR2Fv7bNpNpU
-      pollInterval: 5m
+      historian:
+        timezone: America/Toronto
 
 ---
 
