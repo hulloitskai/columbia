@@ -34,12 +34,13 @@ data:
 
     music:
       polling:
+        enabled: true
         interval: 1s
 
     location:
       polling:
         enabled: true
-        interval: 5m
+        interval: 2m
       airtable:
         baseID: appGghqOnhR9uaj3m
         table: location
