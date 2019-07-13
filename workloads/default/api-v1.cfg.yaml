@@ -41,10 +41,15 @@ data:
       polling:
         enabled: true
         interval: 2m
+
+      region:
+        geocodeLevel: City
+
       airtable:
         baseID: appGghqOnhR9uaj3m
         table: location
         view: non-expired
+
       here:
         appID: NJBvN0hkaR2Fv7bNpNpU
 
