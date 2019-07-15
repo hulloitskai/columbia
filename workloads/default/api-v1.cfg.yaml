@@ -11,6 +11,9 @@ metadata:
 
 data:
   config.yaml: |
+    server:
+      shutdownInterval: 5s
+
     about:
       gist:
         id: 6793872b77b4a04c15baf9c894b3674c
