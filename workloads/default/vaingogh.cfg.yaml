@@ -1,0 +1,39 @@
+---
+
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: vaingogh
+  labels:
+    app: vaingogh
+
+data:
+  config.yaml: |
+    server:
+      baseURL: go.stevenxie.me
+
+    watcher:
+      checkInterval: 15m
+
+    lister:
+      concurrency: 5
+      github:
+        username: stevenxie
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: vaingogh
+  namespace: default
+  labels:
+    app: vaingogh
+
+spec:
+  encryptedData:
+    GITHUB_TOKEN: AgAzv2EXU04YFEByyWY4dn8gBw/dDLzAb5PK7VEPdWmdy1Sf/Z4b4eO8zqhBj38PmTm8dvH9bAix9olxL/8pQaSU3g3JCgbDHVN0QTBDqTVjGk3LxDu4b/UprMRuJmUTIVCqXkzFT1RHOoxWDPYRwAWBJYjx4zPnMAplEmhsxr6cbH7Ewp2uNclDHsqSiiL3RAWzA8z624E58X2wmZ/UxZuIyHO+ia18VnIUbu3jfG9NRVAsyhhe8TGSmmWJfhnDBuiBiSuDUN8Y3UO5IDuNm1wQY7N+p2sNQdUcxeBFmeOhc1WrM05K6XIcrGbZVM3EySFIU+G/XSJ1qEYsGM/ET9LmEbw6PrV69dmvcC9MG1X7kts/GkbKUPN7EIeqDqpMZodLGJnvPMpBmtRKHefBDSmjpM11ySqcbyPrenjUXdrIZ560x+a3ySIlmLUZZ6y6DxaVJ8kup+nwt/M4xadl6VMUFxCWbR3wbeFgHmEm7AImgZCxyUrFe49by0HsfaUeS7XLAMBaiyiwe+W1wEr3S54Osv1GqHLM9mA4Qoy+cxrNWfBNEUuHTx76AriNaXpMsypFTpF6rrJyxbSClkYKRD+MQYTXlHpH2Mmsi7RVtvJZGLmpbQqNrTpfQnQ+z975ZTJ452TCwRX1dVCnzk41wQBCBhgGQBKd3V+Cy/sPGAfujnY5Bqr0Ofk0uY/L/xu+e0m7Bu2A8slutFIw8t2LdmyjdWlanu5cuHpINvB/BBoWDLl6Ql+VKgWh
+
+

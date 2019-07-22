@@ -1,0 +1,55 @@
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: vaingogh
+  namespace: default
+  labels:
+    app: vaingogh
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.vainoggh: regexp:^1(\.[0-9]+){2} # 1.x.x...
+
+spec:
+  selector:
+    matchLabels:
+      app: vaingogh
+  template:
+    metadata:
+      labels:
+        app: vaingogh
+    spec:
+      containers:
+      - name: vaingogh
+        image: stevenxie/vaingogh:1.0.0
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: GOENV
+          value: production
+        envFrom:
+          - secretRef:
+              name: vaingogh
+        ports:
+        - name: http
+          containerPort: 3000
+        volumeMounts:
+        - name: config
+          mountPath: /etc/vaingogh
+        readinessProbe: &probe
+          httpGet:
+            path: /
+            port: http
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 5m
+            memory: 10Mi
+          limits:
+            cpu: 50m
+            memory: 50Mi
+      volumes:
+      - name: config
+        configMap:
+          name: vaingogh
