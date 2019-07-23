@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: ghost
-        image: ghost:2.25.8-alpine
+        image: ghost:2.25.9-alpine
         imagePullPolicy: IfNotPresent
         env:
         - name: url
