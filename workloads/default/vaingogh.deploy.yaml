@@ -23,14 +23,14 @@ spec:
     spec:
       containers:
       - name: vaingogh
-        image: stevenxie/vaingogh:1.0.0
+        image: stevenxie/vaingogh:1.0.0-2-ge793dff
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
           value: production
         envFrom:
-          - secretRef:
-              name: vaingogh
+        - secretRef:
+            name: vaingogh
         ports:
         - name: http
           containerPort: 3000
