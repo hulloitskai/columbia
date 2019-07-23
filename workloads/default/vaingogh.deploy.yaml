@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: vaingogh
-        image: stevenxie/vaingogh:1.0.0-2-g508fd61
+        image: stevenxie/vaingogh:1.0.1-1-g0f73cd1
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
