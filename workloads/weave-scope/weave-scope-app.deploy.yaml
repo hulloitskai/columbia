@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: weaveworks/scope:1.11.3
+        image: weaveworks/scope:1.11.4
         imagePullPolicy: IfNotPresent
         command: ["/home/weave/scope"]
         args:
