@@ -48,3 +48,8 @@ spec:
             response:
               set:
                 X-Service: bincode
+      corsPolicy:
+        allowOrigin: ["*"]
+        allowMethods:
+          - GET
+          - POST
