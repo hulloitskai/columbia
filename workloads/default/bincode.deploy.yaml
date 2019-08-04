@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/bincode:0.1.0
+        image: stevenxie/bincode:0.1.1
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
