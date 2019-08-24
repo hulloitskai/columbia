@@ -37,6 +37,22 @@ spec:
               type: boolean
             forceUpgrade:
               type: boolean
+            rollback:
+              type: object
+              properties:
+                enable:
+                  type: boolean
+                force:
+                  type: boolean
+                recreate:
+                  type: boolean
+                disableHooks:
+                  type: boolean
+                timeout:
+                  type: integer
+                  format: int64
+                wait:
+                  type: boolean
             valueFileSecrets:
               type: array
               items:

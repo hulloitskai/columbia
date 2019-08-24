@@ -31,14 +31,14 @@ kubectl apply -f ./crd.yaml
 Install the chart as follows:
 
 ```bash
-helm repo add weaveworks https://weaveworks.github.io/flux && \
-helm upgrade flux \
-  --install \
+helm repo add fluxcd https://charts.fluxcd.io && \
+helm install \
+  --name=flux \
   --namespace=flux \
   -f ./values.yaml \
-  --version 0.9.5 \
+  --version 0.12.0 \
   --atomic \
-  weaveworks/flux
+  fluxcd/flux
 ```
 
 The following will need to be added to your `~/.bashrc`:

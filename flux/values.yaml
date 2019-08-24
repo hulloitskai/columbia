@@ -3,10 +3,11 @@ git:
   path: cluster,workloads
 
 image:
-  repository: weaveworks/flux
+  repository: docker.io/fluxcd/flux
+  tag: 1.13.3
 
 helmOperator:
-  repository: weaveworks/helm-operator
+  repository: docker.io/fluxcd/helm-operator
   create: true
   createCRD: false
   tillerNamespace: helm
@@ -21,4 +22,4 @@ resources:
     cpu: 25m
     memory: 64Mi
   limits:
-    memory: 125Mi
+    memory: 256Mi

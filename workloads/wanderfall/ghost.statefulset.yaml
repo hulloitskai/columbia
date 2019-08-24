@@ -21,6 +21,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: ghost
+        app: ghost
     spec:
       containers:
       - name: ghost
@@ -44,7 +45,7 @@ spec:
               value: wanderfallgames.com
             - name: X-Forwarded-Proto
               value: https
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
         readinessProbe: *probe
         resources:
           requests:
