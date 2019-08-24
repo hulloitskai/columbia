@@ -10,13 +10,8 @@ metadata:
     app: resume
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["resume.stevenxie.me"]
+  gateways: ["secondary.istio-system"]
+  hosts: ["resume.stevenxie.com"]
   http:
-    - route:
-        - destination:
-            host: resume
-          headers:
-            response:
-              set:
-                X-Service: resume
+    - redirect:
+        authority: resume.stevenxie.me
