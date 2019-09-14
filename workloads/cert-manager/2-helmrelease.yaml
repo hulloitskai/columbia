@@ -21,4 +21,4 @@ spec:
   values:
     image:
       repository: quay.io/jetstack/cert-manager-controller
-      tag: v0.9.1
+      tag: v0.10.0
