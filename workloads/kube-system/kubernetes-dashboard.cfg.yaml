@@ -1,17 +1,19 @@
 ---
 
-apiVersion: v1
-kind: Secret
-type: Opaque
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
 
 metadata:
   name: kubernetes-dashboard-csrf
   namespace: kube-system
-  labels:
-    k8s-app: kubernetes-dashboard
 
-data:
-  csrf: ""
+spec:
+  encryptedData:
+    csrf: AgDyYofnk48CCkMPsJFoD0d2ihVc7dLV5xhnAkJSUOjreATaiJLIxnwG6aGD2Diq3ulJDqyDUhskDyFnD60GwvUTq11Ytw24zK5lv6X7vC9WkLNHFbdiG5wGdfnCVKK44wfVHAy9f21rT4TjApSULBpILf7BveV/ZP7fqc+i7ptRcvXaEykVbZPrGCWmQBROBGSqxzGb7xnoncU0dNS10u/3n9nS/Fon821Y5A3TxKoDtPTLt7O6Sr/yZeeWOH7d9qwdauuHw7G88rJd14hTUDwWvhPpwmN0g8L6CgrxkeLmiEzGREJXejX9RXGB1sc7iQWEvhmWrj3w6EMcMkuk1tMBv9M8RlJKy53OwMYLl5SzQpFUZG711DQiXzS3lE0+2WY5qJr5E5R9nBAgtiQdcmiw7zdV/KeA6QpqFW7n6olLDTbUPj+p4h/KhfzKOXOsN88UoAaSspXi0P0gahQhHqi+229r8jfTzV6ULSXnRgNmctdF/H2LWxr4pnOIjx6Z+XAHUaleXMbxBDSOOTFp0lGFpnsIH/S2HwNc5hAiChWzlyK5I2A52bIzsDvAwbgdDVQ97Bzyy7WJREEYGWv1haA1XZT3/rU/p02TlXnROw3LN/rZ5vwOeFlrJoSxrTremKPqcXfbV9gLfiMWYvt+i/ot3+AlUy0HbJrhHYxpScHGInYCsBbaxFpXzyGafSIf5Ti8DPfka7kXzG2m1VYf1FaKFSgoM/7cSgly4+B11s/cBw==
+  template:
+    metadata:
+      name: kubernetes-dashboard-csrf
+      namespace: kube-system
 
 ---
 
