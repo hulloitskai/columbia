@@ -1,0 +1,64 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: api-v2
+  namespace: default
+  labels:
+    app: api
+    version: v2
+
+spec:
+  selector:
+    app: api
+    version: v2
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: api-v2
+  namespace: default
+  labels:
+    app: api
+    version: v2
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["api.stevenxie.me"]
+  http:
+    # Enforce trailing slash.
+    - match:
+        - authority:
+            exact: api.stevenxie.me
+          uri:
+            exact: /v2
+      redirect:
+        uri: /v2/
+
+    # Short cache.
+    - match:
+        - uri:
+            prefix: /v2/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: api-v2
+          headers:
+            response:
+              set:
+                X-Service: api-v2
+                Cache-Control: public, max-age=1
+                Vary: Origin
+      corsPolicy:
+        allowOrigin: ["*"]
+        allowMethods: ["POST"]
