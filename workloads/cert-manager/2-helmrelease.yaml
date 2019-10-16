@@ -8,7 +8,7 @@ metadata:
   namespace: cert-manager
   annotations:
     flux.weave.works/automated: "true"
-    flux.weave.works/tag.chart-image: semver:~0
+    flux.weave.works/tag.chart-image: semver:~0.11
   labels:
     app: cert-manager
 
@@ -17,7 +17,7 @@ spec:
   chart:
     repository: https://charts.jetstack.io
     name: cert-manager
-    version: v0.8.0
+    version: v0.11.0
   values:
     image:
       repository: quay.io/jetstack/cert-manager-controller

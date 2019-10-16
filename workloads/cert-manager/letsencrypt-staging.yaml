@@ -1,10 +1,10 @@
 ---
 
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 
 metadata:
-  name: letsencrypt-prod
+  name: letsencrypt-staging
 
 spec:
   acme:
@@ -12,9 +12,9 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: letsencrypt-prod
-    dns01:
-      providers:
-        - name: cloudflare
+    solvers:
+      - selector: {}
+        dns01:
           cloudflare:
             email: steven.xie@outlook.com
             apiKeySecretRef:
