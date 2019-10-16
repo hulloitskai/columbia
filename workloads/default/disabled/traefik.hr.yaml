@@ -1,15 +1,15 @@
 ---
 
-apiVersion: flux.weave.works/v1beta1
+apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 
 metadata:
   name: traefik
   namespace: default
   annotations:
-    flux.weave.works/ignore: "true"
-    flux.weave.works/automated: "false"
-    flux.weave.works/tag.hack: glob:v1.7*-alpine
+    fluxcd.io/ignore: "true"
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.hack: glob:v1.7*-alpine
   labels:
     app.kubernetes.io/name: traefik
 

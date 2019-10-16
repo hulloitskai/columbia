@@ -25,7 +25,7 @@ kubectl create secret generic helm-client-certs \
 Install the associated CRDs:
 
 ```bash
-kubectl apply -f ./crd.yaml
+kubectl apply -f crd.yaml helm-operator-crd.yaml
 ```
 
 Install the chart as follows:

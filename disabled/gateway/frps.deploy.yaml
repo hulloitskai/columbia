@@ -7,8 +7,8 @@ metadata:
   name: frps
   namespace: gateway
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.frp: semver:~0.26
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.frp: semver:~0.26
 
 spec:
   selector:

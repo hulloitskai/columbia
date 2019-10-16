@@ -5,7 +5,7 @@ metadata:
   name: ghost-16-04-18
   namespace: wanderfall
   annotations:
-    flux.weave.works/ignore: "true"
+    fluxcd.io/ignore: "true"
 
 spec:
   source:

@@ -1,14 +1,14 @@
 ---
 
-apiVersion: flux.weave.works/v1beta1
+apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 
 metadata:
   name: varnish
   namespace: default
   annotations:
-    flux.weave.works/automated: "false"
-    flux.weave.works/tag.chart-image: "semver:~6"
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: "semver:~6"
   labels:
     app: varnish
 

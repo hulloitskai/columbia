@@ -17,7 +17,7 @@ spec:
           labels:
             app.kubernetes.io/name: http-debug
           annotations:
-            flux.weave.works/automated: "false"
+            fluxcd.io/automated: "false"
         spec:
           container:
             image: mendhak/http-https-echo:latest

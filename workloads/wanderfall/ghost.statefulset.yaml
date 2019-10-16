@@ -7,8 +7,8 @@ metadata:
   name: ghost
   namespace: wanderfall
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.ghost: regexp:^2(\.[0-9]+){2}-alpine$
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.ghost: regexp:^2(\.[0-9]+){2}-alpine$
   labels:
     app: ghost
 

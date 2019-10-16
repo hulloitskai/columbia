@@ -8,6 +8,7 @@ image:
 
 helmOperator:
   repository: docker.io/fluxcd/helm-operator
+  tag: 1.0.0-rc2
   create: true
   createCRD: false
   tillerNamespace: helm

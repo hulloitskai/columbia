@@ -9,8 +9,8 @@ metadata:
   labels:
     app: drone
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.drone: semver:~1.0
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.drone: semver:~1.0
 
 spec:
   selector:

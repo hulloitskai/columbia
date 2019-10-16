@@ -17,7 +17,7 @@ spec:
           labels:
             app.kubernetes.io/name: hello
           annotations:
-            flux.weave.works/automated: "false"
+            fluxcd.io/automated: "false"
         spec:
           container:
             image: gcr.io/knative-samples/helloworld-go:latest

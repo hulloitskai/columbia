@@ -1,13 +1,13 @@
 ---
 
-apiVersion: flux.weave.works/v1beta1
+apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 
 metadata:
   name: rgv
   namespace: default
   annotations:
-    flux.weave.works/automated: "true"
+    fluxcd.io/automated: "true"
   labels:
     app: rgv
 

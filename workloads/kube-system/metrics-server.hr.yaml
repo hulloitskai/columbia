@@ -1,14 +1,14 @@
 ---
 
-apiVersion: flux.weave.works/v1beta1
+apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 
 metadata:
   name: metrics-server
   namespace: kube-system
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.chart-image: regexp:^v0(\.[0-9]+){2}$
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.chart-image: regexp:^v0(\.[0-9]+){2}$
   labels:
     app: metrics-server
 

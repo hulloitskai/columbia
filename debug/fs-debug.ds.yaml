@@ -7,7 +7,7 @@ metadata:
   name: fs-debug
   namespace: default
   annotations:
-    flux.weave.works/ignore: "true"
+    fluxcd.io/ignore: "true"
 
 spec:
   selector:

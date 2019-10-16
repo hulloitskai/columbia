@@ -7,8 +7,8 @@ metadata:
   name: weave-scope-app
   namespace: weave-scope
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.app: semver:~1
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.app: semver:~1
   labels:
     app: weave-scope
     weave-cloud-component: scope

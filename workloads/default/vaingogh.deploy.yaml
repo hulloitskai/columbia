@@ -9,8 +9,8 @@ metadata:
   labels:
     app: vaingogh
   annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/tag.vainoggh: regexp:^1(\.[0-9]+){2} # 1.x.x...
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.vainoggh: regexp:^1(\.[0-9]+){2} # 1.x.x...
 
 spec:
   selector:
