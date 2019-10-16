@@ -36,7 +36,7 @@ helm install \
   --name=flux \
   --namespace=flux \
   -f ./values.yaml \
-  --version 0.12.0 \
+  --version 0.15.0 \
   --atomic \
   fluxcd/flux
 ```
