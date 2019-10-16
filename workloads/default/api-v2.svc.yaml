@@ -35,6 +35,15 @@ spec:
   gateways: ["primary.istio-system"]
   hosts: ["api.stevenxie.me"]
   http:
+    # Redirect root requests to GraphiQL.
+    - match:
+        - authority:
+            exact: api.stevenxie.me
+          uri:
+            exact: /
+      redirect:
+        uri: /v2/graphiql
+
     # Enforce trailing slash.
     - match:
         - authority:

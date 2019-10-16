@@ -38,12 +38,12 @@ data:
 
     auth:
       airtable:
-        selector:
-          viewSelector:
-            baseID: &baseID appGghqOnhR9uaj3m
-            tableName: api-v2
-            viewName: valid
-
+        codes:
+          selector:
+            viewSelector:
+              baseID: &baseID appGghqOnhR9uaj3m
+              tableName: api-v2
+              viewName: valid
         accessRecords:
           enabled: True
           selector:
@@ -51,8 +51,7 @@ data:
               baseID: *baseID
               tableName: api-v2-access
             fieldSelector:
-              time: when
-              permsRecordID: who
+              codeRecordID: user
 
 ---
 
