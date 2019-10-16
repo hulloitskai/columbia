@@ -13,6 +13,10 @@ data:
   server.yaml: |
     shutdownInterval: 5s
 
+    music:
+      streamer:
+        pollInterval: 5s
+
     about:
       gist:
         id: 6793872b77b4a04c15baf9c894b3674c
