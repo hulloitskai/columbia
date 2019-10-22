@@ -70,4 +70,5 @@ spec:
                 Vary: Origin
       corsPolicy:
         allowOrigin: ["*"]
+        allowHeaders: ["Content-Type"]
         allowMethods: ["POST"]
