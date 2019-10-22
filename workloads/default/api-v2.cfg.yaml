@@ -15,12 +15,16 @@ data:
 
     music:
       streamer:
-        pollInterval: 5s
+        pollInterval: 1s
 
     about:
       gist:
         id: 6793872b77b4a04c15baf9c894b3674c
         file: me.json
+
+    git:
+      precacher:
+        interval: 10m
 
     location:
       precacher:

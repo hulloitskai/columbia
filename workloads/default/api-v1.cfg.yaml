@@ -21,8 +21,8 @@ data:
 
     commits:
       polling:
-        enabled: true
-        interval: 20m
+        enabled: false
+        interval: 1h
         limit: 10
 
     availability:
@@ -37,13 +37,13 @@ data:
 
     music:
       polling:
-        enabled: true
-        interval: 1s
+        enabled: false
+        interval: 10s
 
     location:
       polling:
-        enabled: true
-        interval: 4m
+        enabled: false
+        interval: 1h
 
       region:
         geocodeLevel: City
