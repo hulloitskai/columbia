@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.11
+        image: stevenxie/api:2.2.17-1-g74e94a3
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
