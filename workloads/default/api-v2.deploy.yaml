@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.17-1-g74e94a3
+        image: stevenxie/api:2.2.19
         imagePullPolicy: IfNotPresent
         env:
         - name: GOENV
@@ -35,15 +35,17 @@ spec:
         - secretRef:
             name: api-v2
         ports:
-        - name: http
+        - name: http-graphql
           containerPort: 3000
+        - name: http-debug
+          containerPort: 6060
         volumeMounts:
         - name: config
           mountPath: /etc/api
         readinessProbe: &probe
           httpGet:
             path: /
-            port: http
+            port: 3000
         livenessProbe: *probe
         resources:
           requests:

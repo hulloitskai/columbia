@@ -15,9 +15,12 @@ spec:
     app: api
     version: v2
   ports:
-    - name: http
+    - name: http-graphql
       port: 80
-      targetPort: http
+      targetPort: http-graphql
+    - name: http-debug
+      port: 6060
+      targetPort: http-debug
 
 ---
 
@@ -37,18 +40,14 @@ spec:
   http:
     # Redirect root requests to GraphiQL.
     - match:
-        - authority:
-            exact: api.stevenxie.me
-          uri:
+        - uri:
             exact: /
       redirect:
         uri: /v2/graphiql
 
     # Enforce trailing slash.
     - match:
-        - authority:
-            exact: api.stevenxie.me
-          uri:
+        - uri:
             exact: /v2
       redirect:
         uri: /v2/
@@ -62,6 +61,8 @@ spec:
       route:
         - destination:
             host: api-v2
+            port:
+              number: 80
           headers:
             response:
               set:
