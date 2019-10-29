@@ -11,9 +11,6 @@ metadata:
 
 data:
   server.yaml: |
-    shutdownInterval: 5s
-    debug: true
-
     music:
       streamer:
         pollInterval: 1s

@@ -15,9 +15,9 @@ spec:
     app: api
     version: v2
   ports:
-    - name: http-graphql
+    - name: http
       port: 80
-      targetPort: http-graphql
+      targetPort: http
     - name: http-debug
       port: 6060
       targetPort: http-debug

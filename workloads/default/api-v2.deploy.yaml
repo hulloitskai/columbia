@@ -26,8 +26,13 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.19
+        image: stevenxie/api:2.2.20
         imagePullPolicy: IfNotPresent
+        command: ["server"]
+        args: [
+          "--shutdown-timeout", "5s",
+          "--debug",
+        ]
         env:
         - name: GOENV
           value: production
@@ -35,7 +40,7 @@ spec:
         - secretRef:
             name: api-v2
         ports:
-        - name: http-graphql
+        - name: http
           containerPort: 3000
         - name: http-debug
           containerPort: 6060
