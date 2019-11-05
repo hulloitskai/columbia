@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.20
+        image: stevenxie/api:2.2.21-2-g19ab81f
         imagePullPolicy: IfNotPresent
         command: ["server"]
         args: [
