@@ -15,12 +15,12 @@ spec:
     app: api
     version: v2
   ports:
-    - name: http
-      port: 80
-      targetPort: http
+    - name: http-graphql
+      port: 3000
+      targetPort: graphql
     - name: http-debug
       port: 6060
-      targetPort: http-debug
+      targetPort: debug
 
 ---
 
@@ -62,12 +62,13 @@ spec:
         - destination:
             host: api-v2
             port:
-              number: 80
+              number: 3000
           headers:
             response:
               set:
                 X-Service: api-v2
                 Cache-Control: public, max-age=1
+              add:
                 Vary: Origin
       corsPolicy:
         allowOrigin: ["*"]

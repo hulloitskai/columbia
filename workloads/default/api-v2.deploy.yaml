@@ -40,9 +40,9 @@ spec:
         - secretRef:
             name: api-v2
         ports:
-        - name: http
+        - name: graphql
           containerPort: 3000
-        - name: http-debug
+        - name: debug
           containerPort: 6060
         volumeMounts:
         - name: config
