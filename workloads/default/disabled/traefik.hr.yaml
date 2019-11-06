@@ -33,7 +33,7 @@ spec:
     cpuLimit: 250m
     memoryLimit: 100Mi
     nodeSelector:
-      node-role.kubernetes.io/entrypoint: entrypoint
+      node-role.kubernetes.io/ingress: ingress
 
     kubernetes:
       namespaces:

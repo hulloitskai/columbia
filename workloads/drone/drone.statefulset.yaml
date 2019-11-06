@@ -66,14 +66,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
-            - name: docker-socket
-              mountPath: /var/run/docker.sock
-      volumes:
-        - name: docker-socket
-          hostPath:
-            path: /var/run/docker.sock
-      nodeSelector:
-        node-role.kubernetes.io/storage: storage
   volumeClaimTemplates:
     - metadata:
         name: data
