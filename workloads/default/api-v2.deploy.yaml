@@ -26,13 +26,10 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.21-2-g19ab81f
+        image: stevenxie/api:2.2.22
         imagePullPolicy: IfNotPresent
         command: ["server"]
-        args: [
-          "--shutdown-timeout", "5s",
-          "--debug",
-        ]
+        args: ["--shutdown-timeout", "5s", "--debug"]
         env:
         - name: GOENV
           value: production
