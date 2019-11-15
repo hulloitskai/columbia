@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/api:2.2.22
+        image: stevenxie/api:2.2.25
         imagePullPolicy: IfNotPresent
         command: ["server"]
         args: ["--shutdown-timeout", "5s", "--debug"]
