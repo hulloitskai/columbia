@@ -7,7 +7,7 @@ metadata:
   name: drone
   namespace: drone
   labels:
-    app: weave-scope
+    app: drone
 
 spec:
   encryptedData:

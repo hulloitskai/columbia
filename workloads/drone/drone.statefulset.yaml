@@ -20,6 +20,7 @@ spec:
   template:
     metadata:
       labels:
+        app: drone
         app.kubernetes.io/name: drone
       annotations:
         sidecar.istio.io/inject: "false"
@@ -38,8 +39,6 @@ spec:
               value: username:stevenxie,machine:false,admin:true
             - name: DRONE_USER_FILTER
               value: stevenxie,DangAsian,tugolo
-            - name: DRONE_AGENTS_ENABLED
-              value: "true"
           envFrom:
             - secretRef:
                 name: drone
