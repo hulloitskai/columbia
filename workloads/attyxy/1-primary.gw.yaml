@@ -1,0 +1,30 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+
+metadata:
+  name: primary
+  namespace: attyxy
+
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        name: http
+        number: 80
+        protocol: HTTP
+      hosts:
+        - attyxy.me
+        - "*.attyxy.me"
+    # - port:
+    #     name: https
+    #     number: 443
+    #     protocol: HTTPS
+    #   tls:
+    #     mode: SIMPLE
+    #     credentialName: stevenxie-me-tls
+    #   hosts: &hosts
+    #     - stevenxie.me
+    #     - "*.stevenxie.me"
