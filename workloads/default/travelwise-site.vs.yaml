@@ -11,9 +11,7 @@ metadata:
     component: site
 
 spec:
-  gateways:
-    - primary.istio-system
-    - secondary.istio-system
+  gateways: ["primary.istio-system"]
   hosts: ["travelwise.stevenxie.me"]
   http:
     - route:

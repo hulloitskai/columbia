@@ -40,7 +40,6 @@ spec:
             exact: /api
       redirect:
         uri: /api/
-
     - match:
         - uri:
             prefix: /api/
