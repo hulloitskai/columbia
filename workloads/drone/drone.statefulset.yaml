@@ -38,7 +38,7 @@ spec:
             - name: DRONE_USER_CREATE
               value: username:stevenxie,machine:false,admin:true
             - name: DRONE_USER_FILTER
-              value: stevenxie,DangAsian,tugolo
+              value: stevenxie,tugolo,uwblueprint
           envFrom:
             - secretRef:
                 name: drone
@@ -52,7 +52,7 @@ spec:
           readinessProbe: &probe
             httpGet:
               path: /healthz
-              port: http
+              port: 80
             initialDelaySeconds: 10
           livenessProbe: *probe
           resources:

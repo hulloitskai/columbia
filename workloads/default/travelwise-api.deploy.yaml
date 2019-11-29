@@ -1,0 +1,52 @@
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: travelwise-api
+  namespace: default
+  labels:
+    app: travelwise
+    component: api
+  annotations:
+    fluxcd.io/automated: "false"
+
+spec:
+  selector:
+    matchLabels:
+      app: travelwise
+      component: api
+  template:
+    metadata:
+      labels:
+        app: travelwise
+        component: api
+    spec:
+      containers:
+      - name: server
+        image: stevenxie/travelwise-backend:latest
+        imagePullPolicy: Always
+        env:
+        - name: HASURA_GRAPHQL_URL
+          value: https://travelwise.stevenxie.me/hasura/v1/graphql
+        - name: NODE_ENV
+          value: production
+        envFrom:
+        - secretRef:
+            name: travelwise-api
+        ports:
+        - name: http
+          containerPort: 3000
+        readinessProbe: &probe
+          httpGet:
+            path: /
+            port: 3000
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 500m
+            memory: 500Mi

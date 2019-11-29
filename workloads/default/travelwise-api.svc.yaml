@@ -1,0 +1,60 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: travelwise-api
+  namespace: default
+  labels:
+    app: travelwise
+    component: api
+
+spec:
+  selector:
+    app: travelwise
+    component: api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: travelwise-api
+  namespace: default
+  labels:
+    app: travelwise
+    component: api
+
+spec:
+  gateways: ["primary.istio-system"]
+  hosts: ["travelwise.stevenxie.me"]
+  http:
+    - match:
+        - uri:
+            exact: /api
+      redirect:
+        uri: /api/
+
+    - match:
+        - uri:
+            prefix: /api/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: travelwise-api
+          headers:
+            response:
+              set:
+                X-Service: travelwise-api
+      corsPolicy:
+        allowOrigin: ["*"]
+        allowHeaders: ["Content-Type"]
+        allowMethods: ["POST"]
+        allowCredentials: true

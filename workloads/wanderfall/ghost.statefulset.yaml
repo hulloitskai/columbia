@@ -39,7 +39,7 @@ spec:
         livenessProbe: &probe
           httpGet:
             path: /
-            port: http
+            port: 2368
             httpHeaders:
             - name: Host
               value: wanderfallgames.com

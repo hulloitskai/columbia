@@ -40,7 +40,7 @@ spec:
         readinessProbe: &probe
           httpGet:
             path: /
-            port: http
+            port: 3000
         livenessProbe: *probe
         resources:
           requests:

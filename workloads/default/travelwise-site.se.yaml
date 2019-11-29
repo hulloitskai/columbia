@@ -1,0 +1,21 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+
+metadata:
+  name: travelwise-site
+  namespace: default
+  labels:
+    app: travelwise
+    component: site
+
+spec:
+  hosts:
+    - travelwise.netlify.com
+  location: MESH_EXTERNAL
+  ports:
+    - number: 80
+      name: http
+      protocol: HTTP
+  resolution: DNS

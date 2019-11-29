@@ -1,0 +1,45 @@
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+
+metadata:
+  name: travelwise-hasura
+  namespace: default
+  labels:
+    app: travelwise
+    component: hasura
+
+spec:
+  gateways:
+    - primary.istio-system
+    - secondary.istio-system
+  hosts: ["travelwise.stevenxie.me"]
+  http:
+    - match:
+        - authority:
+            exact: travelwise.stevenxie.com
+      redirect:
+        authority: travelwise.stevenxie.me
+    - match:
+        - uri:
+            exact: /hasura
+      redirect:
+        uri: /hasura/
+    - match:
+        - uri:
+            prefix: /hasura/
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: systematic-lemongrass-d54k2ujifslyiuf5zz21vva5.herokudns.com
+          headers:
+            response:
+              set:
+                X-Service: travelwise-hasura
+      corsPolicy:
+        allowOrigin: ["*"]
+        allowHeaders: ["Content-Type"]
+        allowMethods: ["POST"]
+        allowCredentials: true
