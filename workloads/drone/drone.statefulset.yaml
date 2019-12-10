@@ -26,50 +26,50 @@ spec:
         sidecar.istio.io/inject: "false"
     spec:
       containers:
-        - name: drone
-          image: drone/drone:1.6.2
-          env:
-            - name: DRONE_GITHUB_CLIENT_ID
-              value: 37ff2e81d1b8916911f6
-            - name: DRONE_SERVER_HOST
-              value: ci.stevenxie.me
-            - name: DRONE_SERVER_PROTO
-              value: https
-            - name: DRONE_USER_CREATE
-              value: username:stevenxie,machine:false,admin:true
-            - name: DRONE_USER_FILTER
-              value: stevenxie,tugolo,uwblueprint
-          envFrom:
-            - secretRef:
-                name: drone
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-            - name: https
-              containerPort: 443
-              protocol: TCP
-          readinessProbe: &probe
-            httpGet:
-              path: /healthz
-              port: 80
-            initialDelaySeconds: 10
-          livenessProbe: *probe
-          resources:
-            requests:
-              cpu: 1m
-              memory: 15Mi
-            limits:
-              cpu: 25m
-              memory: 75Mi
-          volumeMounts:
-            - name: data
-              mountPath: /data
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes: ["ReadWriteOnce"]
+      - name: drone
+        image: drone/drone:1.6.3
+        env:
+        - name: DRONE_GITHUB_CLIENT_ID
+          value: 37ff2e81d1b8916911f6
+        - name: DRONE_SERVER_HOST
+          value: ci.stevenxie.me
+        - name: DRONE_SERVER_PROTO
+          value: https
+        - name: DRONE_USER_CREATE
+          value: username:stevenxie,machine:false,admin:true
+        - name: DRONE_USER_FILTER
+          value: stevenxie,tugolo,uwblueprint
+        envFrom:
+        - secretRef:
+            name: drone
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: https
+          containerPort: 443
+          protocol: TCP
+        readinessProbe: &probe
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 10
+        livenessProbe: *probe
         resources:
           requests:
-            storage: 1Gi
+            cpu: 1m
+            memory: 15Mi
+          limits:
+            cpu: 25m
+            memory: 75Mi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
