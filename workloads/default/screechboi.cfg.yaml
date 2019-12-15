@@ -1,0 +1,18 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: screechboi
+  namespace: default
+  labels:
+    app: screechboi
+
+spec:
+  template:
+    metadata:
+      name: screechboi
+      namespace: default
+
+  encryptedData:
+    praw.ini: AgCiombfzx0lc+i6Fg4IN31Crzs1ieAwST3Xtb52sV6OJi4AX5riWTfAoE2oQGAbaASI4/2T0IBG7CtVxYtOgRyVdFerUALihMWWpMthqIEIS5ZyVC6PWqTPecvpTzIJ/ldJsxc0ZdmHKz7KNFzYmwyplrvm4z7oedEaVYuOEZDKCot4BjCbOemvxpIlzn2d5+RLn9yjfv/jb8GEJWe7Fcv1V0y9i1Uxt2+sEO318bMBufvGj0GMhfIkl979dRhCI/Wq/m0Ozlst0wAFyMA2r42UZyh2I2Dya5BlIoFtqoT3JmQQW/U20fnwsRDIbg1M+Y2s5Wrg4/7d9U+gnUAKn8ySDmNgtOm7VZ+uH5MTcQ1dg42RmoDRsBwlvpP6B0gQWsip4sZr+xAez0DdXSOT00UY2ETrkHw7h81zkUNoNA7jLm37W+nWR5gbdCekviAfNTZGbuGM+tgOJJfQgY5RJ1PF+WRQtjoCM9ohFVZT/rXyWzRdtZ3BelrqWHtdBbAPF0rfQZehSGp42keMugKCMn92ojDmYiP2JZ/0GTXa5RENumvPlr1VEaOdscokgIHLW7rcjELMp0TTFLBSuNQgAXGWILE/vv7INDSQWs81oV5DBb4VoyjJdiUNm6fnfJPMmXpt7fjEBxk1WUL8TQ8WDgA2Rug9IHjkyHvmdZWzmlC0bpzQfNV9bafDwGUCH/JJ7u3bZuMdWJJ9AQsacAsaMV5zJatcI69EWUUCgR9xwEFllUzTJPGMHSX5ktf5QGDy5adDxdBlRvMNybdN+xy65HAbAAkYSqZGnhz5sYs3X8pnH3qjt3/sbLlKf+c24NUyddYycOI2R0L3QOgQPWkHa20TQt8+Yik/Yj0cNcrw1OUibtHfpDbqEjrHG4mItD6ZV57sBjr4S9mpnmmGjAl1P4JqeuZdM9qDqjqhTgqYIELeA0330I/XxmY5V3A39GgU3UNC8/7ASZxrPWqQeSLlbP9inCGw6wTACQ==
+
