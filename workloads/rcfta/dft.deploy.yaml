@@ -23,8 +23,8 @@ spec:
     spec:
       containers:
       - name: app
-        image: stevenxie/dft:latest
-        imagePullPolicy: Always
+        image: stevenxie/dft:0.1.0
+        imagePullPolicy: IfNotPresent
         env:
         - name: DB_NAME
           value: dft
@@ -39,7 +39,15 @@ spec:
         - name: http
           containerPort: 8000
         readinessProbe: &probe
+          initialDelaySeconds: 35
           httpGet:
             path: /login/
             port: 8000
         livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 75m
+            memory: 150Mi
+          limits:
+            cpu: 250m
+            memory: 300Mi
