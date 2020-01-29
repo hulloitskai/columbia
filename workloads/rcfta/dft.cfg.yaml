@@ -1,0 +1,16 @@
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: dft
+  namespace: rcfta
+
+spec:
+  template:
+    metadata:
+      name: dft
+      namespace: rcfta
+  encryptedData:
+    DB_PASSWORD: AgBORw4o+m4haOgbANV1MTOdHKaF4BaZPex4f06Uj/+wLSh1vLeYSiKMoZYFmah0UZVqk7iMIsSU3ALJdPmUCdTeT8XARKBqj0oPIp6Qzeifnz1VkWM5e9FxlodpDNPeOpNx4SDOtNAKdch+mcxRbwGfAwusB9rI0ghs8HDRWM5ZEFsoPwUbG3BoLsW+Obw0XGg7gEL7iCYHcFHfWOZTKUDeUkPLlAT/mSx5RxkeR1g9WhB8VHrY98/8BLslrWM5a4dY4byxpJyS5Anr6J+w15Rb+cmmIVnegOLlKdBLBR7RozkcqD+Ak6j398e5U3mj3FOoLNCjJZxtQniFNBp9yVddvF28FlbnHtt0Uakw4gZBanG0//+1+0MS7fl80kZ0aRPwWPir6j7qHvS/CszB73xZpankKVI4uNI25qQbWZuUnJWdV69B8GS8TF2UOF+LTKEEVvCTAp4ktXPtibxC79HwoJrqnERlq47OVv9cKByfGoC/wUNMpwNbmHt/UHiBe4XfVRui4m+VkjLQoLrEulgFZG8lX6cvkuu7/Eds41YlPMqGzJkg1S5nKgqG+iBol3LD+WgzmA89z12tGpC+r6z7JWE0goFKT1AkhWq93sxSJeeaQgEhZrvvVN28aMqPo1coqX+ej63LFkRshWvtCyDK/3kfqTwF/tMfxbjaMZ1AgscUadwhfZMLrupwHLRlNCnkKqt5ugyNlNNm47ds+nqXpKT1R2vbqeLnjwMFxx+2Kg==

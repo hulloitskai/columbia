@@ -1,0 +1,45 @@
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: dft
+  namespace: rcfta
+  labels:
+    app: dft
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.app: regexp:^0(\.[0-9]+){2} # 0.x.x...
+
+spec:
+  selector:
+    matchLabels:
+      app: dft
+  template:
+    metadata:
+      labels:
+        app: dft
+    spec:
+      containers:
+      - name: app
+        image: stevenxie/dft:latest
+        imagePullPolicy: Always
+        env:
+        - name: DB_NAME
+          value: dft
+        - name: DB_USER
+          value: rcfta
+        - name: DB_HOST
+          value: postgres-postgresql.default
+        envFrom:
+        - secretRef:
+            name: dft
+        ports:
+        - name: http
+          containerPort: 8000
+        readinessProbe: &probe
+          httpGet:
+            path: /login/
+            port: 8000
+        livenessProbe: *probe

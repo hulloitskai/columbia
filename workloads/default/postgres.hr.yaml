@@ -1,0 +1,35 @@
+---
+
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+
+metadata:
+  name: postgres
+  namespace: default
+  annotations:
+    fluxcd.io/automated: "false"
+    fluxcd.io/tag.chart-image: "semver:~6"
+  labels:
+    app: postgres
+
+spec:
+  releaseName: postgres
+  chart:
+    repository: https://kubernetes-charts.storage.googleapis.com
+    name: postgresql
+    version: 8.2.0
+  values:
+    image:
+      repository: bitnami/postgresql
+      tag: 11.6.0-debian-10-r0
+
+    persistence:
+      size: 6Gi
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 75Mi
+      limits:
+        cpu: 150m
+        memory: 225Mi
