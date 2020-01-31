@@ -38,8 +38,8 @@ spec:
         livenessProbe: *probe
         resources:
           requests:
-            cpu: 20m
-            memory: 20Mi
+            cpu: 5m
+            memory: 10Mi
           limits:
-            cpu: 50m
-            memory: 50Mi
+            cpu: 40m
+            memory: 70Mi

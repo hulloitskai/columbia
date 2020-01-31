@@ -17,3 +17,20 @@ spec:
     repository: https://charts.stevenxie.me
     name: rgv
     version: 0.2.0
+  values:
+    api:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 15Mi
+        limits:
+          cpu: 50m
+          memory: 75Mi
+    frontend:
+      resources:
+        requests:
+          cpu: 2m
+          memory: 2Mi
+        limits:
+          cpu: 15m
+          memory: 25Mi

@@ -51,11 +51,11 @@ spec:
         livenessProbe: *probe
         resources:
           requests:
-            cpu: 20m
+            cpu: 10m
             memory: 20Mi
           limits:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 150m
+            memory: 150Mi
       volumes:
       - name: config
         configMap:
