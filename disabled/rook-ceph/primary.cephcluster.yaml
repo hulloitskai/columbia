@@ -34,7 +34,7 @@ metadata:
   namespace: rook-ceph
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways: ["stevenxie-me.istio-system"]
   hosts: ["ceph.stevenxie.me"]
   http:
     - route:

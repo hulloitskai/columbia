@@ -4,7 +4,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 
 metadata:
-  name: primary
+  name: attyxy-me
   namespace: attyxy
 
 spec:

@@ -111,6 +111,8 @@ kind: SealedSecret
 metadata:
   name: traefik-release
   namespace: default
+  annotations:
+    fluxcd.io/ignore: "true"
   labels:
     app.kubernetes.io/name: traefik
 

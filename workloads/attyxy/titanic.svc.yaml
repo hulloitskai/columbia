@@ -29,7 +29,7 @@ metadata:
     app: titanic
 
 spec:
-  gateways: ["primary"]
+  gateways: ["attyxy-me"]
   hosts: ["api.attyxy.me"]
   http:
     - match:

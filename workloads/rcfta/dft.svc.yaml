@@ -29,9 +29,18 @@ metadata:
     app: dft
 
 spec:
-  gateways: ["primary.istio-system"]
-  hosts: ["dft.stevenxie.me"]
+  gateways:
+    - stevenxie-me.istio-system
+    - rcsandbox-ca.istio-system
+  hosts:
+    - dft.stevenxie.me
+    - rcsandbox.ca
   http:
+    - match:
+        - authority:
+            exact: dft.stevenxie.me
+      redirect:
+        authority: rcsandbox.ca
     - route:
         - destination:
             host: dft

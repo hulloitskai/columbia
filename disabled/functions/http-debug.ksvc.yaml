@@ -35,7 +35,7 @@ metadata:
   namespace: functions
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways: ["stevenxie-me.istio-system"]
   hosts: ["fn.stevenxie.me"]
   http:
     - match:

@@ -11,8 +11,8 @@ metadata:
 
 spec:
   gateways:
-    - primary.istio-system
-    - secondary.istio-system
+    - stevenxie-me.istio-system
+    - stevenxie-com.istio-system
   hosts:
     - api.stevenxie.me
     - api.stevenxie.com

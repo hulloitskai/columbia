@@ -4,7 +4,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 
 metadata:
-  name: wanderfall
+  name: rcsandbox-ca
   namespace: istio-system
 
 spec:
@@ -17,10 +17,10 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: wanderfallgames-com-tls
+        credentialName: rcsandbox-ca-tls
       hosts: &hosts
-        - wanderfallgames.com
-        - www.wanderfallgames.com
+        - rcsandbox.ca
+        - "*.rcsandbox.ca"
     - port:
         name: http
         number: 80

@@ -8,7 +8,7 @@ metadata:
   namespace: gateway
 
 spec:
-  gateways: ["proxy", "primary.istio-system"]
+  gateways: ["proxy", "stevenxie-me.istio-system"]
   hosts:
     - monastery.stevenxie.me
     - k8s.monastery.stevenxie.me

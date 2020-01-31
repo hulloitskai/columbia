@@ -1,6 +1,6 @@
 ---
 
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion:  cert-manager.io/v1alpha2
 kind: Certificate
 
 metadata:
@@ -8,16 +8,11 @@ metadata:
   namespace: istio-system
 
 spec:
-  secretName: stevenxie-com-tls
-  issuerRef:
-    name: letsencrypt-prod
-    kind: ClusterIssuer
   commonName: stevenxie.com
+  secretName: stevenxie-com-tls
   dnsNames: &names
     - stevenxie.com
     - "*.stevenxie.com"
-  acme:
-    config:
-      - dns01:
-          provider: cloudflare
-        domains: *names
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

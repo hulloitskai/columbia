@@ -35,7 +35,7 @@ metadata:
     version: v2
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways: ["stevenxie-me.istio-system"]
   hosts: ["api.stevenxie.me"]
   http:
     # Redirect root requests to GraphiQL.

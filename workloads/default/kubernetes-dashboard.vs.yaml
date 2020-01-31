@@ -8,7 +8,7 @@ metadata:
   namespace: default
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways: ["stevenxie-me.istio-system"]
   hosts: ["k8s.stevenxie.me"]
   http:
     - route:

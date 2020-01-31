@@ -33,7 +33,7 @@ metadata:
 
 spec:
   gateways:
-    - primary.istio-system
+    - stevenxie-me.istio-system
     - cluster.istio-system
   hosts:
     - api-v1-origin.stevenxie.me

@@ -34,7 +34,7 @@ metadata:
     app: weave-scope
 
 spec:
-  gateways: ["primary.istio-system"]
+  gateways: ["stevenxie-me.istio-system"]
   hosts:
     - status.stevenxie.me
     - columbia.stevenxie.me

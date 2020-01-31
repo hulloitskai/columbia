@@ -10,7 +10,7 @@ metadata:
     app: web
 
 spec:
-  gateways: ["secondary.istio-system"]
+  gateways: ["stevenxie-com.istio-system"]
   hosts:
     - stevenxie.com
     - www.stevenxie.com
