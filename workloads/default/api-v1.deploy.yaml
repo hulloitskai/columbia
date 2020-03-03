@@ -11,7 +11,7 @@ metadata:
     version: v1
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.server: regexp:^1(\.[0-9]+){2} # 1.x.x...
+    filter.fluxcd.io/server: regexp:^1(\.[0-9]+){2} # 1.x.x...
 
 spec:
   selector:

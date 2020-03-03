@@ -8,7 +8,7 @@ metadata:
   namespace: cert-manager
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.chart-image: semver:~0.13
+    filter.fluxcd.io/chart-image: semver:~0.13
   labels:
     app: cert-manager
 

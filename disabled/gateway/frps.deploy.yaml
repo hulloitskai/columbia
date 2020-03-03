@@ -8,7 +8,7 @@ metadata:
   namespace: gateway
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.frp: semver:~0.26
+    filter.fluxcd.io/frp: semver:~0.26
 
 spec:
   selector:

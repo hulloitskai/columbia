@@ -10,7 +10,7 @@ metadata:
     app: drone
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.drone: semver:~1
+    filter.fluxcd.io/drone: semver:~1
 
 spec:
   selector:

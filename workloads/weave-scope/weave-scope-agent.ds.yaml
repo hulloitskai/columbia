@@ -8,7 +8,7 @@ metadata:
   namespace: weave-scope
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.scope-agent: semver:~1
+    filter.fluxcd.io/scope-agent: semver:~1
   labels:
     app: weave-scope
     weave-cloud-component: scope

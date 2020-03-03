@@ -10,7 +10,7 @@ metadata:
     app: titanic
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.app: regexp:^3(\.[0-9]+){2} # 3.x.x...
+    filter.fluxcd.io/app: regexp:^3(\.[0-9]+){2} # 3.x.x...
 
 spec:
   selector:

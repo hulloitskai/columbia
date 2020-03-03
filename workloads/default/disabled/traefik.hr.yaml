@@ -9,7 +9,7 @@ metadata:
   annotations:
     fluxcd.io/ignore: "true"
     fluxcd.io/automated: "false"
-    fluxcd.io/tag.hack: glob:v1.7*-alpine
+    filter.fluxcd.io/hack: glob:v1.7*-alpine
   labels:
     app.kubernetes.io/name: traefik
 
