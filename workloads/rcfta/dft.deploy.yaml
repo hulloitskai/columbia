@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: stevenxie/dft:0.1.0-9-g74fdc53
+        image: stevenxie/dft:0.1.0-58-geb87a65
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_NAME
