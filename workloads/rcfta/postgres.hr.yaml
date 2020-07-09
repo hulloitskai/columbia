@@ -1,0 +1,42 @@
+---
+
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+
+metadata:
+  name: postgres
+  namespace: rcfta
+  annotations:
+    fluxcd.io/automated: "false"
+    filter.fluxcd.io/chart-image: "semver:~6"
+  labels:
+    app: postgres
+
+spec:
+  releaseName: postgres
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: postgresql
+    version: 9.1.1
+  values:
+    image:
+      repository: bitnami/postgresql
+      tag: 11.8.0-debian-10-r61
+    fullnameOverride: postgres
+
+    persistence:
+      size: 6Gi
+    # volumePermissions:
+    #   enabled: true
+
+    master:
+      labels:
+        app: postgres
+
+    resources:
+      requests:
+        cpu: 25m
+        memory: 50Mi
+      limits:
+        cpu: 150m
+        memory: 225Mi
