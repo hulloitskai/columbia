@@ -30,17 +30,21 @@ metadata:
 
 spec:
   gateways:
+    # - rcsandbox-ca.istio-system
     - stevenxie-me.istio-system
-    - rcsandbox-ca.istio-system
+    - sandboxapi-ca.istio-system
   hosts:
+    # - rcsandbox.ca
+    # - www.rcsandbox.ca
     - dft.stevenxie.me
-    - rcsandbox.ca
+    - sandboxapi.ca
+    - www.sandboxapi.ca
   http:
     - match:
         - authority:
-            exact: dft.stevenxie.me
+            exact: www.sandboxapi.ca
       redirect:
-        authority: rcsandbox.ca
+        authority: sandboxapi.ca
     - route:
         - destination:
             host: dft

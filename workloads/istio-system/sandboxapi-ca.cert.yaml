@@ -10,7 +10,7 @@ metadata:
 spec:
   commonName: sandboxapi.ca
   secretName: sandboxapi-ca-tls
-  dnsNames: &names
+  dnsNames:
     - sandboxapi.ca
     - "*.sandboxapi.ca"
   issuerRef:
