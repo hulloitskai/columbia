@@ -20,5 +20,5 @@ if [[ $# -lt 2 ]] || [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
   exit 2
 fi
 
-kubectl create secret generic --dry-run -o yaml $@ | \
+kubectl create secret generic --dry-run=client -o yaml $@ | \
   kubeseal --cert=./cert.pem --format=yaml
