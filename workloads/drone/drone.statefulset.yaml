@@ -38,7 +38,7 @@ spec:
         - name: DRONE_USER_CREATE
           value: username:stevenxie,machine:false,admin:true
         - name: DRONE_USER_FILTER
-          value: stevenxie,tugolo,uwblueprint,OlyaJaworsky,BashManVP
+          value: stevenxie,UWCoffeeNCode,OlyaJaworsky,BashManVP
         envFrom:
         - secretRef:
             name: drone
