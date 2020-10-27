@@ -19,12 +19,12 @@ spec:
     name: traefik
     version: 9.8.1
   valuesFrom:
-    - secretKeyRef:
-        name: traefik-release
+  - secretKeyRef:
+      name: traefik-release
   values:
     image:
       repository: traefik
-      tag: 2.3.1
+      tag: v2.3.2
 
     logs:
       general:
@@ -44,10 +44,10 @@ spec:
       enabled: true
 
     additionalArguments:
-      - "--certificatesresolvers.letsencrypt.acme.email=dev@stevenxie.me"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
-      - "--certificatesresolvers.letsencrypt.acme.tlschallenge"
-      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
+    - "--certificatesresolvers.letsencrypt.acme.email=dev@stevenxie.me"
+    - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+    - "--certificatesresolvers.letsencrypt.acme.tlschallenge"
+    - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
 
     service:
       type: ClusterIP
@@ -62,7 +62,6 @@ spec:
       limits:
         cpu: 300m
         memory: 150Mi
-
 ---
 
 apiVersion: bitnami.com/v1alpha1
