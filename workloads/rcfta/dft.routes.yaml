@@ -1,0 +1,19 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: dft
+  namespace: rcfta
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`sandboxapi.ca`)
+      kind: Rule
+      services:
+        - name: dft
+          port: 80
+  tls:
+    secretName: tls-sandboxapi-ca

@@ -1,0 +1,35 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: api-v2
+  namespace: stevenxie
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`api.stevenxie.me`) && PathPrefix(`/v2`)
+      kind: Rule
+      services:
+        - name: api-v2
+          port: 80
+      middlewares:
+        - name: api-v2-strip-prefix
+  tls:
+    secretName: tls-stevenxie-me
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-v2-strip-prefix
+  namespace: stevenxie
+
+spec:
+  stripPrefix:
+    prefixes:
+      - /v2

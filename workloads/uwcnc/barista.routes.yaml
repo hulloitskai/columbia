@@ -1,0 +1,19 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: barista
+  namespace: uwcnc
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`api.uwcoffeencode.com`)
+      kind: Rule
+      services:
+        - name: barista
+          port: 80
+  tls:
+    secretName: tls-uwcoffeencode-com

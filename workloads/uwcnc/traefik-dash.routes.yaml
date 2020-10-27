@@ -1,0 +1,20 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: traefik-dash
+  namespace: uwcnc
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`gateway.uwcoffeencode.com`)
+      kind: Rule
+      services:
+        - name: api@internal
+          kind: TraefikService
+  tls:
+    secretName: tls-uwcoffeencode-com
+

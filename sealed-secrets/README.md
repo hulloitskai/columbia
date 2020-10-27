@@ -69,7 +69,9 @@ To restore the private key, run the following command (assuming that the
 private key is named `master.key.yaml`):
 
 ```bash
-kubectl replace -f master.key.yaml && \
-kubectl --namespace kube-system \
-  delete pods -l app.kubernetes.io/name=sealed-secrets
+kubectl replace \
+  --filename master.key.yaml && \
+kubectl \
+  --namespace kube-system \
+  rollout restart deployment sealed-secrets-controller
 ```

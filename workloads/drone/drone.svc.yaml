@@ -22,36 +22,36 @@ spec:
       protocol: TCP
       targetPort: https
 
----
+# ---
 
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
 
-metadata:
-  name: drone
-  namespace: drone
-  labels:
-    app: drone
+# metadata:
+#   name: drone
+#   namespace: drone
+#   labels:
+#     app: drone
 
-spec:
-  gateways:
-    - stevenxie-me.istio-system
-    - stevenxie-com.istio-system
-  hosts:
-    - ci.stevenxie.me
-    - ci.stevenxie.com
-  http:
-    - match:
-        - authority:
-            exact: ci.stevenxie.com
-      redirect:
-        authority: ci.stevenxie.me
-    - route:
-        - destination:
-            host: drone
-            port:
-              number: 80
-          headers:
-            response:
-              set:
-                X-Service: drone
+# spec:
+#   gateways:
+#     - stevenxie-me.istio-system
+#     - stevenxie-com.istio-system
+#   hosts:
+#     - ci.stevenxie.me
+#     - ci.stevenxie.com
+#   http:
+#     - match:
+#         - authority:
+#             exact: ci.stevenxie.com
+#       redirect:
+#         authority: ci.stevenxie.me
+#     - route:
+#         - destination:
+#             host: drone
+#             port:
+#               number: 80
+#           headers:
+#             response:
+#               set:
+#                 X-Service: drone

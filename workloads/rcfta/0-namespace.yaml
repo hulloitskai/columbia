@@ -5,5 +5,3 @@ kind: Namespace
 
 metadata:
   name: rcfta
-  labels:
-    istio-injection: enabled

@@ -1,0 +1,18 @@
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: uwcoffeencode-com
+  namespace: uwcnc
+
+spec:
+  commonName: uwcoffeencode.com
+  secretName: tls-uwcoffeencode-com
+  dnsNames:
+    - uwcoffeencode.com
+    - "*.uwcoffeencode.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

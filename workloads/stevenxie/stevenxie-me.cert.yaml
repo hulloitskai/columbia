@@ -1,0 +1,18 @@
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: stevenxie-me
+  namespace: stevenxie
+
+spec:
+  commonName: stevenxie.me
+  secretName: tls-stevenxie-me
+  dnsNames:
+    - stevenxie.me
+    - "*.stevenxie.me"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

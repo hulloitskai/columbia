@@ -1,0 +1,18 @@
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: sandboxapi-ca
+  namespace: rcfta
+
+spec:
+  commonName: sandboxapi.ca
+  secretName: tls-sandboxapi-ca
+  dnsNames:
+    - sandboxapi.ca
+    - "*.sandboxapi.ca"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

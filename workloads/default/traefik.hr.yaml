@@ -1,0 +1,82 @@
+---
+
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+
+metadata:
+  name: traefik
+  namespace: default
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/chart-image: semver:~2.3
+  labels:
+    app: traefik
+
+spec:
+  releaseName: traefik
+  chart:
+    repository: https://helm.traefik.io/traefik
+    name: traefik
+    version: 9.8.1
+  valuesFrom:
+    - secretKeyRef:
+        name: traefik-release
+  values:
+    image:
+      repository: traefik
+      tag: 2.3.1
+
+    logs:
+      general:
+        level: INFO
+
+    ports:
+      traefik:
+        expose: true
+      web:
+        hostPort: 80
+      websecure:
+        hostPort: 443
+        tls:
+          enabled: true
+
+    pilot:
+      enabled: true
+
+    additionalArguments:
+      - "--certificatesresolvers.letsencrypt.acme.email=dev@stevenxie.me"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge"
+      - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=cloudflare"
+
+    service:
+      type: ClusterIP
+
+    nodeSelector:
+      node-role.kubernetes.io/ingress: ingress
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 50Mi
+      limits:
+        cpu: 300m
+        memory: 150Mi
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: traefik-release
+  namespace: default
+
+spec:
+  template:
+    metadata:
+      name: traefik-release
+      namespace: default
+  encryptedData:
+    values.yaml: AgA6M2s4zPclqg5yTs/XWPUeAFqW0JlgViBja0fkaH7RqzToPsUACT0x1nkBRUh8QMXzrWqJjxMvGDtzC5/KSs5efJr6U2QOSG+sZT1WR+Z7ThgJYXbfGS8u7AIoL3/nUvBY7j+Izx5nnKe7x9lMo0phXHxboO4+4y69iuKc/EX2sF9UIutQjg73CzFY9+QpL+D1TlCK3lgfGSMuC+zR8vle62L6fdz8w8lnCwV21CElsVReVz02H9GPqxx+7EyL+/HaHuBOOEfBTkzQPqSDgf9JNpsWNr4bN5iGG93/6FzPq2QRcueZMGJxIgCqHJEaMdaAVkkmUklpyVFg7JAJGymJVZ8fN41xSeM+l4jO0xpX9IguharzDdYzX0koXRLfyWfCJIEorqn8oLmtwpoPNTPdDL3rGV/rwuggn9mVNsLcv3ThhZDYpYx9hBCvJDjkBaEELrObgkfaAcPXaa6idVmXpkgYewxxrl0rW9anNLXszfBxgbNaK3Fl5Dp/8h73nulmC5/h+KKx9agywBvLPF4tFkT57AzcVmGUbYanFDihQn2/FKt+hkFwwMbavRID2OOgY24Xf9KQ2JgfG8k0I/HDOIzjcTaPWqVAduYjJuMHHakqczjHCP49bKWoE1JBrc/qlI/RRFuMVEotUYodWSULcQaUhNQSanRdNqZTbOEXQdCQwcGGm5xg5+2vFY4MLCAZlKLp+qw/pElLGjKOByNZxwkTO05IYC0ezGRtXC+2pEty+S+CxyKzAQU40CmHp1K/Jm9IPQ==
+

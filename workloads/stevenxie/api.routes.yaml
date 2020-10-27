@@ -1,0 +1,35 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: api
+  namespace: stevenxie
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`api.stevenxie.me`) && Path(`/`)
+      kind: Rule
+      middlewares:
+        - name: api-redirect-default
+      services:
+        - name: noop@internal
+          kind: TraefikService
+  tls:
+    secretName: tls-stevenxie-me
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-redirect-default
+  namespace: stevenxie
+
+spec:
+  redirectRegex:
+    regex: ^https://api.stevenxie.me/$
+    replacement: https://api.stevenxie.me/v2/graphiql

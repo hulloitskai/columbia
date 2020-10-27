@@ -1,0 +1,20 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: ci
+  namespace: stevenxie
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`ci.stevenxie.me`)
+      kind: Rule
+      services:
+        - name: drone
+          namespace: drone
+          port: 80
+  tls:
+    secretName: tls-stevenxie-me
