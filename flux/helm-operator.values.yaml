@@ -1,0 +1,7 @@
+image:
+  repository: docker.io/fluxcd/helm-operator
+  tag: 1.2.0
+
+helm:
+  versions: "v3"
+

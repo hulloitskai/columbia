@@ -1,0 +1,15 @@
+image:
+  repository: docker.io/fluxcd/flux
+  tag: 1.20.2
+
+git:
+  url: git@github.com:stevenxie/columbia
+  path: cluster,workloads
+
+syncGarbageCollection:
+  enabled: true
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi

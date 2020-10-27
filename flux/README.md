@@ -4,47 +4,39 @@
 
 ### Installation
 
-[`flux`](https://github.com/weaveworks/flux) should be installed in the
+[`flux`](https://fluxcd.io) should be installed in the
 namespace `flux`. Use the guide at
-[`flux/site/helm-get-started`](https://github.com/weaveworks/flux/blob/master/site/helm-get-started.md)
+[`docs.fluxcd.io`](https://github.com/weaveworks/flux/blob/master/site/helm-get-started.md)
 for reference.
 
-> `flux` requires `helm` to be installed first. See the
-> [docs on installing `helm` with TLS](../helm/README.md).
-
-Prepare the namespace `flux`, and install the `helm-client-certs` secrets:
+Prepare the namespace `flux`:
 
 ```bash
-kubectl create namespace flux && \
-kubectl create secret generic helm-client-certs \
-  --namespace flux \
-  --from-file tls.key=../helm/flux.key.pem \
-  --from-file tls.crt=../helm/flux.cert.pem
+kubectl create namespace flux
 ```
 
-Install the associated CRDs:
-
-```bash
-kubectl apply -f crd.yaml helm-operator-crd.yaml
-```
-
-Install the chart as follows:
+Install the `flux` chart as follows:
 
 ```bash
 helm repo add fluxcd https://charts.fluxcd.io && \
-helm install \
-  --name=flux \
-  --namespace=flux \
-  -f ./values.yaml \
-  --version 0.15.0 \
+helm upgrade flux fluxcd/flux \
+  --install \
+  --namespace flux \
+  --version 1.5.0 \
   --atomic \
-  fluxcd/flux
+  --values ./flux.values.yaml
 ```
 
-The following will need to be added to your `~/.bashrc`:
+Install the `helm-operator` chart as follows:
 
 ```bash
-export FLUX_FORWARD_NAMESPACE=flux
+kubectl apply -f https://raw.githubusercontent.com/fluxcd/helm-operator/1.2.0/deploy/crds.yaml && \
+helm upgrade helm-operator fluxcd/helm-operator \
+  --install \
+  --namespace flux \
+  --version 1.2.0 \
+  --atomic \
+  --values ./helm-operator.values.yaml
 ```
 
 ### Git Integration

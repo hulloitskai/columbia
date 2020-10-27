@@ -25,3 +25,4 @@ kubeconfig.yaml
 
 # Windows:
 Thumbs.db
+!*.secret
