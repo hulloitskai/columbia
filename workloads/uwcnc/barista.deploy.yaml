@@ -24,7 +24,7 @@ spec:
     spec:
       initContainers:
       - name: migrate
-        image: uwcoffeencode/barista:0.1.0-4-g6b1043e
+        image: uwcoffeencode/barista:0.1.0-6-g5454e3c
         command: ["python", "manage.py"]
         args: ["migrate"]
         envFrom: &env
@@ -34,7 +34,7 @@ spec:
             name: barista
       containers:
       - name: app
-        image: uwcoffeencode/barista:0.1.0-4-g6b1043e
+        image: uwcoffeencode/barista:0.1.0-6-g5454e3c
         envFrom: *env
         ports:
         - name: http
@@ -45,8 +45,8 @@ spec:
             path: /healthz
             port: http
             httpHeaders:
-              - name: Host
-                value: localhost
+            - name: Host
+              value: localhost
         livenessProbe: *probe
         resources:
           requests:
