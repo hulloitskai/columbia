@@ -1,5 +1,21 @@
 ---
 
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: dft
+  namespace: rcfta
+
+data:
+  DB_NAME: rcfta_dft
+  DB_USER: rcfta
+  DB_HOST: frost-do-user-2931318-0.b.db.ondigitalocean.com
+  DB_PORT: "25060"
+  DB_SSLMODE: require
+
+---
+
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 
@@ -13,4 +29,4 @@ spec:
       name: dft
       namespace: rcfta
   encryptedData:
-    DB_PASSWORD: AgBORw4o+m4haOgbANV1MTOdHKaF4BaZPex4f06Uj/+wLSh1vLeYSiKMoZYFmah0UZVqk7iMIsSU3ALJdPmUCdTeT8XARKBqj0oPIp6Qzeifnz1VkWM5e9FxlodpDNPeOpNx4SDOtNAKdch+mcxRbwGfAwusB9rI0ghs8HDRWM5ZEFsoPwUbG3BoLsW+Obw0XGg7gEL7iCYHcFHfWOZTKUDeUkPLlAT/mSx5RxkeR1g9WhB8VHrY98/8BLslrWM5a4dY4byxpJyS5Anr6J+w15Rb+cmmIVnegOLlKdBLBR7RozkcqD+Ak6j398e5U3mj3FOoLNCjJZxtQniFNBp9yVddvF28FlbnHtt0Uakw4gZBanG0//+1+0MS7fl80kZ0aRPwWPir6j7qHvS/CszB73xZpankKVI4uNI25qQbWZuUnJWdV69B8GS8TF2UOF+LTKEEVvCTAp4ktXPtibxC79HwoJrqnERlq47OVv9cKByfGoC/wUNMpwNbmHt/UHiBe4XfVRui4m+VkjLQoLrEulgFZG8lX6cvkuu7/Eds41YlPMqGzJkg1S5nKgqG+iBol3LD+WgzmA89z12tGpC+r6z7JWE0goFKT1AkhWq93sxSJeeaQgEhZrvvVN28aMqPo1coqX+ej63LFkRshWvtCyDK/3kfqTwF/tMfxbjaMZ1AgscUadwhfZMLrupwHLRlNCnkKqt5ugyNlNNm47ds+nqXpKT1R2vbqeLnjwMFxx+2Kg==
+    DB_PASSWORD: AgBFzpXcI5avTuXALRRAvA/Hl2ciD1mbQvaGjIWuhUflmM5O8ub2o5Tj7XdE+XWtkCJbyUgBrtiQ7CAwuZEw55o6D1WFfLtW1VGhq0/Xi+DkdjUJP7ZPx5YtSOxzRuKHXMQpw+iJr2L2WDI6kK4J0bFuKXUZKrWf3MjRTS9pnwI5qhK0WmWc0ewZbDcgH+HAKtC1cX368ha/wvPyLdAbKSKVHgpMCUWYiOp5v7G0BkItrlOj7C0V9N88yojFfmwUUw+fjWc/ToXWUaJizp22ffPWmSa2XLofTqpOQXLw1Ohun9iUqvbhcnEmHzKlppTqKdbVlKQo40LmdPKPobhMgTlL6kM58LncN4896Z16X5hRyuFCLw91H0oWQLIaseQAQ42FqZA2SmkvnnehYBQScgKxYwhI1kxicUAtLs2DRc4SlvBq13jn0D6v4gTnqouRN9A/L386hxxoiESXQCRVC+etzBQ6GOAPjE5BxdybShoi5yDIZj46R7vPEKRGkimZzFhRKEchn2a65LZkUqAU2FKQa8ZNBmgzHd9TWo+/WbUj7wuwEUvRwU3N9O4Taua6w34HepZXbQT/DbhYdw/+vtmpaHkll5qkDCBKCX/m7mSdje8kcSxfs2BRYXLpOiOrQxwctBZwH4/3YI5sgaEYHcD9mTqJUPvhmoARzex0tPxUxlDiJ8oWD+DRrK/hbW51KpsIpyZ39eh1c9+mPLIMlaxQ

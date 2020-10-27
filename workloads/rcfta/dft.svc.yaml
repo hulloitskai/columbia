@@ -14,7 +14,7 @@ spec:
     app: dft
   ports:
     - name: http
-      port: 8080
+      port: 80
       targetPort: http
 
 ---
@@ -49,7 +49,7 @@ spec:
         - destination:
             host: dft
             port:
-              number: 8080
+              number: 80
           headers:
             response:
               set:

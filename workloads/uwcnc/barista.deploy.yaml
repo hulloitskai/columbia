@@ -4,39 +4,46 @@ apiVersion: apps/v1beta1
 kind: Deployment
 
 metadata:
-  name: dft
-  namespace: rcfta
+  name: barista
+  namespace: uwcnc
   labels:
-    app: dft
+    app: barista
   annotations:
     fluxcd.io/automated: "true"
     filter.fluxcd.io/app: regexp:^0(\.[0-9]+){2} # 0.x.x...
+    filter.fluxcd.io/migrate: regexp:^0(\.[0-9]+){2} # 0.x.x...
 
 spec:
   selector:
     matchLabels:
-      app: dft
+      app: barista
   template:
     metadata:
       labels:
-        app: dft
+        app: barista
     spec:
+      initContainers:
+      - name: migrate
+        image: uwcoffeencode/barista:0.1.0-4-g6b1043e
+        command: ["python", "manage.py"]
+        args: ["migrate"]
+        envFrom: &env
+        - configMapRef:
+            name: barista
+        - secretRef:
+            name: barista
       containers:
       - name: app
-        image: stevenxie/dft:0.1.0-78-gcec170f
-        envFrom:
-        - configMapRef:
-            name: dft
-        - secretRef:
-            name: dft
+        image: uwcoffeencode/barista:0.1.0-4-g6b1043e
+        envFrom: *env
         ports:
         - name: http
-          containerPort: 8000
+          containerPort: 80
         readinessProbe: &probe
-          initialDelaySeconds: 30
+          initialDelaySeconds: 20
           httpGet:
-            path: /login/
-            port: 8000
+            path: /healthz
+            port: http
             httpHeaders:
               - name: Host
                 value: localhost
