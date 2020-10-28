@@ -10,26 +10,10 @@ metadata:
 spec:
   entryPoints: ["websecure"]
   routes:
-    - match: Host(`api.uwcoffeencode.com`)
+    - match: Host(`api.uwcoffeencode.com`) && (Path(`/`, `/graphql`) || PathPrefix(`/static`))
       kind: Rule
       services:
         - name: barista
           port: 80
-      middlewares:
-        - name: api-admin
   tls:
     secretName: tls-uwcoffeencode-com
-
----
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-
-metadata:
-  name: api-admin
-  namespace: uwcnc
-
-spec:
-  redirectRegex:
-    regex: ^https://api.uwcoffeencode.com/admin/(.*)$
-    replacement: https://barista.uwcoffeencode.com/admin/$1
