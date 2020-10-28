@@ -4,22 +4,21 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 
 metadata:
-  name: barista
+  name: api
   namespace: uwcnc
 
 spec:
   entryPoints: ["websecure"]
   routes:
-    - match: Host(`barista.uwcoffeencode.com`)
+    - match: Host(`api.uwcoffeencode.com`)
       kind: Rule
       services:
         - name: barista
           port: 80
       middlewares:
-        - name: barista-default
+        - name: api-admin
   tls:
     secretName: tls-uwcoffeencode-com
-
 
 ---
 
@@ -27,10 +26,10 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 
 metadata:
-  name: barista-default
+  name: api-admin
   namespace: uwcnc
 
 spec:
   redirectRegex:
-    regex: ^https://barista.uwcoffeencode.com/$
-    replacement: https://barista.uwcoffeencode.com/admin
+    regex: ^https://api.uwcoffeencode.com/admin/(.*)$
+    replacement: https://barista.uwcoffeencode.com/admin/$1
