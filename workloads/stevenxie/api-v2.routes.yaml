@@ -16,9 +16,30 @@ spec:
         - name: api-v2
           port: 80
       middlewares:
+        - name: api-v2-cors
         - name: api-v2-strip-prefix
   tls:
     secretName: tls-stevenxie-me
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-v2-cors
+  namespace: stevenxie
+
+spec:
+  headers:
+    accessControlMaxAge: 5
+    accessControlAllowHeaders:
+      - Content-Type
+    accessControlAllowMethods:
+      - POST
+    accessControlAllowOriginList:
+      - https://stevenxie.me
+    addVaryHeader: true
 
 ---
 
