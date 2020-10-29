@@ -13,8 +13,8 @@ spec:
     - match: Host(`barista.uwcoffeencode.com`)
       kind: Rule
       services:
-        - name: barista
-          port: 80
+        - name: noop@internal
+          kind: TraefikService
       middlewares:
         - name: barista-default
   tls:
@@ -32,5 +32,5 @@ metadata:
 
 spec:
   redirectRegex:
-    regex: ^https://barista.uwcoffeencode.com/$
-    replacement: https://barista.uwcoffeencode.com/admin
+    regex: ^https://barista.uwcoffeencode.com/.*$
+    replacement: https://api.uwcoffeencode.com/admin

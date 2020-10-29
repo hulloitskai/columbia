@@ -10,10 +10,35 @@ metadata:
 spec:
   entryPoints: ["websecure"]
   routes:
-    - match: Host(`api.uwcoffeencode.com`) && (Path(`/`, `/graphql`) || PathPrefix(`/static`))
+    - match: Host(`api.uwcoffeencode.com`)
       kind: Rule
       services:
         - name: barista
           port: 80
+      middlewares:
+        - name: api-cors
   tls:
     secretName: tls-uwcoffeencode-com
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-cors
+  namespace: uwcnc
+
+spec:
+  headers:
+    accessControlMaxAge: 5
+    accessControlAllowHeaders:
+      - Content-Type
+    accessControlAllowMethods:
+      - POST
+    accessControlAllowOriginList:
+      - http://localhost:8000
+      - https://uwcoffeencode.com
+    accessControlAllowCredentials: true
+    addVaryHeader: true
+
