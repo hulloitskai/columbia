@@ -1,0 +1,19 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: vaingogh
+  namespace: stevenxie
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`go.stevenxie.me`)
+      kind: Rule
+      services:
+        - name: vaingogh
+          port: 80
+  tls:
+    secretName: tls-stevenxie-me

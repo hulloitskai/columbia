@@ -5,6 +5,7 @@ kind: ConfigMap
 
 metadata:
   name: vaingogh
+  namespace: stevenxie
   labels:
     app: vaingogh
 
@@ -28,12 +29,16 @@ kind: SealedSecret
 
 metadata:
   name: vaingogh
-  namespace: default
+  namespace: stevenxie
   labels:
     app: vaingogh
 
 spec:
+  template:
+    metadata:
+      name: vaingogh
+      namespace: stevenxie
+      labels:
+        app: vaingogh
   encryptedData:
-    GITHUB_TOKEN: AgAzv2EXU04YFEByyWY4dn8gBw/dDLzAb5PK7VEPdWmdy1Sf/Z4b4eO8zqhBj38PmTm8dvH9bAix9olxL/8pQaSU3g3JCgbDHVN0QTBDqTVjGk3LxDu4b/UprMRuJmUTIVCqXkzFT1RHOoxWDPYRwAWBJYjx4zPnMAplEmhsxr6cbH7Ewp2uNclDHsqSiiL3RAWzA8z624E58X2wmZ/UxZuIyHO+ia18VnIUbu3jfG9NRVAsyhhe8TGSmmWJfhnDBuiBiSuDUN8Y3UO5IDuNm1wQY7N+p2sNQdUcxeBFmeOhc1WrM05K6XIcrGbZVM3EySFIU+G/XSJ1qEYsGM/ET9LmEbw6PrV69dmvcC9MG1X7kts/GkbKUPN7EIeqDqpMZodLGJnvPMpBmtRKHefBDSmjpM11ySqcbyPrenjUXdrIZ560x+a3ySIlmLUZZ6y6DxaVJ8kup+nwt/M4xadl6VMUFxCWbR3wbeFgHmEm7AImgZCxyUrFe49by0HsfaUeS7XLAMBaiyiwe+W1wEr3S54Osv1GqHLM9mA4Qoy+cxrNWfBNEUuHTx76AriNaXpMsypFTpF6rrJyxbSClkYKRD+MQYTXlHpH2Mmsi7RVtvJZGLmpbQqNrTpfQnQ+z975ZTJ452TCwRX1dVCnzk41wQBCBhgGQBKd3V+Cy/sPGAfujnY5Bqr0Ofk0uY/L/xu+e0m7Bu2A8slutFIw8t2LdmyjdWlanu5cuHpINvB/BBoWDLl6Ql+VKgWh
-
-
+    GITHUB_TOKEN: AgCqF4IcIMyYXC/yzlkgvQHOUDGstHZ9XqxBtndJ//JMWZ5YMt6TsHG7+tHvYY48ikAxJWlmdoBIuQUAus6SbCY0l3suNgX+MFolkNSrqA+JRCMsG3ecwdPSf09tx63XW0iK8NwF4VCyNTiW6Y8yFAO+BeUc55eUlQBg1Ty9Dp1jNiBmeUffITIDYd7CdaHwuZBnj2/0sq7hfwnkF+lK9Xmov/yTwGj7z6eDZ9A05tI8N7E8mAnfTv6s45eUeo8ptEW+4MykyjYJ0iZOFySYCPqRDWcKOACena+bREzmAPpUjSnNdZ77UzP5FAdRm2dCNqi10StguVgSmSUfTqPB+fnMpRI51AXXu9Mc0VWNuSeroklXbtN6kpDzSJ3E+3GcMek0oHPyH8OVVcOEDotJAdsFGmNpGyY0cS4M2u3QZBC44M+WDG754aTUYEUebQ3WU4dECg0rOVTaFZlrpqny/ZXFomRuA1bWUTtTmVDbAAcVRgWGLHDjfHG6J58wYjh6HA33lgBL5PwLpu+lNgxa+dPYKJevEaiHJ6+hPFTWKODWvTijOm/Psn8Tc3aFlGB0oDrETB5PqlMk/ViWESjccyeqxDCwlK1Pea8QSv1Ie0mnd/YE5YdzsH+pmGVqjM440E3KXwb+6qtslpiOU1gTprXUmj+Ehg+HxzbTY13JNj3SeabgKAB+tP1+ZMEXhaHlRFTg3lXA2xchc+58XobIzy3mJ+xJAcchSmhrOfzjc30/rSN1dmNTlaqC

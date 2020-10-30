@@ -5,7 +5,7 @@ kind: Deployment
 
 metadata:
   name: vaingogh
-  namespace: default
+  namespace: stevenxie
   labels:
     app: vaingogh
   annotations:
