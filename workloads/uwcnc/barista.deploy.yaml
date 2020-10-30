@@ -24,7 +24,7 @@ spec:
     spec:
       initContainers:
       - name: migrate
-        image: uwcoffeencode/barista:0.2.0-1-gee5a2d1
+        image: uwcoffeencode/barista:0.2.0-2-g30c5641
         command: ["python", "manage.py"]
         args: ["migrate"]
         envFrom: &env
@@ -34,7 +34,7 @@ spec:
             name: barista
       containers:
       - name: app
-        image: uwcoffeencode/barista:0.2.0-1-gee5a2d1
+        image: uwcoffeencode/barista:0.2.0-2-g30c5641
         envFrom: *env
         ports:
         - name: http
