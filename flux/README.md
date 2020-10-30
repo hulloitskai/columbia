@@ -21,7 +21,7 @@ Install the `flux` chart as follows:
 helm repo add fluxcd https://charts.fluxcd.io && \
 helm upgrade flux fluxcd/flux \
   --install \
-  --namespace flux \
+  --namespace default \
   --version 1.5.0 \
   --atomic \
   --values ./flux.values.yaml
@@ -33,7 +33,7 @@ Install the `helm-operator` chart as follows:
 kubectl apply -f https://raw.githubusercontent.com/fluxcd/helm-operator/1.2.0/deploy/crds.yaml && \
 helm upgrade helm-operator fluxcd/helm-operator \
   --install \
-  --namespace flux \
+  --namespace default \
   --version 1.2.0 \
   --atomic \
   --values ./helm-operator.values.yaml
