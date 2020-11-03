@@ -11,7 +11,7 @@ data:
   DB_NAME: rcfta_dft
   DB_USER: rcfta
   DB_HOST: frost-do-user-2931318-0.b.db.ondigitalocean.com
-  DB_PORT: "25060"
+  DB_PORT: "25061"
   DB_SSLMODE: require
 
 ---
