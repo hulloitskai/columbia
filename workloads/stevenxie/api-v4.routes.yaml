@@ -1,0 +1,56 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: api-v4
+  namespace: stevenxie
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`api.stevenxie.me`) && PathPrefix(`/v4`)
+      kind: Rule
+      services:
+        - name: api-v4
+          port: 80
+      middlewares:
+        - name: api-v4-cors
+        - name: api-v4-strip-prefix
+  tls:
+    secretName: tls-stevenxie-me
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-v4-cors
+  namespace: stevenxie
+
+spec:
+  headers:
+    accessControlMaxAge: 5
+    accessControlAllowHeaders:
+      - Content-Type
+    accessControlAllowMethods:
+      - POST
+    accessControlAllowOriginList:
+      - https://stevenxie.me
+    addVaryHeader: true
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: api-v4-strip-prefix
+  namespace: stevenxie
+
+spec:
+  stripPrefix:
+    prefixes:
+      - /v4

@@ -1,0 +1,55 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: api-v4
+  namespace: stevenxie
+  labels:
+    app: api
+    version: v4
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/server: regexp:^master-*$ # master-...
+
+spec:
+  selector:
+    matchLabels:
+      app: api
+      version: v4
+  template:
+    metadata:
+      labels:
+        app: api
+        version: v4
+    spec:
+      containers:
+      - name: api
+        image: stevenxie/api:master-21893bd
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: api-v4
+        - secretRef:
+            name: api-v4
+        ports:
+        - name: http
+          containerPort: 80
+        readinessProbe: &probe
+          initialDelaySeconds: 5
+          httpGet:
+            path: /
+            port: http
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 150m
+            memory: 150Mi
+      volumes:
+      - name: config
+        configMap:
+          name: api-v4
