@@ -15,7 +15,7 @@ data:
   BARISTA_DB_NAME: uwcnc_barista
   BARISTA_DB_USER: uwcnc
   BARISTA_DB_HOST: frost-do-user-2931318-0.b.db.ondigitalocean.com
-  BARISTA_DB_PORT: "25060"
+  BARISTA_DB_PORT: "25061"
   BARISTA_DB_SSLMODE: require
 
 ---
