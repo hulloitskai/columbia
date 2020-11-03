@@ -14,6 +14,7 @@ data:
   API_CONTACT_FIRST_NAME: Steven
   API_CONTACT_LAST_NAME: Xie
   API_CONTACT_ABOUT: I'm a real human being.
+  API_POSTGRES_MAX_CONNECTIONS: "4"
 
 ---
 
