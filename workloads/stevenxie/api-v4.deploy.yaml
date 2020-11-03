@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: stevenxie/api:master-21893bd
+        image: stevenxie/api:master-95168f5
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
