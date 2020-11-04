@@ -32,4 +32,4 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https://api.stevenxie.me/$
-    replacement: https://api.stevenxie.me/v2/graphiql
+    replacement: https://api.stevenxie.me/v4
