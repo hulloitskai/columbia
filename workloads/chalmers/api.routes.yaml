@@ -4,18 +4,18 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 
 metadata:
-  name: dft
-  namespace: rcfta
+  name: api
+  namespace: chalmers
   labels:
-    app: dft
+    app: api
 
 spec:
   entryPoints: ["websecure"]
   routes:
-    - match: Host(`sandboxapi.ca`)
+    - match: Host(`api.chalmersproject.com`)
       kind: Rule
       services:
-        - name: dft
+        - name: api
           port: 80
   tls:
-    secretName: tls-sandboxapi-ca
+    secretName: tls-chalmersproject-com

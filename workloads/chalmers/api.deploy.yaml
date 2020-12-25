@@ -1,0 +1,57 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: api
+  namespace: chalmers
+  labels:
+    app: api
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/app: regexp:^0(\.[0-9]+){2} # 0.x.x...
+    filter.fluxcd.io/migrate: regexp:^0(\.[0-9]+){2} # 0.x.x...
+
+spec:
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: app
+        image: chalmersproject/api:master-c9a3e56
+        envFrom:
+        - configMapRef:
+            name: api
+        - secretRef:
+            name: api
+        ports:
+        - name: http
+          containerPort: 80
+        readinessProbe: &probe
+          initialDelaySeconds: 5
+          httpGet:
+            path: /healthz
+            port: http
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 150m
+            memory: 150Mi
+      initContainers:
+      - name: migrate
+        image: chalmersproject/api:master-c9a3e56
+        args: ["migrate"]
+        envFrom:
+        - configMapRef:
+            name: api
+        - secretRef:
+            name: api

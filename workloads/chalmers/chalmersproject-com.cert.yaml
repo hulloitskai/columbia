@@ -1,0 +1,18 @@
+---
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: chalmersproject-com
+  namespace: chalmers
+
+spec:
+  commonName: chalmersproject.com
+  secretName: tls-chalmersproject-com
+  dnsNames:
+    - chalmersproject.com
+    - "*.chalmersproject.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

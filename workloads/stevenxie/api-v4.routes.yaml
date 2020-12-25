@@ -6,6 +6,9 @@ kind: IngressRoute
 metadata:
   name: api-v4
   namespace: stevenxie
+  labels:
+    app: api
+    version: v4
 
 spec:
   entryPoints: ["websecure"]
@@ -36,6 +39,9 @@ kind: Middleware
 metadata:
   name: api-v4-redirect
   namespace: stevenxie
+  labels:
+    app: api
+    version: v4
 
 spec:
   redirectRegex:
@@ -50,6 +56,9 @@ kind: Middleware
 metadata:
   name: api-v4-cors
   namespace: stevenxie
+  labels:
+    app: api
+    version: v4
 
 spec:
   headers:
@@ -70,6 +79,9 @@ kind: Middleware
 metadata:
   name: api-v4-strip-prefix
   namespace: stevenxie
+  labels:
+    app: api
+    version: v4
 
 spec:
   stripPrefix:

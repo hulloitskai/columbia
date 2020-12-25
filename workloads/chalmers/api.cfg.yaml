@@ -1,0 +1,34 @@
+---
+
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: api
+  namespace: chalmers
+
+data:
+  API_ENV: production
+  API_LOG: warn,api=debug
+  API_HOST: 0.0.0.0
+  API_PORT: "80"
+  API_CORS_ORIGIN: https://api.chalmersproject.com
+  API_DATABASE_MAX_CONNECTIONS: "4"
+  API_FIREBASE_PROJECT_ID: fake
+
+---
+
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+
+metadata:
+  name: api
+  namespace: chalmers
+
+spec:
+  template:
+    metadata:
+      name: api
+      namespace: chalmers
+  encryptedData:
+    API_DATABASE_URL: AgBnnklZ4nrNStxlpe8wlM2l2k7DL2lg3ivepFvs4k8PFhvf8yV+ianlauQH01CUFp2GY/pG3joAaZJGzZyPIyexLy3uHSbNFnPKHLKLO+sDfbDr9pYw+JE5rMvVgZqRWQykWdO2LkTnG7SXlY8rCRuYwq+qVPjUeAbegJWuteZyLvgyqYjJ2ajdmXKAhTxMMA8WJqUug5JIXuCmSI7YgdKnnMY7iDTU5PlIceDHOJ7Gdc6VjaAr7q04j4nCMrKQkOvEpjKkIdR9FqUavigR3Q3mM3iWAWesPCBIZ0GrV9TxggjoZlxW/MelwRj0IGDctlIy0mAH/F22baP/fSPTApQTYMeSLE6P18rxMoU3IzJZlYqHvswfbutBtzmkzPYiiF39eSUC2eXTAj/kT28qgas8kd5GKwgT9hyKllRS25T8MVFgegY9hUMdR7GiDFYUpSxrUfe8K0Wu4OMJx4b2jMY499dDQI6NPtGzyRLjhuiqSvuWoTLhtFPez0Fo7LYqfmtyTzN7o1LLi+Ipxc20GVCZC540euNMmrMT09dOeiTB2VvvEKjz81sfNF1twCd8DhKXuwXLVxPa7+uk85pJgcv1tVVFSzPx8jpmC3m699roMmC46lyQwr1tBC95DHyov/4GpLZbe8lLDf8fcLMtnuR99/SuMlCBdSszmxwUjM6TBoqh86ye46q9cPqpxXUs/lQXdnaJ8dlhE8zzZ0KAoU0N+vWMyrk4qKGIaDuz+31rQ8fUkM3n7d/9b3U8imLzu7O+fJo6nv69X2FWx/oK9jlyuPjciUz1ZFS11TB87vW2dWVC59oGlqeEiPfSobFuocatrPhwnQPaKfTfomI5he+S9Oi0OjU=
