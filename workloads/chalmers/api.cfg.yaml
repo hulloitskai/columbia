@@ -12,9 +12,9 @@ data:
   API_LOG: warn,api=debug
   API_HOST: 0.0.0.0
   API_PORT: "80"
-  API_CORS_ORIGIN: https://api.chalmersproject.com
+  API_CORS_ORIGIN: "*"
   API_DATABASE_MAX_CONNECTIONS: "4"
-  API_FIREBASE_PROJECT_ID: fake
+  API_FIREBASE_PROJECT_ID: chalmers-api
 
 ---
 
