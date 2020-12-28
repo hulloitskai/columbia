@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: chalmersproject/api:master-c9a3e56
+        image: chalmersproject/api:master-103cc90
         envFrom:
         - configMapRef:
             name: api
@@ -48,7 +48,7 @@ spec:
             memory: 150Mi
       initContainers:
       - name: migrate
-        image: chalmersproject/api:master-c9a3e56
+        image: chalmersproject/api:master-103cc90
         args: ["migrate"]
         envFrom:
         - configMapRef:
