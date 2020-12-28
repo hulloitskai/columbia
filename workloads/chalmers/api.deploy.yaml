@@ -10,8 +10,8 @@ metadata:
     app: api
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/app: regexp:^0(\.[0-9]+){2} # 0.x.x...
-    filter.fluxcd.io/migrate: regexp:^0(\.[0-9]+){2} # 0.x.x...
+    filter.fluxcd.io/app: glob:master-*
+    filter.fluxcd.io/migrate: glob:master-*
 
 spec:
   selector:
