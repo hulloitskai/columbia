@@ -1,0 +1,39 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: rgv-api
+  namespace: stevenxie
+  labels:
+    app: rgv-api
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`rgv.stevenxie.me`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: rgv-api
+          port: 80
+      middlewares:
+        - name: rgv-api-strip-prefix
+  tls:
+    secretName: tls-stevenxie-me
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: rgv-api-strip-prefix
+  namespace: stevenxie
+  labels:
+    app: rgv-api
+
+spec:
+  stripPrefix:
+    prefixes:
+      - /api

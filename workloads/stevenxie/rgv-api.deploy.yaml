@@ -1,0 +1,34 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: rgv-api
+  namespace: stevenxie
+  labels:
+    app: rgv-api
+
+spec:
+  selector:
+    matchLabels:
+      app: rgv-api
+  template:
+    metadata:
+      labels:
+        app: rgv-api
+    spec:
+      containers:
+      - name: server
+        image: stevenxie/rgv-api:0.1.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
