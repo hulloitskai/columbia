@@ -28,6 +28,11 @@ spec:
       - name: server
         image: stevenxie/api:master-c3b7452
         imagePullPolicy: IfNotPresent
+        env:
+        - name: API_HOST
+          value: 0.0.0.0
+        - name: API_PORT
+          value: '80'
         envFrom:
         - configMapRef:
             name: api-v4
