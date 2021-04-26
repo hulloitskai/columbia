@@ -1,0 +1,47 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kidsability-checkout-assistant
+  namespace: stevenxie
+  labels:
+    app: kidsability-checkout-assistant
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/server: regexp:^master-.*$ # master-...
+
+spec:
+  selector:
+    matchLabels:
+      app: kidsability-checkout-assistant
+  template:
+    metadata:
+      labels:
+        app: kidsability-checkout-assistant
+    spec:
+      containers:
+      - name: server
+        image: stevenxie/kidsability-checkout-assistant-server:master-84e188b
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+        readinessProbe: &probe
+          initialDelaySeconds: 15
+          httpGet:
+            path: /
+            port: http
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 150m
+            memory: 150Mi
+      volumes:
+      - name: config
+        configMap:
+          name: kidsability-checkout-assistant

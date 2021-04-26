@@ -1,0 +1,22 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: kidsability-checkout-assistant
+  namespace: stevenxie
+  labels:
+    app: kidsability-checkout-assistant
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`kidsability-checkout-assistant.stevenxie.me`)
+      kind: Rule
+      services:
+        - name: kidsability-checkout-assistant
+          port: 80
+  tls:
+    secretName: tls-stevenxie-me
+
