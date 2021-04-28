@@ -8,7 +8,7 @@ helm:
 resources:
   limits:
     cpu: 500m
-    memory: 512Mi
+    memory: 640Mi
   requests:
     cpu: 50m
     memory: 64Mi
