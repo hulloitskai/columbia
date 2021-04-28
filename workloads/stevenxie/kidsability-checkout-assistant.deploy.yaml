@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/kidsability-checkout-assistant-server:master-84e188b
+        image: stevenxie/kidsability-checkout-assistant-server:master-df374fc
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
