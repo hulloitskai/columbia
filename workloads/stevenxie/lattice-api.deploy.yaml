@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/lattice-api:master-1fa30c6
+        image: stevenxie/lattice-api:master-94535db
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

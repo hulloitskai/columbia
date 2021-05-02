@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/lattice-web:master-b5b6a80
+        image: stevenxie/lattice-web:master-94535db
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
