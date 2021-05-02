@@ -1,0 +1,20 @@
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: lattice-web
+  namespace: stevenxie
+  labels:
+    app: lattice
+    component: web
+
+spec:
+  selector:
+    app: lattice
+    component: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

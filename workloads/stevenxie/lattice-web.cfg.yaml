@@ -1,0 +1,14 @@
+---
+
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: lattice-web
+  namespace: stevenxie
+  labels:
+    app: lattice
+    component: web
+
+data:
+  NEXT_SERVER_API_URL: https://lattice.uwblueprint.org/api

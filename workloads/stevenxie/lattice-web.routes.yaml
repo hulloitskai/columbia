@@ -1,0 +1,23 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: lattice-web
+  namespace: stevenxie
+  labels:
+    app: lattice
+    component: web
+
+spec:
+  entryPoints: ["websecure"]
+  routes:
+    - match: Host(`lattice.uwblueprint.org`)
+      kind: Rule
+      services:
+        - name: lattice-web
+          port: 80
+  tls:
+    secretName: tls-lattice-uwblueprint-org
+

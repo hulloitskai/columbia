@@ -1,0 +1,50 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: lattice-api
+  namespace: stevenxie
+  labels:
+    app: lattice
+    component: api
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/server: regexp:^master-.*$ # master-...
+
+spec:
+  selector:
+    matchLabels:
+      app: lattice
+      component: api
+  template:
+    metadata:
+      labels:
+        app: lattice
+        component: api
+    spec:
+      containers:
+      - name: server
+        image: stevenxie/lattice-api:master-b5b6a80
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+        readinessProbe: &probe
+          initialDelaySeconds: 15
+          httpGet:
+            path: /
+            port: http
+        livenessProbe: *probe
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 150m
+            memory: 150Mi
+      volumes:
+      - name: config
+        configMap:
+          name: lattice-api
