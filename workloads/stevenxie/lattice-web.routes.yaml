@@ -20,4 +20,3 @@ spec:
           port: 80
   tls:
     secretName: tls-lattice-uwblueprint-org
-

@@ -19,3 +19,8 @@ spec:
             apiKeySecretRef:
               name: cloudflare
               key: apiKey
+      - selector:
+          dnsZones:
+            - uwblueprint.org
+        http01:
+          ingress: {}

@@ -1,0 +1,37 @@
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+
+metadata:
+  name: lattice-insecure
+  namespace: stevenxie
+  labels:
+    app: lattice
+
+spec:
+  entryPoints: ["web"]
+  routes:
+    - match: Host(`lattice.uwblueprint.org`)
+      kind: Rule
+      services:
+        - name: noop@internal
+          kind: TraefikService
+      middlewares:
+        - name: lattice-redirect-http
+
+---
+
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: lattice-redirect-http
+  namespace: stevenxie
+  labels:
+    app: lattice
+
+spec:
+  redirectScheme:
+    scheme: https

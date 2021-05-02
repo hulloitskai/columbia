@@ -13,8 +13,7 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
-      - selector: {}
-        dns01:
+      - dns01:
           cloudflare:
             email: steven.xie@outlook.com
             apiKeySecretRef:
