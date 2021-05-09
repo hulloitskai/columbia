@@ -28,6 +28,9 @@ spec:
       - name: server
         image: stevenxie/lattice-api:master-94535db
         imagePullPolicy: IfNotPresent
+        envFrom:
+        - secretRef:
+            name: lattice-api
         ports:
         - name: http
           containerPort: 3000

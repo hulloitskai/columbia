@@ -11,4 +11,4 @@ metadata:
     component: web
 
 data:
-  NEXT_SERVER_API_URL: https://lattice.uwblueprint.org/api
+  LATTICE_API_URL: https://lattice.uwblueprint.org/api
