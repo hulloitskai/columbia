@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/lattice-api:main-73f54f3
+        image: stevenxie/lattice-api:main-67f2017
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
