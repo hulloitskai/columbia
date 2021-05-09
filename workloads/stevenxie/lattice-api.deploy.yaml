@@ -11,7 +11,7 @@ metadata:
     component: api
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/server: regexp:^master-.*$ # master-...
+    filter.fluxcd.io/server: regexp:^main-.*$ # main-...
 
 spec:
   selector:
