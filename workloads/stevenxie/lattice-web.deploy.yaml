@@ -35,7 +35,6 @@ spec:
         - name: http
           containerPort: 8000
         readinessProbe: &probe
-          initialDelaySeconds: 15
           httpGet:
             path: /
             port: http
