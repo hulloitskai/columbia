@@ -18,6 +18,21 @@ spec:
       services:
         - name: lattice-api
           port: 80
+      middlewares:
+        - name: lattice-api-strip-prefix
   tls:
     secretName: tls-lattice-uwblueprint-org
 
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+
+metadata:
+  name: lattice-api-strip-prefix
+  namespace: stevenxie
+
+spec:
+  stripPrefix:
+    prefixes:
+      - /api
