@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: stevenxie/lattice-api:main-67f2017
+        image: stevenxie/lattice-api:main-677bf55
         imagePullPolicy: IfNotPresent
         envFrom:
         - secretRef:
@@ -50,3 +50,9 @@ spec:
       - name: config
         configMap:
           name: lattice-api
+      initContainers:
+      - name: migrator
+        image: stevenxie/lattice-migrator:main-5424786
+        envFrom:
+        - secretRef:
+            name: lattice-api
