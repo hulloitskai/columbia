@@ -52,7 +52,7 @@ spec:
           name: lattice-api
       initContainers:
       - name: migrator
-        image: stevenxie/lattice-migrator:main-f714b7d
+        image: stevenxie/lattice-migrator:main-cbddf79
         envFrom:
         - secretRef:
             name: lattice-api
