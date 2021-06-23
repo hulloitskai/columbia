@@ -24,7 +24,7 @@ spec:
   values:
     image:
       repository: traefik
-      tag: v2.4.8
+      tag: v2.4.9
 
     logs:
       general:
