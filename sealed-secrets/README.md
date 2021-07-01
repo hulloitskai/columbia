@@ -8,7 +8,7 @@ This directory serves as a workbench from which to create
 Install `sealed-secrets`:
 
 ```bash
-kb apply -f ../workloads/kube-system/sealed-secrets.hr.yaml
+kb apply -f ../namespaces/kube-system/sealed-secrets.hr.yaml
 ```
 
 > This relies on the existence of `flux`'s Helm operator. If `flux` is not

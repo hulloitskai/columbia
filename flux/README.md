@@ -22,7 +22,7 @@ helm repo add fluxcd https://charts.fluxcd.io && \
 helm upgrade flux fluxcd/flux \
   --install \
   --namespace default \
-  --version 1.5.0 \
+  --version 1.10.0 \
   --atomic \
   --values ./flux.values.yaml
 ```

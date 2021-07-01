@@ -17,7 +17,7 @@ _My personal K8s cluster, configured with code (using
 
 - [`cluster`](./cluster) – a GitOps-enabled directory that contains cluster-wide
   resources like `CustomResourseDefinitions` and `ClusterRoleBindings`.
-- [`workloads`](./workloads) – a GitOps-enabled directory that contains
+- [`namespaces`](./namespaces) – a GitOps-enabled directory that contains
   namespaced resources and Helm releases to be run on-cluster.
 - [`sealed-secrets`](./sealed-secrets) – a workbench from which to create
   [sealed secrets](https://github.com/bitnami-labs/sealed-secrets).
