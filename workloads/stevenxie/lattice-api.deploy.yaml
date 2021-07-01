@@ -46,10 +46,6 @@ spec:
           limits:
             cpu: 150m
             memory: 150Mi
-      volumes:
-      - name: config
-        configMap:
-          name: lattice-api
       initContainers:
       - name: migrator
         image: stevenxie/lattice-migrator:main-2136cbf
