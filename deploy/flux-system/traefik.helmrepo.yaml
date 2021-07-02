@@ -7,4 +7,4 @@ metadata:
 
 spec:
   url: https://helm.traefik.io/traefik
-  interval: 2m
+  interval: 1h
