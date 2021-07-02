@@ -18,6 +18,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: traefik
+        namespace: flux-system
       interval: 1m
   valuesFrom:
   - kind: Secret

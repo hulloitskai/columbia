@@ -5,7 +5,7 @@ kind: ImagePolicy
 
 metadata:
   name: traefik
-  namespace: default
+  namespace: flux-system
 
 spec:
   imageRepositoryRef:
