@@ -26,6 +26,7 @@ If Flux is not installed, it needs to be boostrapped:
 
 ```bash
 flux bootstrap github \
+  --components-extra=image-reflector-controller,image-automation-controller \
   --owner=stevenxie \
   --repository=columbia \
   --branch=main \
