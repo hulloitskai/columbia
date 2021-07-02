@@ -3,7 +3,7 @@ kind: HelmRepository
 
 metadata:
   name: traefik
-  namespace: flux-system
+  namespace: default
 
 spec:
   url: https://helm.traefik.io/traefik
