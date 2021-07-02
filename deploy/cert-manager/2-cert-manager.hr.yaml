@@ -1,33 +1,33 @@
 ---
 
-apiVersion: helm.fluxcd.io/v1
-kind: HelmRelease
+# apiVersion: helm.fluxcd.io/v1
+# kind: HelmRelease
 
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-  annotations:
-    fluxcd.io/automated: "true"
-    filter.fluxcd.io/chart-image: semver:~0.13
-  labels:
-    app: cert-manager
+# metadata:
+#   name: cert-manager
+#   namespace: cert-manager
+#   annotations:
+#     fluxcd.io/automated: "true"
+#     filter.fluxcd.io/chart-image: semver:~0.13
+#   labels:
+#     app: cert-manager
 
-spec:
-  releaseName: cert-manager
-  chart:
-    repository: https://charts.jetstack.io
-    name: cert-manager
-    version: v1.0.3
-  values:
-    image:
-      repository: quay.io/jetstack/cert-manager-controller
-      tag: v0.13.1
+# spec:
+#   releaseName: cert-manager
+#   chart:
+#     repository: https://charts.jetstack.io
+#     name: cert-manager
+#     version: v1.0.3
+#   values:
+#     image:
+#       repository: quay.io/jetstack/cert-manager-controller
+#       tag: v0.13.1
 
-    installCRDs: true
+#     installCRDs: true
 
-    global:
-      leaderElection:
-        namespace: cert-manager
+#     global:
+#       leaderElection:
+#         namespace: cert-manager
 
-    prometheus:
-      enabled: false
+#     prometheus:
+#       enabled: false

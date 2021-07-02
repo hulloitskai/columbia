@@ -1,35 +1,35 @@
 ---
 
-apiVersion: helm.fluxcd.io/v1
-kind: HelmRelease
+# apiVersion: helm.fluxcd.io/v1
+# kind: HelmRelease
 
-metadata:
-  name: metrics-server
-  namespace: kube-system
-  annotations:
-    fluxcd.io/automated: "true"
-    filter.fluxcd.io/chart-image: regexp:^v2(\.[0-9]+){2}$
-  labels:
-    app: metrics-server
+# metadata:
+#   name: metrics-server
+#   namespace: kube-system
+#   annotations:
+#     fluxcd.io/automated: "true"
+#     filter.fluxcd.io/chart-image: regexp:^v2(\.[0-9]+){2}$
+#   labels:
+#     app: metrics-server
 
-spec:
-  releaseName: metrics-server
-  chart:
-    repository: https://kubernetes-charts.storage.googleapis.com/
-    name: metrics-server
-    version: 2.11.2
-  values:
-    image:
-      repository: gcr.io/google_containers/metrics-server-amd64
-      tag: v0.3.6
+# spec:
+#   releaseName: metrics-server
+#   chart:
+#     repository: https://kubernetes-charts.storage.googleapis.com/
+#     name: metrics-server
+#     version: 2.11.2
+#   values:
+#     image:
+#       repository: gcr.io/google_containers/metrics-server-amd64
+#       tag: v0.3.6
 
-    args:
-      - --kubelet-preferred-address-types=InternalIP
+#     args:
+#       - --kubelet-preferred-address-types=InternalIP
 
-    resources:
-      requests:
-        cpu: 10m
-        memory: 25Mi
-      limits:
-        cpu: 100m
-        memory: 125Mi
+#     resources:
+#       requests:
+#         cpu: 10m
+#         memory: 25Mi
+#       limits:
+#         cpu: 100m
+#         memory: 125Mi
