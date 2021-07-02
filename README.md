@@ -8,31 +8,42 @@
 
 # columbia
 
-_My personal K8s cluster, configured with code (using
-[Flux](https://github.com/weaveworks/flux))._
+_A personal K8s cluster, configured with code (using
+[Flux](https://fluxcd.io))._
 
 [![UptimeRobot][status-img]][status]
 
 ## Directories
 
-- [`cluster`](./cluster) – a GitOps-enabled directory that contains cluster-wide
-  resources like `CustomResourseDefinitions` and `ClusterRoleBindings`.
-- [`namespaces`](./namespaces) – a GitOps-enabled directory that contains
-  namespaced resources and Helm releases to be run on-cluster.
-- [`sealed-secrets`](./sealed-secrets) – a workbench from which to create
+- [`deploy`](./deploy) – All the YAML-specified resources that are managed by
+  Flux.
+- [`sealed-secrets`](./sealed-secrets) – A workbench from which to create
   [sealed secrets](https://github.com/bitnami-labs/sealed-secrets).
-- [`helm`](./helm) – configuration related to the [`helm`](https://helm.sh) and
-  `helm-tiller` cluster setup.
-- [`flux`](./flux) – configuration related to the
-  [`flux`](https://github.com/weaveworks/flux) cluster setup.
+
+## Flux
+
+If Flux is not installed, it needs to be boostrapped:
+
+```bash
+flux bootstrap github \
+  --owner=stevenxie \
+  --repository=columbia \
+  --branch=main \
+  --path=deploy \
+  --personal \
+  --private=false
+```
+
+The same command is used to update the Flux system. You can verify the
+installation/upgrade status with `flux check`.
 
 ## Secrets
 
 Configuration secrets are to be hidden using
-[`git-secret`](https://git-secret.io), using the `make secrets-hide` and
-`make secrets-reveal` commands.
+[`git-secret`](https://git-secret.io). Reveal secrets using `git secret reveal`,
+and hide them using `git secret hide -m`.
 
-K8s `Secret` resources should be encrypted using
+Kubernetes secrets should be encrypted using
 [`sealed-secrets`](https://github.com/bitnami-labs/sealed-secrets), using a
 process described in [`sealed-secrets/README.md`](./sealed-secrets/README.md).
 
